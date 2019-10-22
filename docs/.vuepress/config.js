@@ -4,6 +4,6 @@ module.exports = {
   description: 'A modal plugin for Vue',
   themeConfig: {
     nav: [{ text: 'Home', link: '/' }],
-    sidebar: [['/', 'Home'], ['/features/', 'Features']]
+    sidebar: [['/', 'Home']]
   }
 };
