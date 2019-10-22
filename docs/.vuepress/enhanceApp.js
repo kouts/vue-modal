@@ -1,4 +1,4 @@
-import Modal from '../../src/components/vue-modal/Modal.vue';
+import Modal from '../../src/components/Modal.vue';
 
 export default ({
   Vue, // the version of Vue being used in the VuePress app

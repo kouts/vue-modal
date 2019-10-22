@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "watch": "vue-cli-service serve",
+    "watch": "vuepress dev docs",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build-lib": "vue-cli-service build --target lib --name vue-modal ./src/components/vue-modal/index.js",
@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "@linusborg/vue-simple-portal": "^0.1.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.12.0",
