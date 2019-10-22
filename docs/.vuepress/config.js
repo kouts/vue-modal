@@ -5,14 +5,5 @@ module.exports = {
   themeConfig: {
     nav: [{ text: 'Home', link: '/' }],
     sidebar: [['/', 'Home'], ['/features/', 'Features']]
-  },
-  head: [
-    [
-      'link',
-      {
-        rel: 'stylesheet',
-        href: '/src/assets/css/styles.css'
-      }
-    ]
-  ]
+  }
 };

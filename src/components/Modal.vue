@@ -2,14 +2,14 @@
   <div v-if="mount">
     <portal>
       <transition
-        name="custom-popup-backdrop-transition"
+        name="custom-modal-backdrop-transition"
         :enter-active-class="bgInClass"
         :leave-active-class="bgOutClass"
       >
-        <div v-show="show" :class="['popup-backdrop', 'backdrop-'+modalId ]" :style="{ 'z-index': zIndex-1 }"></div>
+        <div v-show="show" :class="['modal-backdrop', 'backdrop-'+modalId ]" :style="{ 'z-index': zIndex-1 }"></div>
       </transition>
       <transition
-        name="custom-popup-transition"
+        name="custom-modal-transition"
         :enter-active-class="inClass"
         :leave-active-class="outClass"
         @before-enter="beforeOpen"
@@ -20,21 +20,21 @@
         @after-leave="afterClose"
       >
         <div 
-          ref="popup-wrapper"
+          ref="modal-wrapper"
           role="dialog" 
           tabindex="0" 
           v-show="show" 
-          :class="['popup-wrapper', wrapperClass, baseAnimClass, animClass, modalId]" 
+          :class="['modal-wrapper', wrapperClass, baseAnimClass, animClass, modalId]" 
           :aria-label="title" 
           :style="{ opacity: 1, display: 'block', 'z-index': zIndex, cursor: enableClose ? 'pointer' : 'default' }"
           @click.prevent="clickOutside($event)"
           @keydown="keydown($event)"
         >
-          <div ref="popup" :class="['popup', cssClass]" :style="cssStyle">
-            <div class="popup-titlebar">
-              <h3 class="popup-title">{{title}}</h3> <button v-if="enableClose" class="popup-btn-close" type="button" @click.prevent="close"><i class="fa fa-times"></i></button>
+          <div ref="modal" :class="['modal', cssClass]" :style="cssStyle">
+            <div class="modal-titlebar">
+              <h3 class="modal-title">{{title}}</h3> <button v-if="enableClose" class="modal-btn-close" type="button" @click.prevent="close"></button>
             </div>
-            <div class="popup-content">
+            <div class="modal-content">
               <slot></slot>
             </div>
           </div>
@@ -98,19 +98,19 @@ export default {
     },
     inClass: {
       type: String,
-      default: 'popup-fadeIn'
+      default: 'modal-fadeIn'
     },
     outClass: {
       type: String,
-      default: 'popup-fadeOut'
+      default: 'modal-fadeOut'
     },    
     bgInClass: {
       type: String,
-      default: 'popup-fadeIn'
+      default: 'modal-fadeIn'
     },
     bgOutClass: {
       type: String,
-      default: 'popup-fadeOut'
+      default: 'modal-fadeOut'
     },    
     bgClass: {
       type: String
@@ -126,7 +126,7 @@ export default {
       }
     },
     clickOutside(e){
-      if (e.target === this.$refs['popup-wrapper']){
+      if (e.target === this.$refs['modal-wrapper']){
         this.close();
       }
     },
@@ -136,12 +136,12 @@ export default {
       }
       if (e.which === 9){
         // Get only visible elements
-        let all = [].slice.call(this.$refs['popup-wrapper'].querySelectorAll('input, select, textarea, button, a'));
+        let all = [].slice.call(this.$refs['modal-wrapper'].querySelectorAll('input, select, textarea, button, a'));
         all = all.filter(function(el){
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
         });
         if (e.shiftKey){
-          if (e.target === all[0] || e.target === this.$refs['popup-wrapper']){
+          if (e.target === all[0] || e.target === this.$refs['modal-wrapper']){
             e.preventDefault();
             all[all.length - 1].focus();
           }
@@ -155,7 +155,7 @@ export default {
     },
     getTopZindex(){
       let toret = 0;
-      let all = document.querySelectorAll('.popup-wrapper');
+      let all = document.querySelectorAll('.modal-wrapper');
       for (let i = 0; i < all.length; i++) {
         if (all[i].display === 'none'){
           continue;
@@ -164,9 +164,9 @@ export default {
       }
       return toret;
     },
-    popupsVisible(){
-      let all = document.querySelectorAll('.popup-wrapper');
-      // We cannot return false unless we make sure that there are not any popups visible
+    modalsVisible(){
+      let all = document.querySelectorAll('.modal-wrapper');
+      // We cannot return false unless we make sure that there are not any modals visible
       let found_visible = 0;
       for (let i = 0; i < all.length; i++) {
         if (all[i].display === 'none'){
@@ -191,7 +191,7 @@ export default {
     },
     afterOpen(){
       // console.log('afterOpen');
-      this.$refs['popup-wrapper'].querySelector('[autofocus]') ? this.$refs['popup-wrapper'].querySelector('[autofocus]').focus() : this.$refs['popup-wrapper'].focus();
+      this.$refs['modal-wrapper'].querySelector('[autofocus]') ? this.$refs['modal-wrapper'].querySelector('[autofocus]').focus() : this.$refs['modal-wrapper'].focus();
       this.$emit('afterOpen');
     },
     beforeClose(){
@@ -212,18 +212,18 @@ export default {
         window.requestAnimationFrame(()=> {
           let lastZindex = this.getTopZindex();
           if (lastZindex > 0){
-            let all = document.querySelectorAll('.popup-wrapper');
+            let all = document.querySelectorAll('.modal-wrapper');
             for (let i = 0; i < all.length; i++) {
-              let popupWrapper = all[i];
-              if (popupWrapper.display === 'none'){
+              let modalWrapper = all[i];
+              if (modalWrapper.display === 'none'){
                 continue;
               }
-              if (parseInt(popupWrapper.style.zIndex) === lastZindex){
-                if (popupWrapper.contains(this.elToFocus)){
+              if (parseInt(modalWrapper.style.zIndex) === lastZindex){
+                if (modalWrapper.contains(this.elToFocus)){
                   this.elToFocus.focus();
                 } else {
-                  console.log(popupWrapper);
-                  popupWrapper.querySelector('[autofocus]') ? popupWrapper.querySelector('[autofocus]').focus() : popupWrapper.focus();
+                  console.log(modalWrapper);
+                  modalWrapper.querySelector('[autofocus]') ? modalWrapper.querySelector('[autofocus]').focus() : modalWrapper.focus();
                 }
                 break;
               }
@@ -244,7 +244,7 @@ export default {
     }
   },
   mounted(){
-    this.modalId = this._uid + '_popup';
+    this.modalId = this._uid + '_modal';
     this.$watch('basedOn', function(newVal, oldVal){
       if (newVal){
         this.mount = true;
@@ -265,21 +265,20 @@ export default {
 </script>
 
 <style>
-  /* Popup */
-  .popup-backdrop {position: fixed; top: 0; right: 0; bottom: 0; left: 0; background-color: rgba(0, 0, 0, 0.5);}
-  .popup-wrapper {position: fixed; top: 0; right: 0; bottom: 0; left: 0; overflow-x: hidden; overflow-y: auto; display: none; outline: 0;}
-  .popup {position: relative; margin: 0px auto; width: calc(100% - 20px); min-width: 110px; max-width:100%; color: $body-color; background-color: #fff; top:30px; cursor: default; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); border-radius: $border-radius;}
-  .popup-titlebar {padding:10px 15px 10px 15px; color: $body-color; overflow: auto; border-bottom: 1px solid #e5e5e5;}
-  .popup-title {margin-top:2px; margin-bottom: 0px; display: inline-block; font-size:18px; font-weight: normal;}
-  .popup-btn-close {padding: 0px; cursor: pointer;  background: 0 0; border: 0; float: right; font-size: 17px; line-height: 17px; margin-top: 5px; margin-right: 0px; color:#ccc;}
-  .popup-btn-close .fa.fa-times::before{ content: '\f156'; font: normal normal normal 17px/1 "Material Design Icons"; }
-  .popup-btn-close:hover, .popup-btn-close:focus:hover{color:#6f6f6f; border-color: transparent; background-color: transparent;}
-  .popup-btn-close:focus {color:#939393; border-color: transparent; background-color: transparent;}
-  .popup-content {padding:10px 15px 15px 15px;}
-  .popup-content .full-hr {width: auto; border: 0; border-top: 1px solid #e0e0e0; margin-top:15px; margin-bottom:15px; margin-left:-14px; margin-right:-14px;}
-  .popup-fadeIn {animation-name: popup-fadeIn;} 
-  @keyframes popup-fadeIn {0% {opacity: 0} 100% {opacity: 1}}
-  .popup-fadeOut {animation-name: popup-fadeOut;} 
-  @keyframes popup-fadeOut {0% {opacity: 1} 100% {opacity: 0}}
-  .popup-fadeIn, .popup-fadeOut {animation-duration: .25s; animation-fill-mode: both;}
+  /* Modal */
+  .modal-backdrop {position: fixed; top: 0; right: 0; bottom: 0; left: 0; background-color: rgba(0, 0, 0, 0.5);}
+  .modal-wrapper {position: fixed; top: 0; right: 0; bottom: 0; left: 0; overflow-x: hidden; overflow-y: auto; display: none; outline: 0;}
+  .modal {position: relative; margin: 0px auto; width: calc(100% - 20px); min-width: 110px; max-width:100%; color: $body-color; background-color: #fff; top:30px; cursor: default; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);}
+  .modal-titlebar {padding:10px 15px 10px 15px; color: $body-color; overflow: auto; border-bottom: 1px solid #e5e5e5;}
+  .modal-title {margin-top:2px; margin-bottom: 0px; display: inline-block; font-size:18px; font-weight: normal;}
+  .modal-btn-close {color: #ccc; padding: 0px; cursor: pointer;  background: 0 0; border: 0; float: right; font-size: 24px; line-height: 1em; color:#ccc;}
+  .modal-btn-close:before {content: '×'; font-family: Arial;}
+  .modal-btn-close:hover, .modal-btn-close:focus, .modal-btn-close:focus:hover{color:#bbb; border-color: transparent; background-color: transparent;}
+  .modal-content {padding:10px 15px 15px 15px;}
+  .modal-content .full-hr {width: auto; border: 0; border-top: 1px solid #e5e5e5; margin-top:15px; margin-bottom:15px; margin-left:-14px; margin-right:-14px;}
+  .modal-fadeIn {animation-name: modal-fadeIn;} 
+  @keyframes modal-fadeIn {0% {opacity: 0} 100% {opacity: 1}}
+  .modal-fadeOut {animation-name: modal-fadeOut;} 
+  @keyframes modal-fadeOut {0% {opacity: 1} 100% {opacity: 0}}
+  .modal-fadeIn, .modal-fadeOut {animation-duration: .25s; animation-fill-mode: both;}
 </style>
