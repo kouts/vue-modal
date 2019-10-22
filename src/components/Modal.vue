@@ -222,7 +222,7 @@ export default {
                 if (modalWrapper.contains(this.elToFocus)){
                   this.elToFocus.focus();
                 } else {
-                  console.log(modalWrapper);
+                  // console.log(modalWrapper);
                   modalWrapper.querySelector('[autofocus]') ? modalWrapper.querySelector('[autofocus]').focus() : modalWrapper.focus();
                 }
                 break;
@@ -245,7 +245,7 @@ export default {
   },
   mounted(){
     this.modalId = this._uid + '_modal';
-    this.$watch('basedOn', function(newVal, oldVal){
+    this.$watch('basedOn', function(newVal){
       if (newVal){
         this.mount = true;
         this.$nextTick(() => {
