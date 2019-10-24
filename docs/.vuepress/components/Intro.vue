@@ -22,7 +22,7 @@
       <hr class="full-hr">
       <div class="row">
         <div class="col-sm-12">
-          <div class="float-right"><button class="btn btn-primary" type="button">Yes</button> <button class="btn btn-secondary ml-2" type="button" @click="show_modal_1=false">No</button></div>
+          <div class="float-right"><button class="btn btn-secondary ml-2" type="button" @click="show_modal_1=false">Close</button></div>
         </div>
       </div>
     </Modal>

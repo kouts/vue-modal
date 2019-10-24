@@ -182,6 +182,15 @@ export default {
       }
       return found_visible;
     },
+    handleFocus(modalWrapper){
+      let autofocus = modalWrapper.querySelector('[autofocus]');
+      if(autofocus){
+        autofocus.focus();
+      } else {
+        let focusable = modalWrapper.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        focusable.length ? focusable[0].focus() : modalWrapper.focus();
+      }
+    },
     beforeOpen(){
       // console.log('beforeOpen');
       this.elToFocus = document.activeElement;
@@ -195,7 +204,7 @@ export default {
     },
     afterOpen(){
       // console.log('afterOpen');
-      this.$refs['modal-wrapper'].querySelector('[autofocus]') ? this.$refs['modal-wrapper'].querySelector('[autofocus]').focus() : this.$refs['modal-wrapper'].focus();
+      this.handleFocus(this.$refs['modal-wrapper']);
       this.$emit('afterOpen');
     },
     beforeClose(){
@@ -227,7 +236,7 @@ export default {
                   this.elToFocus.focus();
                 } else {
                   // console.log(modalWrapper);
-                  modalWrapper.querySelector('[autofocus]') ? modalWrapper.querySelector('[autofocus]').focus() : modalWrapper.focus();
+                  this.handleFocus(modalWrapper);
                 }
                 break;
               }
