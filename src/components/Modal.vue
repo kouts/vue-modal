@@ -1,6 +1,6 @@
 <template>
   <div v-if="mount">
-    <portal>
+    <portal :selector="appendTo">
       <transition
         name="custom-modal-backdrop-transition"
         :enter-active-class="bgInClass"
@@ -117,7 +117,11 @@ export default {
     },
     bgAnimClass: {
       type: String
-    }
+    },
+    appendTo: {
+      type: String,
+      default: 'body'
+    }    
   },
   methods: {
     close(){
