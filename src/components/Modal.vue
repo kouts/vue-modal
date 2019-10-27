@@ -21,16 +21,14 @@
       >
         <div 
           ref="modal-wrapper"
-          role="dialog" 
           tabindex="0" 
           v-show="show" 
           :class="['modal-wrapper', wrapperClass, baseAnimClass, animClass, modalId]" 
-          :aria-label="title" 
-          :style="{ opacity: 1, display: 'block', 'z-index': zIndex, cursor: enableClose ? 'pointer' : 'default' }"
+          :style="{ 'z-index': zIndex, cursor: enableClose ? 'pointer' : 'default' }"
           @click.prevent="clickOutside($event)"
           @keydown="keydown($event)"
         >
-          <div ref="modal" :class="['modal', cssClass]" :style="cssStyle">
+          <div ref="modal" :class="['modal', cssClass]" :style="cssStyle" role="dialog" :aria-label="title" aria-modal="true">
             <div class="modal-titlebar">
               <h3 class="modal-title">{{title}}</h3> <button v-if="enableClose" class="modal-btn-close" type="button" @click.prevent="close"></button>
             </div>
@@ -278,9 +276,8 @@ export default {
 </script>
 
 <style>
-  /* Modal */
   .modal-backdrop {position: fixed; top: 0; right: 0; bottom: 0; left: 0; background-color: rgba(0, 0, 0, 0.5);}
-  .modal-wrapper {position: fixed; top: 0; right: 0; bottom: 0; left: 0; overflow-x: hidden; overflow-y: auto; display: none; outline: 0;}
+  .modal-wrapper {position: fixed; top: 0; right: 0; bottom: 0; left: 0; overflow-x: hidden; overflow-y: auto; outline: 0;}
   .modal {position: relative; margin: 0px auto; width: calc(100% - 20px); min-width: 110px; max-width:100%; color: $body-color; background-color: #fff; top:30px; cursor: default; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);}
   .modal-titlebar {padding:10px 15px 10px 15px; color: $body-color; overflow: auto; border-bottom: 1px solid #e5e5e5;}
   .modal-title {margin-top:2px; margin-bottom: 0px; display: inline-block; font-size:18px; font-weight: normal;}
