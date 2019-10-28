@@ -29,12 +29,16 @@
           @keydown="keydown($event)"
         >
           <div ref="modal" :class="['modal', cssClass]" :style="cssStyle" role="dialog" :aria-label="title" aria-modal="true">
-            <div class="modal-titlebar">
-              <h3 class="modal-title">{{title}}</h3> <button v-if="enableClose" class="modal-btn-close" type="button" @click.prevent="close"></button>
-            </div>
-            <div class="modal-content">
-              <slot></slot>
-            </div>
+            <slot name="modal-titlebar">
+              <div class="modal-titlebar">
+                <h3 class="modal-title">{{title}}</h3> <button v-if="enableClose" class="modal-btn-close" type="button" @click.prevent="close"></button>
+              </div>
+            </slot>
+            <slot name="modal-content">
+              <div class="modal-content">
+                <slot></slot>
+              </div>
+            </slot>
           </div>
         </div>
       </transition>
