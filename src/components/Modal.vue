@@ -55,10 +55,10 @@ export default {
       zIndex: 0,
       modalId: null,
       show: false,
-      mount: false
+      mount: false,
+      elToFocus: null,
     };
   },
-  elToFocus: null,
   props: {
     basedOn: {
       type: Boolean,
@@ -121,10 +121,14 @@ export default {
       default: 'body'
     }    
   },
+  model: {
+    prop: 'basedOn',
+    event: 'changed'
+  },  
   methods: {
     close(){
       if (this.enableClose === true){
-        this.$emit('doClose');
+        this.$emit('changed', false);
       }
     },
     clickOutside(e){

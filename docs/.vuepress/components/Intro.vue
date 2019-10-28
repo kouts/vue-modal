@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <Modal :basedOn="show_modal_1" title="Test modal title" cssClass="mw8" @doClose="show_modal_1=false">
+    <Modal v-model="show_modal_1" title="Test modal title" cssClass="mw8">
       <div class="row">
         <div class="col-sm-12">
           <p>
