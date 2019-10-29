@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/public/',
+  base: '/vue-modal/',
   title: 'vue-modal',
   description: 'A modal plugin for Vue',
   themeConfig: {
