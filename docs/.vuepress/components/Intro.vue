@@ -8,23 +8,55 @@
       </div>
     </div>
 
-    <Modal v-model="show_modal_1" title="Test modal title" cssClass="mw8">
-      <div class="row">
-        <div class="col-sm-12">
-          <p>
-            <label>Test field</label>
-            <input type="text" class="form-control" value="" />
-          </p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a lorem suscipit orci vehicula aliquam. Sed varius urna nec nisl placerat convallis. Maecenas bibendum ante mi, in mattis nisl fringilla vitae. Duis sollicitudin est id purus venenatis tincidunt. Donec vitae nulla ac lorem tristique varius et in mauris. Aenean molestie dui eu mauris pretium iaculis. Phasellus varius mi in molestie congue. Nullam non ultrices libero.</p>
-          <p><button type="button" class="btn btn-primary" @click="show_modal_2=true">Open second modal</button></p>
+    <Modal v-model="show_modal_1" title="My first modal" cssClass="mw10">
+      <form novalidate>
+        <div class="form-group">
+          <label for="inputEmail4">Email</label>
+          <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
         </div>
-      </div>
-      <hr class="full-hr">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="float-right"><button class="btn btn-secondary ml-2" type="button" @click="show_modal_1=false">Close</button></div>
+        <div class="form-group">
+          <label for="inputAddress">Address</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
         </div>
-      </div>
+        <div class="form-group">
+          <label for="inputAddress2">Address 2</label>
+          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputCity">City</label>
+            <input type="text" class="form-control" id="inputCity">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState">State</label>
+            <select id="inputState" class="form-control">
+              <option selected>Choose...</option>
+              <option>...</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputZip">Zip</label>
+            <input type="text" class="form-control" id="inputZip">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+              Check me out
+            </label>
+          </div>
+        </div>
+        <hr class="full-hr">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="float-right">
+              <button class="btn btn-primary" type="button" @click="show_modal_1=false">Ok</button>
+              <button class="btn btn-secondary ml-2" type="button" @click="show_modal_1=false">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </form>
     </Modal>
   </div>
 </template>
