@@ -66,9 +66,10 @@
 
 <script>
   export default {
+    name: 'Intro',
     data: function(){
       return {
-        show_modal_1: false,
+        show_modal_1: false
       }
     }
   }

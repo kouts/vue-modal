@@ -4,30 +4,14 @@
   "private": true,
   "scripts": {
     "watch": "vuepress dev docs",
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "build-lib": "vue-cli-service build --target lib --name vue-modal ./src/components/Modal.vue",
-    "lint": "vue-cli-service lint",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
-  "dependencies": {
-    "core-js": "^2.6.5",
-    "vue": "^2.6.10",
-    "@linusborg/vue-simple-portal": "^0.1.4"
-  },
   "devDependencies": {
     "bootstrap": "^4.3.1",
-    "@vue/cli-plugin-babel": "^3.12.0",
-    "@vue/cli-plugin-eslint": "^3.12.0",
-    "@vue/cli-service": "^3.12.0",
-    "@vuepress/plugin-register-components": "^1.0.0-rc.1",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
+    "vuepress": "^1.2.0",
+    "@linusborg/vue-simple-portal": "^0.1.4",
     "node-sass": "^4.13.0",
-    "sass-loader": "^8.0.0",
-    "vue-template-compiler": "^2.6.10",
-    "vuepress": "^1.2.0"
+    "sass-loader": "^8.0.0"
   }
 }
