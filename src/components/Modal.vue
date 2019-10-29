@@ -25,7 +25,7 @@
           v-show="show" 
           :class="['modal-wrapper', wrapperClass, baseAnimClass, animClass, modalId]" 
           :style="{ 'z-index': zIndex, cursor: enableClose ? 'pointer' : 'default' }"
-          @click.prevent="clickOutside($event)"
+          @click="clickOutside($event)"
           @keydown="keydown($event)"
         >
           <div ref="modal" :class="['modal', cssClass]" :style="cssStyle" role="dialog" :aria-label="title" aria-modal="true">
