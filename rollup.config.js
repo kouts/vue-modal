@@ -31,7 +31,7 @@ export default {
     resolve(),
     commonjs(),
     css({
-      output: 'vue-modal.css'
+      output: 'dist/vue-modal.css'
     }),
     vue({
       css: false
