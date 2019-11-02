@@ -63,7 +63,7 @@ var TargetContainer = Vue.extend({
   },
   render: function render(h) {
     var nodes = this.updatedNodes && this.updatedNodes();
-    if (!nodes) return h();
+    if (!nodes) { return h(); }
     return nodes.length < 2 && !nodes[0].text ? nodes : h(this.tag || 'DIV', nodes);
   },
   destroyed: function destroyed() {
@@ -95,7 +95,7 @@ var Portal = Vue.extend({
   render: function render(h) {
     if (this.disabled) {
       var nodes = this.$scopedSlots && this.$scopedSlots.default();
-      if (!nodes) return h();
+      if (!nodes) { return h(); }
       return nodes.length < 2 && !nodes[0].text ? nodes : h(this.tag, nodes);
     }
 
@@ -135,11 +135,11 @@ var Portal = Vue.extend({
   methods: {
     // This returns the element into which the content should be mounted.
     getTargetEl: function getTargetEl() {
-      if (!isBrowser) return;
+      if (!isBrowser) { return; }
       return document.querySelector(this.selector);
     },
     insertTargetEl: function insertTargetEl() {
-      if (!isBrowser) return;
+      if (!isBrowser) { return; }
       var parent = document.querySelector('body');
       var child = document.createElement(this.tag);
       child.id = this.selector.substring(1);
@@ -193,7 +193,7 @@ if (typeof window !== 'undefined' && window.Vue && window.Vue === Vue) {
 var script = {
   name: 'VueModal',
   components: {
-    Portal
+    Portal: Portal
   },
   data: function() {
     return {
@@ -271,23 +271,23 @@ var script = {
     event: 'changed'
   },  
   methods: {
-    close(){
+    close: function close(){
       if (this.enableClose === true){
         this.$emit('changed', false);
       }
     },
-    clickOutside(e){
+    clickOutside: function clickOutside(e){
       if (e.target === this.$refs['vm-wrapper']){
         this.close();
       }
     },
-    keydown: function(e){
+    keydown: function keydown(e){
       if (e.which === 27){
         this.close();
       }
       if (e.which === 9){
         // Get only visible elements
-        let all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll('input, select, textarea, button, a'));
+        var all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll('input, select, textarea, button, a'));
         all = all.filter(function(el){
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
         });
@@ -304,10 +304,10 @@ var script = {
         }
       }
     },
-    getTopZindex(){
-      let toret = 0;
-      let all = document.querySelectorAll('.vm-wrapper');
-      for (let i = 0; i < all.length; i++) {
+    getTopZindex: function getTopZindex(){
+      var toret = 0;
+      var all = document.querySelectorAll('.vm-wrapper');
+      for (var i = 0; i < all.length; i++) {
         if (all[i].display === 'none'){
           continue;
         }
@@ -315,11 +315,11 @@ var script = {
       }
       return toret;
     },
-    modalsVisible(){
-      let all = document.querySelectorAll('.vm-wrapper');
+    modalsVisible: function modalsVisible(){
+      var all = document.querySelectorAll('.vm-wrapper');
       // We cannot return false unless we make sure that there are not any modals visible
-      let found_visible = 0;
-      for (let i = 0; i < all.length; i++) {
+      var found_visible = 0;
+      for (var i = 0; i < all.length; i++) {
         if (all[i].display === 'none'){
           continue;
         }
@@ -329,87 +329,91 @@ var script = {
       }
       return found_visible;
     },
-    handleFocus(wrapper){
-      let autofocus = wrapper.querySelector('[autofocus]');
+    handleFocus: function handleFocus(wrapper){
+      var autofocus = wrapper.querySelector('[autofocus]');
       if(autofocus){
         autofocus.focus();
       } else {
-        let focusable = wrapper.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        var focusable = wrapper.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
         focusable.length ? focusable[0].focus() : wrapper.focus();
       }
     },
-    beforeOpen(){
+    beforeOpen: function beforeOpen(){
       // console.log('beforeOpen');
       this.elToFocus = document.activeElement;
-      let lastZindex = this.getTopZindex();
+      var lastZindex = this.getTopZindex();
       this.zIndex = (lastZindex === 0) ? this.baseZindex : lastZindex + 2;
       this.$emit('beforeOpen');
     },
-    opening(){
+    opening: function opening(){
       // console.log('opening');
       this.$emit('opening');
     },
-    afterOpen(){
+    afterOpen: function afterOpen(){
       // console.log('afterOpen');
       this.handleFocus(this.$refs['vm-wrapper']);
       this.$emit('afterOpen');
     },
-    beforeClose(){
+    beforeClose: function beforeClose(){
       // console.log('beforeClose');
       this.$emit('beforeClose');
     },
-    closing(){
+    closing: function closing(){
       // console.log('closing');
       this.$emit('closing');
     },
-    afterClose(){
+    afterClose: function afterClose(){
+      var this$1 = this;
+
       // console.log('afterClose');
       this.zIndex = 0;
       if (!this.live){
         this.mount = false;
       }
-      this.$nextTick(() => {
-        window.requestAnimationFrame(()=> {
-          let lastZindex = this.getTopZindex();
+      this.$nextTick(function () {
+        window.requestAnimationFrame(function (){
+          var lastZindex = this$1.getTopZindex();
           if (lastZindex > 0){
-            let all = document.querySelectorAll('.vm-wrapper');
-            for (let i = 0; i < all.length; i++) {
-              let wrapper = all[i];
+            var all = document.querySelectorAll('.vm-wrapper');
+            for (var i = 0; i < all.length; i++) {
+              var wrapper = all[i];
               if (wrapper.display === 'none'){
                 continue;
               }
               if (parseInt(wrapper.style.zIndex) === lastZindex){
-                if (wrapper.contains(this.elToFocus)){
-                  this.elToFocus.focus();
+                if (wrapper.contains(this$1.elToFocus)){
+                  this$1.elToFocus.focus();
                 } else {
                   // console.log(wrapper);
-                  this.handleFocus(wrapper);
+                  this$1.handleFocus(wrapper);
                 }
                 break;
               }
             }
           } else {
-            if (document.body.contains(this.elToFocus)){
-              this.elToFocus.focus();
+            if (document.body.contains(this$1.elToFocus)){
+              this$1.elToFocus.focus();
             }
           }
-          this.$emit('afterClose');
+          this$1.$emit('afterClose');
         });
       });
     }
   },
-  created(){
+  created: function created(){
     if (this.live){
       this.mount = true;
     }
   },
-  mounted(){
+  mounted: function mounted(){
     this.id = 'vm-'+this._uid;
     this.$watch('basedOn', function(newVal){
+      var this$1 = this;
+
       if (newVal){
         this.mount = true;
-        this.$nextTick(() => {
-          this.show = true;
+        this.$nextTick(function () {
+          this$1.show = true;
         });
       } else {
         this.show = false;
@@ -418,7 +422,7 @@ var script = {
       immediate: true
     });
   },
-  beforeDestroy(){
+  beforeDestroy: function beforeDestroy(){
     this.elToFocus = null;
   }
 };
@@ -430,7 +434,7 @@ function normalizeComponent(template, style, script, scopeId, isFunctionalTempla
         shadowMode = false;
     }
     // Vue.extend constructor export interop.
-    const options = typeof script === 'function' ? script.options : script;
+    var options = typeof script === 'function' ? script.options : script;
     // render functions
     if (template && template.render) {
         options.render = template.render;
@@ -445,7 +449,7 @@ function normalizeComponent(template, style, script, scopeId, isFunctionalTempla
     if (scopeId) {
         options._scopeId = scopeId;
     }
-    let hook;
+    var hook;
     if (moduleIdentifier) {
         // server build
         hook = function (context) {
@@ -483,7 +487,7 @@ function normalizeComponent(template, style, script, scopeId, isFunctionalTempla
     if (hook) {
         if (options.functional) {
             // register for functional component in vue file
-            const originalRender = options.render;
+            var originalRender = options.render;
             options.render = function renderWithStyleInjection(h, context) {
                 hook.call(context);
                 return originalRender(h, context);
@@ -491,18 +495,18 @@ function normalizeComponent(template, style, script, scopeId, isFunctionalTempla
         }
         else {
             // inject component registration as beforeCreate hook
-            const existing = options.beforeCreate;
+            var existing = options.beforeCreate;
             options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
         }
     }
     return script;
 }
 
-const isOldIE = typeof navigator !== 'undefined' &&
+var isOldIE = typeof navigator !== 'undefined' &&
     /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
 
 /* script */
-const __vue_script__ = script;
+var __vue_script__ = script;
 /* template */
 var __vue_render__ = function() {
   var _vm = this;
@@ -653,13 +657,13 @@ var __vue_staticRenderFns__ = [];
 __vue_render__._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__ = undefined;
+  var __vue_inject_styles__ = undefined;
   /* scoped */
-  const __vue_scope_id__ = undefined;
+  var __vue_scope_id__ = undefined;
   /* module identifier */
-  const __vue_module_identifier__ = undefined;
+  var __vue_module_identifier__ = undefined;
   /* functional template */
-  const __vue_is_functional_template__ = false;
+  var __vue_is_functional_template__ = false;
   /* style inject */
   
   /* style inject SSR */

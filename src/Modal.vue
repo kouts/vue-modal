@@ -140,7 +140,7 @@ export default {
         this.close();
       }
     },
-    keydown: function(e){
+    keydown(e){
       if (e.which === 27){
         this.close();
       }

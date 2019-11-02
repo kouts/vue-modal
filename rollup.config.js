@@ -2,6 +2,7 @@ import vue from 'rollup-plugin-vue';
 import css from 'rollup-plugin-css-only';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
+import buble from '@rollup/plugin-buble';
 import { terser } from 'rollup-plugin-terser';
 
 export default {
@@ -36,6 +37,7 @@ export default {
     vue({
       css: false
     }),
+    buble(),
     terser({
       sourcemap: true,
       include: [/^.+\.min\.js$/]
