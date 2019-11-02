@@ -189,40 +189,39 @@ if (typeof window !== 'undefined' && window.Vue && window.Vue === Vue) {
 }
 
 //
-
 var script = {
-  name: 'Modal',
+  name: 'VueModal',
   components: {
-    Portal
+    Portal: Portal
   },
-  data: function() {
+  data: function data() {
     return {
       zIndex: 0,
-      modalId: null,
+      id: null,
       show: false,
       mount: false,
-      elToFocus: null,
+      elToFocus: null
     };
   },
   props: {
     basedOn: {
       type: Boolean,
-      default: false
+      "default": false
     },
     live: {
       type: Boolean,
-      default: false
-    },    
+      "default": false
+    },
     title: {
       type: String
     },
     enableClose: {
       type: Boolean,
-      default: true      
+      "default": true
     },
     baseZindex: {
       type: Number,
-      default: 1051      
+      "default": 1051
     },
     baseAnimClass: {
       type: String
@@ -235,26 +234,26 @@ var script = {
     },
     cssStyle: {
       type: Object
-    },    
+    },
     animClass: {
       type: String
     },
     inClass: {
       type: String,
-      default: 'modal-fadeIn'
+      "default": 'vm-fadeIn'
     },
     outClass: {
       type: String,
-      default: 'modal-fadeOut'
-    },    
+      "default": 'vm-fadeOut'
+    },
     bgInClass: {
       type: String,
-      default: 'modal-fadeIn'
+      "default": 'vm-fadeIn'
     },
     bgOutClass: {
       type: String,
-      default: 'modal-fadeOut'
-    },    
+      "default": 'vm-fadeOut'
+    },
     bgClass: {
       type: String
     },
@@ -263,153 +262,174 @@ var script = {
     },
     appendTo: {
       type: String,
-      default: 'body'
-    }    
+      "default": 'body'
+    }
   },
   model: {
     prop: 'basedOn',
     event: 'changed'
-  },  
+  },
   methods: {
-    close(){
-      if (this.enableClose === true){
+    close: function close() {
+      if (this.enableClose === true) {
         this.$emit('changed', false);
       }
     },
-    clickOutside(e){
-      if (e.target === this.$refs['modal-wrapper']){
+    clickOutside: function clickOutside(e) {
+      if (e.target === this.$refs['vm-wrapper']) {
         this.close();
       }
     },
-    keydown: function(e){
-      if (e.which === 27){
+    keydown: function keydown(e) {
+      if (e.which === 27) {
         this.close();
       }
-      if (e.which === 9){
+
+      if (e.which === 9) {
         // Get only visible elements
-        let all = [].slice.call(this.$refs['modal-wrapper'].querySelectorAll('input, select, textarea, button, a'));
-        all = all.filter(function(el){
+        var all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll('input, select, textarea, button, a'));
+        all = all.filter(function (el) {
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
         });
-        if (e.shiftKey){
-          if (e.target === all[0] || e.target === this.$refs['modal-wrapper']){
+
+        if (e.shiftKey) {
+          if (e.target === all[0] || e.target === this.$refs['vm-wrapper']) {
             e.preventDefault();
             all[all.length - 1].focus();
           }
         } else {
-          if (e.target === all[all.length - 1]){
+          if (e.target === all[all.length - 1]) {
             e.preventDefault();
             all[0].focus();
           }
         }
       }
     },
-    getTopZindex(){
-      let toret = 0;
-      let all = document.querySelectorAll('.modal-wrapper');
-      for (let i = 0; i < all.length; i++) {
-        if (all[i].display === 'none'){
+    getTopZindex: function getTopZindex() {
+      var toret = 0;
+      var all = document.querySelectorAll('.vm-wrapper');
+
+      for (var i = 0; i < all.length; i++) {
+        if (all[i].display === 'none') {
           continue;
         }
+
         toret = parseInt(all[i].style.zIndex) > toret ? parseInt(all[i].style.zIndex) : toret;
       }
+
       return toret;
     },
-    modalsVisible(){
-      let all = document.querySelectorAll('.modal-wrapper');
-      // We cannot return false unless we make sure that there are not any modals visible
-      let found_visible = 0;
-      for (let i = 0; i < all.length; i++) {
-        if (all[i].display === 'none'){
+    modalsVisible: function modalsVisible() {
+      var all = document.querySelectorAll('.vm-wrapper'); // We cannot return false unless we make sure that there are not any modals visible
+
+      var found_visible = 0;
+
+      for (var i = 0; i < all.length; i++) {
+        if (all[i].display === 'none') {
           continue;
         }
-        if (parseInt(all[i].style.zIndex) > 0){
+
+        if (parseInt(all[i].style.zIndex) > 0) {
           found_visible++;
         }
       }
+
       return found_visible;
     },
-    handleFocus(modalWrapper){
-      let autofocus = modalWrapper.querySelector('[autofocus]');
-      if(autofocus){
+    handleFocus: function handleFocus(wrapper) {
+      var autofocus = wrapper.querySelector('[autofocus]');
+
+      if (autofocus) {
         autofocus.focus();
       } else {
-        let focusable = modalWrapper.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-        focusable.length ? focusable[0].focus() : modalWrapper.focus();
+        var focusable = wrapper.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        focusable.length ? focusable[0].focus() : wrapper.focus();
       }
     },
-    beforeOpen(){
+    beforeOpen: function beforeOpen() {
       // console.log('beforeOpen');
       this.elToFocus = document.activeElement;
-      let lastZindex = this.getTopZindex();
-      this.zIndex = (lastZindex === 0) ? this.baseZindex : lastZindex + 2;
+      var lastZindex = this.getTopZindex();
+      this.zIndex = lastZindex === 0 ? this.baseZindex : lastZindex + 2;
       this.$emit('beforeOpen');
     },
-    opening(){
+    opening: function opening() {
       // console.log('opening');
       this.$emit('opening');
     },
-    afterOpen(){
+    afterOpen: function afterOpen() {
       // console.log('afterOpen');
-      this.handleFocus(this.$refs['modal-wrapper']);
+      this.handleFocus(this.$refs['vm-wrapper']);
       this.$emit('afterOpen');
     },
-    beforeClose(){
+    beforeClose: function beforeClose() {
       // console.log('beforeClose');
       this.$emit('beforeClose');
     },
-    closing(){
+    closing: function closing() {
       // console.log('closing');
       this.$emit('closing');
     },
-    afterClose(){
+    afterClose: function afterClose() {
+      var _this = this;
+
       // console.log('afterClose');
       this.zIndex = 0;
-      if (!this.live){
+
+      if (!this.live) {
         this.mount = false;
       }
-      this.$nextTick(() => {
-        window.requestAnimationFrame(()=> {
-          let lastZindex = this.getTopZindex();
-          if (lastZindex > 0){
-            let all = document.querySelectorAll('.modal-wrapper');
-            for (let i = 0; i < all.length; i++) {
-              let modalWrapper = all[i];
-              if (modalWrapper.display === 'none'){
+
+      this.$nextTick(function () {
+        window.requestAnimationFrame(function () {
+          var lastZindex = _this.getTopZindex();
+
+          if (lastZindex > 0) {
+            var all = document.querySelectorAll('.vm-wrapper');
+
+            for (var i = 0; i < all.length; i++) {
+              var wrapper = all[i];
+
+              if (wrapper.display === 'none') {
                 continue;
               }
-              if (parseInt(modalWrapper.style.zIndex) === lastZindex){
-                if (modalWrapper.contains(this.elToFocus)){
-                  this.elToFocus.focus();
+
+              if (parseInt(wrapper.style.zIndex) === lastZindex) {
+                if (wrapper.contains(_this.elToFocus)) {
+                  _this.elToFocus.focus();
                 } else {
-                  // console.log(modalWrapper);
-                  this.handleFocus(modalWrapper);
+                  // console.log(wrapper);
+                  _this.handleFocus(wrapper);
                 }
+
                 break;
               }
             }
           } else {
-            if (document.body.contains(this.elToFocus)){
-              this.elToFocus.focus();
+            if (document.body.contains(_this.elToFocus)) {
+              _this.elToFocus.focus();
             }
           }
-          this.$emit('afterClose');
+
+          _this.$emit('afterClose');
         });
       });
     }
   },
-  created(){
-    if (this.live){
+  created: function created() {
+    if (this.live) {
       this.mount = true;
     }
   },
-  mounted(){
-    this.modalId = this._uid + '_modal';
-    this.$watch('basedOn', function(newVal){
-      if (newVal){
+  mounted: function mounted() {
+    this.id = 'vm-' + this._uid;
+    this.$watch('basedOn', function (newVal) {
+      var _this2 = this;
+
+      if (newVal) {
         this.mount = true;
-        this.$nextTick(() => {
-          this.show = true;
+        this.$nextTick(function () {
+          _this2.show = true;
         });
       } else {
         this.show = false;
@@ -418,7 +438,7 @@ var script = {
       immediate: true
     });
   },
-  beforeDestroy(){
+  beforeDestroy: function beforeDestroy() {
     this.elToFocus = null;
   }
 };
@@ -520,7 +540,7 @@ var __vue_render__ = function() {
                 "transition",
                 {
                   attrs: {
-                    name: "custom-modal-backdrop-transition",
+                    name: "vm-backdrop-transition",
                     "enter-active-class": _vm.bgInClass,
                     "leave-active-class": _vm.bgOutClass
                   }
@@ -535,7 +555,7 @@ var __vue_render__ = function() {
                         expression: "show"
                       }
                     ],
-                    class: ["modal-backdrop", "backdrop-" + _vm.modalId],
+                    class: ["vm-backdrop", _vm.id + "-backdrop"],
                     style: { "z-index": _vm.zIndex - 1 }
                   })
                 ]
@@ -545,7 +565,7 @@ var __vue_render__ = function() {
                 "transition",
                 {
                   attrs: {
-                    name: "custom-modal-transition",
+                    name: "vm-transition",
                     "enter-active-class": _vm.inClass,
                     "leave-active-class": _vm.outClass
                   },
@@ -570,13 +590,13 @@ var __vue_render__ = function() {
                           expression: "show"
                         }
                       ],
-                      ref: "modal-wrapper",
+                      ref: "vm-wrapper",
                       class: [
-                        "modal-wrapper",
+                        "vm-wrapper",
                         _vm.wrapperClass,
                         _vm.baseAnimClass,
                         _vm.animClass,
-                        _vm.modalId
+                        _vm.id
                       ],
                       style: {
                         "z-index": _vm.zIndex,
@@ -596,8 +616,7 @@ var __vue_render__ = function() {
                       _c(
                         "div",
                         {
-                          ref: "modal",
-                          class: ["modal", _vm.cssClass],
+                          class: ["vm", _vm.cssClass],
                           style: _vm.cssStyle,
                           attrs: {
                             role: "dialog",
@@ -606,15 +625,15 @@ var __vue_render__ = function() {
                           }
                         },
                         [
-                          _vm._t("modal-titlebar", [
-                            _c("div", { staticClass: "modal-titlebar" }, [
-                              _c("h3", { staticClass: "modal-title" }, [
+                          _vm._t("titlebar", [
+                            _c("div", { staticClass: "vm-titlebar" }, [
+                              _c("h3", { staticClass: "vm-title" }, [
                                 _vm._v(_vm._s(_vm.title))
                               ]),
                               _vm._v(" "),
                               _vm.enableClose
                                 ? _c("button", {
-                                    staticClass: "modal-btn-close",
+                                    staticClass: "vm-btn-close",
                                     attrs: { type: "button" },
                                     on: {
                                       click: function($event) {
@@ -627,10 +646,10 @@ var __vue_render__ = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _vm._t("modal-content", [
+                          _vm._t("content", [
                             _c(
                               "div",
-                              { staticClass: "modal-content" },
+                              { staticClass: "vm-content" },
                               [_vm._t("default")],
                               2
                             )
