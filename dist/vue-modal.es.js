@@ -189,39 +189,40 @@ if (typeof window !== 'undefined' && window.Vue && window.Vue === Vue) {
 }
 
 //
+
 var script = {
   name: 'VueModal',
   components: {
-    Portal: Portal
+    Portal
   },
-  data: function data() {
+  data: function() {
     return {
       zIndex: 0,
       id: null,
       show: false,
       mount: false,
-      elToFocus: null
+      elToFocus: null,
     };
   },
   props: {
     basedOn: {
       type: Boolean,
-      "default": false
+      default: false
     },
     live: {
       type: Boolean,
-      "default": false
-    },
+      default: false
+    },    
     title: {
       type: String
     },
     enableClose: {
       type: Boolean,
-      "default": true
+      default: true      
     },
     baseZindex: {
       type: Number,
-      "default": 1051
+      default: 1051      
     },
     baseAnimClass: {
       type: String
@@ -234,26 +235,26 @@ var script = {
     },
     cssStyle: {
       type: Object
-    },
+    },    
     animClass: {
       type: String
     },
     inClass: {
       type: String,
-      "default": 'vm-fadeIn'
+      default: 'vm-fadeIn'
     },
     outClass: {
       type: String,
-      "default": 'vm-fadeOut'
-    },
+      default: 'vm-fadeOut'
+    },    
     bgInClass: {
       type: String,
-      "default": 'vm-fadeIn'
+      default: 'vm-fadeIn'
     },
     bgOutClass: {
       type: String,
-      "default": 'vm-fadeOut'
-    },
+      default: 'vm-fadeOut'
+    },    
     bgClass: {
       type: String
     },
@@ -262,174 +263,153 @@ var script = {
     },
     appendTo: {
       type: String,
-      "default": 'body'
-    }
+      default: 'body'
+    }    
   },
   model: {
     prop: 'basedOn',
     event: 'changed'
-  },
+  },  
   methods: {
-    close: function close() {
-      if (this.enableClose === true) {
+    close(){
+      if (this.enableClose === true){
         this.$emit('changed', false);
       }
     },
-    clickOutside: function clickOutside(e) {
-      if (e.target === this.$refs['vm-wrapper']) {
+    clickOutside(e){
+      if (e.target === this.$refs['vm-wrapper']){
         this.close();
       }
     },
-    keydown: function keydown(e) {
-      if (e.which === 27) {
+    keydown: function(e){
+      if (e.which === 27){
         this.close();
       }
-
-      if (e.which === 9) {
+      if (e.which === 9){
         // Get only visible elements
-        var all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll('input, select, textarea, button, a'));
-        all = all.filter(function (el) {
+        let all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll('input, select, textarea, button, a'));
+        all = all.filter(function(el){
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
         });
-
-        if (e.shiftKey) {
-          if (e.target === all[0] || e.target === this.$refs['vm-wrapper']) {
+        if (e.shiftKey){
+          if (e.target === all[0] || e.target === this.$refs['vm-wrapper']){
             e.preventDefault();
             all[all.length - 1].focus();
           }
         } else {
-          if (e.target === all[all.length - 1]) {
+          if (e.target === all[all.length - 1]){
             e.preventDefault();
             all[0].focus();
           }
         }
       }
     },
-    getTopZindex: function getTopZindex() {
-      var toret = 0;
-      var all = document.querySelectorAll('.vm-wrapper');
-
-      for (var i = 0; i < all.length; i++) {
-        if (all[i].display === 'none') {
+    getTopZindex(){
+      let toret = 0;
+      let all = document.querySelectorAll('.vm-wrapper');
+      for (let i = 0; i < all.length; i++) {
+        if (all[i].display === 'none'){
           continue;
         }
-
         toret = parseInt(all[i].style.zIndex) > toret ? parseInt(all[i].style.zIndex) : toret;
       }
-
       return toret;
     },
-    modalsVisible: function modalsVisible() {
-      var all = document.querySelectorAll('.vm-wrapper'); // We cannot return false unless we make sure that there are not any modals visible
-
-      var found_visible = 0;
-
-      for (var i = 0; i < all.length; i++) {
-        if (all[i].display === 'none') {
+    modalsVisible(){
+      let all = document.querySelectorAll('.vm-wrapper');
+      // We cannot return false unless we make sure that there are not any modals visible
+      let found_visible = 0;
+      for (let i = 0; i < all.length; i++) {
+        if (all[i].display === 'none'){
           continue;
         }
-
-        if (parseInt(all[i].style.zIndex) > 0) {
+        if (parseInt(all[i].style.zIndex) > 0){
           found_visible++;
         }
       }
-
       return found_visible;
     },
-    handleFocus: function handleFocus(wrapper) {
-      var autofocus = wrapper.querySelector('[autofocus]');
-
-      if (autofocus) {
+    handleFocus(wrapper){
+      let autofocus = wrapper.querySelector('[autofocus]');
+      if(autofocus){
         autofocus.focus();
       } else {
-        var focusable = wrapper.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        let focusable = wrapper.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
         focusable.length ? focusable[0].focus() : wrapper.focus();
       }
     },
-    beforeOpen: function beforeOpen() {
+    beforeOpen(){
       // console.log('beforeOpen');
       this.elToFocus = document.activeElement;
-      var lastZindex = this.getTopZindex();
-      this.zIndex = lastZindex === 0 ? this.baseZindex : lastZindex + 2;
+      let lastZindex = this.getTopZindex();
+      this.zIndex = (lastZindex === 0) ? this.baseZindex : lastZindex + 2;
       this.$emit('beforeOpen');
     },
-    opening: function opening() {
+    opening(){
       // console.log('opening');
       this.$emit('opening');
     },
-    afterOpen: function afterOpen() {
+    afterOpen(){
       // console.log('afterOpen');
       this.handleFocus(this.$refs['vm-wrapper']);
       this.$emit('afterOpen');
     },
-    beforeClose: function beforeClose() {
+    beforeClose(){
       // console.log('beforeClose');
       this.$emit('beforeClose');
     },
-    closing: function closing() {
+    closing(){
       // console.log('closing');
       this.$emit('closing');
     },
-    afterClose: function afterClose() {
-      var _this = this;
-
+    afterClose(){
       // console.log('afterClose');
       this.zIndex = 0;
-
-      if (!this.live) {
+      if (!this.live){
         this.mount = false;
       }
-
-      this.$nextTick(function () {
-        window.requestAnimationFrame(function () {
-          var lastZindex = _this.getTopZindex();
-
-          if (lastZindex > 0) {
-            var all = document.querySelectorAll('.vm-wrapper');
-
-            for (var i = 0; i < all.length; i++) {
-              var wrapper = all[i];
-
-              if (wrapper.display === 'none') {
+      this.$nextTick(() => {
+        window.requestAnimationFrame(()=> {
+          let lastZindex = this.getTopZindex();
+          if (lastZindex > 0){
+            let all = document.querySelectorAll('.vm-wrapper');
+            for (let i = 0; i < all.length; i++) {
+              let wrapper = all[i];
+              if (wrapper.display === 'none'){
                 continue;
               }
-
-              if (parseInt(wrapper.style.zIndex) === lastZindex) {
-                if (wrapper.contains(_this.elToFocus)) {
-                  _this.elToFocus.focus();
+              if (parseInt(wrapper.style.zIndex) === lastZindex){
+                if (wrapper.contains(this.elToFocus)){
+                  this.elToFocus.focus();
                 } else {
                   // console.log(wrapper);
-                  _this.handleFocus(wrapper);
+                  this.handleFocus(wrapper);
                 }
-
                 break;
               }
             }
           } else {
-            if (document.body.contains(_this.elToFocus)) {
-              _this.elToFocus.focus();
+            if (document.body.contains(this.elToFocus)){
+              this.elToFocus.focus();
             }
           }
-
-          _this.$emit('afterClose');
+          this.$emit('afterClose');
         });
       });
     }
   },
-  created: function created() {
-    if (this.live) {
+  created(){
+    if (this.live){
       this.mount = true;
     }
   },
-  mounted: function mounted() {
-    this.id = 'vm-' + this._uid;
-    this.$watch('basedOn', function (newVal) {
-      var _this2 = this;
-
-      if (newVal) {
+  mounted(){
+    this.id = 'vm-'+this._uid;
+    this.$watch('basedOn', function(newVal){
+      if (newVal){
         this.mount = true;
-        this.$nextTick(function () {
-          _this2.show = true;
+        this.$nextTick(() => {
+          this.show = true;
         });
       } else {
         this.show = false;
@@ -438,7 +418,7 @@ var script = {
       immediate: true
     });
   },
-  beforeDestroy: function beforeDestroy() {
+  beforeDestroy(){
     this.elToFocus = null;
   }
 };

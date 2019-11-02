@@ -2,7 +2,6 @@ import vue from 'rollup-plugin-vue';
 import css from 'rollup-plugin-css-only';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 
 export default {
@@ -36,12 +35,6 @@ export default {
     }),
     vue({
       css: false
-    }),
-    babel({
-      exclude: 'node_modules/**',
-      presets: [
-        '@babel/preset-env'
-      ]
     }),
     terser({
       sourcemap: true,
