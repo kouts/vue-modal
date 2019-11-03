@@ -1,13 +1,14 @@
 {
   "name": "@kouts/vue-modal",
+  "description": "A modal window component for Vue",
   "version": "0.1.0",
+  "license": "MIT",   
   "files": [
     "dist",
     "src"
   ],
   "main": "dist/vue-modal.umd.min.js",
   "jsnext:main": "vue-modal.es.js",
-  "license": "MIT",   
   "scripts": {
     "watch": "vuepress dev docs",
     "rollup": "rollup -c",
