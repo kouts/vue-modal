@@ -1,7 +1,13 @@
 {
-  "name": "vue-modal",
+  "name": "@kouts/vue-modal",
   "version": "0.1.0",
-  "private": true,
+  "files": [
+    "dist",
+    "src"
+  ],
+  "main": "dist/vue-modal.umd.min.js",
+  "jsnext:main": "vue-modal.es.js",
+  "license": "MIT",   
   "scripts": {
     "watch": "vuepress dev docs",
     "rollup": "rollup -c",
