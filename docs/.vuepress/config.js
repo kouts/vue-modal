@@ -8,7 +8,8 @@ module.exports = {
     nav: [{ text: 'Guide', link: '/' }],
     sidebar: [
       ['/', 'Guide'],
-      ['/install/', 'Install']
+      ['/installation/', 'Installation'],
+      ['/usage/', 'Usage']
     ]
   },
   head: [

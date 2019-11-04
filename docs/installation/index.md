@@ -19,7 +19,8 @@ npm i @kouts/vue-modal --save
 ```
 import to use it
 ``` js
-import VueModal from '@kouts/vue-modal'
+import VueModal from '@kouts/vue-modal';
+import '@kouts/vue-modal/dist/vue-modal.css';
 ```
 
 ## Register
