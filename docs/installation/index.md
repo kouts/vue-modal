@@ -22,18 +22,3 @@ import to use it
 import VueModal from '@kouts/vue-modal';
 import '@kouts/vue-modal/dist/vue-modal.css';
 ```
-
-## Register
-Register ```vue-modal``` in your application globbaly
-``` js
-Vue.component('Modal', VueModal);
-```
-or locally
-``` js
-new Vue({
-  el: '#app',
-  components: {
-    'Modal': VueModal
-  }
-})
-```
