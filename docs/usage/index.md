@@ -19,7 +19,7 @@ new Vue({
 <button type="button" class="btn btn-primary" @click="show_modal_1=true">
   Open a modal
 </button>
-<Modal v-model="show_modal_1" title="My first modal" cssClass="mw10">
+<Modal v-model="show_modal_1" title="My first modal">
   <p>Modal content goes here...</p>
 </Modal>
 ```

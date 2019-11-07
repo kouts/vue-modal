@@ -9,7 +9,7 @@
     </div>
 
     <ClientOnly>
-      <Modal v-model="show_modal_1" title="My first modal" cssClass="mw10">
+      <Modal v-model="show_modal_1" title="My first modal">
         <p>Modal content goes here...</p>
       </Modal>
     </ClientOnly>
