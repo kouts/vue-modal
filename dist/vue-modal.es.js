@@ -205,40 +205,25 @@ var script = {
     };
   },
   props: {
-    basedOn: {
-      type: Boolean,
-      default: false
-    },
-    live: {
-      type: Boolean,
-      default: false
-    },    
     title: {
       type: String
     },
-    enableClose: {
-      type: Boolean,
-      default: true      
-    },
     baseZindex: {
       type: Number,
-      default: 1051      
+      default: 1051
     },
-    baseAnimClass: {
+    bgClass: {
       type: String
-    },
+    },    
     wrapperClass: {
       type: String
     },
-    cssClass: {
+    modalClass: {
       type: String
     },
-    cssStyle: {
+    modalStyle: {
       type: Object
     },    
-    animClass: {
-      type: String
-    },
     inClass: {
       type: String,
       default: 'vm-fadeIn'
@@ -255,15 +240,21 @@ var script = {
       type: String,
       default: 'vm-fadeOut'
     },    
-    bgClass: {
-      type: String
-    },
-    bgAnimClass: {
-      type: String
-    },
     appendTo: {
       type: String,
       default: 'body'
+    },
+    live: {
+      type: Boolean,
+      default: false
+    },
+    enableClose: {
+      type: Boolean,
+      default: true
+    },
+    basedOn: {
+      type: Boolean,
+      default: false
     }    
   },
   model: {
@@ -539,7 +530,7 @@ var __vue_render__ = function() {
                         expression: "show"
                       }
                     ],
-                    class: ["vm-backdrop", _vm.id + "-backdrop"],
+                    class: ["vm-backdrop", _vm.id + "-backdrop", _vm.bgClass],
                     style: { "z-index": _vm.zIndex - 1 }
                   })
                 ]
@@ -575,13 +566,7 @@ var __vue_render__ = function() {
                         }
                       ],
                       ref: "vm-wrapper",
-                      class: [
-                        "vm-wrapper",
-                        _vm.wrapperClass,
-                        _vm.baseAnimClass,
-                        _vm.animClass,
-                        _vm.id
-                      ],
+                      class: ["vm-wrapper", _vm.wrapperClass, _vm.id],
                       style: {
                         "z-index": _vm.zIndex,
                         cursor: _vm.enableClose ? "pointer" : "default"
@@ -600,8 +585,8 @@ var __vue_render__ = function() {
                       _c(
                         "div",
                         {
-                          class: ["vm", _vm.cssClass],
-                          style: _vm.cssStyle,
+                          class: ["vm", _vm.modalClass],
+                          style: _vm.modalStyle,
                           attrs: {
                             role: "dialog",
                             "aria-label": _vm.title,
