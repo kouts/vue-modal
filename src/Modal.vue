@@ -6,7 +6,7 @@
         :enter-active-class="bgInClass"
         :leave-active-class="bgOutClass"
       >
-        <div v-show="show" :class="['vm-backdrop', id+'-backdrop']" :style="{ 'z-index': zIndex-1 }"></div>
+        <div v-show="show" :class="['vm-backdrop', id+'-backdrop', bgClass]" :style="{ 'z-index': zIndex-1 }"></div>
       </transition>
       <transition
         name="vm-transition"
@@ -23,15 +23,15 @@
           ref="vm-wrapper"
           tabindex="0" 
           v-show="show" 
-          :class="['vm-wrapper', wrapperClass, baseAnimClass, animClass, id]" 
+          :class="['vm-wrapper', wrapperClass, id]" 
           :style="{ 'z-index': zIndex, cursor: enableClose ? 'pointer' : 'default' }"
           @click="clickOutside($event)"
           @keydown="keydown($event)"
         >
-          <div :class="['vm', cssClass]" :style="cssStyle" role="dialog" :aria-label="title" aria-modal="true">
+          <div :class="['vm', modalClass]" :style="modalStyle" role="dialog" :aria-label="title" aria-modal="true">
             <slot name="titlebar">
               <div class="vm-titlebar">
-                <h3 class="vm-title">{{title}}</h3> <button v-if="enableClose" class="vm-btn-close" type="button" @click.prevent="close"></button>
+                <h3 class="vm-title">{{title}}</h3> <button type="button" class="vm-btn-close" v-if="enableClose" @click.prevent="close"></button>
               </div>
             </slot>
             <slot name="content">
@@ -64,40 +64,25 @@ export default {
     };
   },
   props: {
-    basedOn: {
-      type: Boolean,
-      default: false
-    },
-    live: {
-      type: Boolean,
-      default: false
-    },    
     title: {
       type: String
     },
-    enableClose: {
-      type: Boolean,
-      default: true      
-    },
     baseZindex: {
       type: Number,
-      default: 1051      
+      default: 1051
     },
-    baseAnimClass: {
+    bgClass: {
       type: String
-    },
+    },    
     wrapperClass: {
       type: String
     },
-    cssClass: {
+    modalClass: {
       type: String
     },
-    cssStyle: {
+    modalStyle: {
       type: Object
     },    
-    animClass: {
-      type: String
-    },
     inClass: {
       type: String,
       default: 'vm-fadeIn'
@@ -114,15 +99,21 @@ export default {
       type: String,
       default: 'vm-fadeOut'
     },    
-    bgClass: {
-      type: String
-    },
-    bgAnimClass: {
-      type: String
-    },
     appendTo: {
       type: String,
       default: 'body'
+    },
+    live: {
+      type: Boolean,
+      default: false
+    },
+    enableClose: {
+      type: Boolean,
+      default: true
+    },
+    basedOn: {
+      type: Boolean,
+      default: false
     }    
   },
   model: {
