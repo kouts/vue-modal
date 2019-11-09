@@ -2,9 +2,9 @@
   <div>
     <div class="row mb-3">
       <div class="col">
-        <a href="#" @click="show_modal_1=true">
+        <button type="button" class="btn btn-primary" @click="show_modal_1=true">
           Open a modal
-        </a>
+        </button>
       </div>
     </div>
 
