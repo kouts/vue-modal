@@ -201,7 +201,7 @@ var script = {
       id: null,
       show: false,
       mount: false,
-      elToFocus: null,
+      elToFocus: null
     };
   },
   props: {
@@ -322,7 +322,7 @@ var script = {
     },
     handleFocus: function handleFocus(wrapper){
       var autofocus = wrapper.querySelector('[autofocus]');
-      if(autofocus){
+      if (autofocus){
         autofocus.focus();
       } else {
         var focusable = wrapper.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
@@ -397,7 +397,7 @@ var script = {
     }
   },
   mounted: function mounted(){
-    this.id = 'vm-'+this._uid;
+    this.id = 'vm-' + this._uid;
     this.$watch('basedOn', function(newVal){
       var this$1 = this;
 
@@ -585,6 +585,7 @@ var __vue_render__ = function() {
                       _c(
                         "div",
                         {
+                          ref: "vm",
                           class: ["vm", _vm.modalClass],
                           style: _vm.modalStyle,
                           attrs: {
