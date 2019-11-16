@@ -28,7 +28,7 @@
           @click="clickOutside($event)"
           @keydown="keydown($event)"
         >
-          <div :class="['vm', modalClass]" :style="modalStyle" role="dialog" :aria-label="title" aria-modal="true">
+          <div ref="vm" :class="['vm', modalClass]" :style="modalStyle" role="dialog" :aria-label="title" aria-modal="true">
             <slot name="titlebar">
               <div class="vm-titlebar">
                 <h3 class="vm-title">{{title}}</h3> <button type="button" class="vm-btn-close" v-if="enableClose" @click.prevent="close"></button>
@@ -60,7 +60,7 @@ export default {
       id: null,
       show: false,
       mount: false,
-      elToFocus: null,
+      elToFocus: null
     };
   },
   props: {
@@ -181,7 +181,7 @@ export default {
     },
     handleFocus(wrapper){
       let autofocus = wrapper.querySelector('[autofocus]');
-      if(autofocus){
+      if (autofocus){
         autofocus.focus();
       } else {
         let focusable = wrapper.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
@@ -254,7 +254,7 @@ export default {
     }
   },
   mounted(){
-    this.id = 'vm-'+this._uid;
+    this.id = 'vm-' + this._uid;
     this.$watch('basedOn', function(newVal){
       if (newVal){
         this.mount = true;
