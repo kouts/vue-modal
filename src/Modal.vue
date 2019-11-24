@@ -118,12 +118,12 @@ export default {
   },
   model: {
     prop: 'basedOn',
-    event: 'changed'
+    event: 'close'
   },  
   methods: {
     close(){
       if (this.enableClose === true){
-        this.$emit('changed', false);
+        this.$emit('close', false);
       }
     },
     clickOutside(e){
