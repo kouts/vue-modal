@@ -259,12 +259,12 @@ var script = {
   },
   model: {
     prop: 'basedOn',
-    event: 'changed'
+    event: 'close'
   },  
   methods: {
     close: function close(){
       if (this.enableClose === true){
-        this.$emit('changed', false);
+        this.$emit('close', false);
       }
     },
     clickOutside: function clickOutside(e){
@@ -658,7 +658,7 @@ __vue_render__._withStripped = true;
   
 
   
-  var Modal = normalizeComponent(
+  var __vue_component__ = normalizeComponent(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -671,5 +671,5 @@ __vue_render__._withStripped = true;
     undefined
   );
 
-export default Modal;
+export default __vue_component__;
 //# sourceMappingURL=vue-modal.es.js.map
