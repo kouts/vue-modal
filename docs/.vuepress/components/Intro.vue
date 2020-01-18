@@ -9,7 +9,7 @@
     </div>
 
     <ClientOnly>
-      <Modal v-model="show_modal_1" title="My first modal" cssClass="mw10">
+      <Modal v-model="show_modal_1" title="First modal" cssClass="mw10">
         <form novalidate>
           <div class="form-group">
             <label for="inputEmail4">Email</label>
@@ -51,9 +51,34 @@
           <hr class="full-hr">
           <div class="row">
             <div class="col-sm-12">
+              <div class="float-left">
+                <button class="btn btn-warning" type="button" @click="show_modal_2=true">Open second modal</button>
+              </div>
               <div class="float-right">
                 <button class="btn btn-primary" type="button" @click="show_modal_1=false">Ok</button>
                 <button class="btn btn-secondary ml-2" type="button" @click="show_modal_1=false">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </Modal>
+
+      <Modal v-model="show_modal_2" title="Second modal" cssClass="mw10">
+        <form novalidate>
+          <div class="form-group">
+            <label for="formField1">Field 1</label>
+            <input type="text" class="form-control" id="formField1" placeholder="">
+          </div>
+          <div class="form-group">
+            <label for="formField2">Field 2</label>
+            <input type="text" class="form-control" id="formField2" placeholder="">
+          </div>
+          <hr class="full-hr">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="float-right">
+                <button class="btn btn-primary" type="button" @click="show_modal_2=false">Ok</button>
+                <button class="btn btn-secondary ml-2" type="button" @click="show_modal_2=false">Cancel</button>
               </div>
             </div>
           </div>
@@ -69,7 +94,8 @@
     name: 'Intro',
     data: function(){
       return {
-        show_modal_1: false
+        show_modal_1: false,
+        show_modal_2: false
       }
     }
   }
