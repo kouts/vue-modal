@@ -20,9 +20,9 @@
         @after-leave="afterClose"
       >
         <div 
-          ref="vm-wrapper"
+          v-show="show"
+          ref="vm-wrapper" 
           tabindex="0" 
-          v-show="show" 
           :class="['vm-wrapper', wrapperClass, id]" 
           :style="{ 'z-index': zIndex, cursor: enableClose ? 'pointer' : 'default' }"
           @click="clickOutside($event)"
@@ -31,7 +31,7 @@
           <div ref="vm" :class="['vm', modalClass]" :style="modalStyle" role="dialog" :aria-label="title" aria-modal="true">
             <slot name="titlebar">
               <div class="vm-titlebar">
-                <h3 class="vm-title">{{title}}</h3> <button type="button" class="vm-btn-close" v-if="enableClose" @click.prevent="close"></button>
+                <h3 class="vm-title">{{ title }}</h3> <button v-if="enableClose" type="button" class="vm-btn-close" @click.prevent="close"></button>
               </div>
             </slot>
             <slot name="content">
@@ -54,34 +54,34 @@ export default {
   components: {
     Portal
   },
-  data: function() {
-    return {
-      zIndex: 0,
-      id: null,
-      show: false,
-      mount: false,
-      elToFocus: null
-    };
+  model: {
+    prop: 'basedOn',
+    event: 'close'
   },
   props: {
     title: {
-      type: String
+      type: String,
+      default: ''
     },
     baseZindex: {
       type: Number,
       default: 1051
     },
     bgClass: {
-      type: String
+      type: String,
+      default: ''
     },    
     wrapperClass: {
-      type: String
+      type: String,
+      default: ''
     },
     modalClass: {
-      type: String
+      type: String,
+      default: ''
     },
     modalStyle: {
-      type: Object
+      type: Object,
+      default: ()=>{}
     },    
     inClass: {
       type: String,
@@ -116,9 +116,37 @@ export default {
       default: false
     }    
   },
-  model: {
-    prop: 'basedOn',
-    event: 'close'
+  data: function() {
+    return {
+      zIndex: 0,
+      id: null,
+      show: false,
+      mount: false,
+      elToFocus: null
+    };
+  },
+  created(){
+    if (this.live){
+      this.mount = true;
+    }
+  },
+  mounted(){
+    this.id = 'vm-' + this._uid;
+    this.$watch('basedOn', function(newVal){
+      if (newVal){
+        this.mount = true;
+        this.$nextTick(() => {
+          this.show = true;
+        });
+      } else {
+        this.show = false;
+      }
+    }, {
+      immediate: true
+    });
+  },
+  beforeDestroy(){
+    this.elToFocus = null;
   },  
   methods: {
     close(){
@@ -247,29 +275,6 @@ export default {
         });
       });
     }
-  },
-  created(){
-    if (this.live){
-      this.mount = true;
-    }
-  },
-  mounted(){
-    this.id = 'vm-' + this._uid;
-    this.$watch('basedOn', function(newVal){
-      if (newVal){
-        this.mount = true;
-        this.$nextTick(() => {
-          this.show = true;
-        });
-      } else {
-        this.show = false;
-      }
-    }, {
-      immediate: true
-    });
-  },
-  beforeDestroy(){
-    this.elToFocus = null;
   }
 };
 </script>

@@ -195,34 +195,34 @@ var script = {
   components: {
     Portal: Portal
   },
-  data: function() {
-    return {
-      zIndex: 0,
-      id: null,
-      show: false,
-      mount: false,
-      elToFocus: null
-    };
+  model: {
+    prop: 'basedOn',
+    event: 'close'
   },
   props: {
     title: {
-      type: String
+      type: String,
+      default: ''
     },
     baseZindex: {
       type: Number,
       default: 1051
     },
     bgClass: {
-      type: String
+      type: String,
+      default: ''
     },    
     wrapperClass: {
-      type: String
+      type: String,
+      default: ''
     },
     modalClass: {
-      type: String
+      type: String,
+      default: ''
     },
     modalStyle: {
-      type: Object
+      type: Object,
+      default: function (){}
     },    
     inClass: {
       type: String,
@@ -257,9 +257,39 @@ var script = {
       default: false
     }    
   },
-  model: {
-    prop: 'basedOn',
-    event: 'close'
+  data: function() {
+    return {
+      zIndex: 0,
+      id: null,
+      show: false,
+      mount: false,
+      elToFocus: null
+    };
+  },
+  created: function created(){
+    if (this.live){
+      this.mount = true;
+    }
+  },
+  mounted: function mounted(){
+    this.id = 'vm-' + this._uid;
+    this.$watch('basedOn', function(newVal){
+      var this$1 = this;
+
+      if (newVal){
+        this.mount = true;
+        this.$nextTick(function () {
+          this$1.show = true;
+        });
+      } else {
+        this.show = false;
+      }
+    }, {
+      immediate: true
+    });
+  },
+  beforeDestroy: function beforeDestroy(){
+    this.elToFocus = null;
   },  
   methods: {
     close: function close(){
@@ -390,31 +420,6 @@ var script = {
         });
       });
     }
-  },
-  created: function created(){
-    if (this.live){
-      this.mount = true;
-    }
-  },
-  mounted: function mounted(){
-    this.id = 'vm-' + this._uid;
-    this.$watch('basedOn', function(newVal){
-      var this$1 = this;
-
-      if (newVal){
-        this.mount = true;
-        this.$nextTick(function () {
-          this$1.show = true;
-        });
-      } else {
-        this.show = false;
-      }
-    }, {
-      immediate: true
-    });
-  },
-  beforeDestroy: function beforeDestroy(){
-    this.elToFocus = null;
   }
 };
 
