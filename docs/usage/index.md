@@ -16,10 +16,10 @@ new Vue({
 ### Template
 
 ``` vue
-<button type="button" class="btn btn-primary" @click="show_modal_1=true">
+<button type="button" class="btn btn-primary" @click="showModal=true">
   Open a modal
 </button>
-<Modal v-model="show_modal_1" title="My first modal">
+<Modal v-model="showModal" title="My first modal">
   <p>Modal content goes here...</p>
 </Modal>
 ```
@@ -29,7 +29,7 @@ new Vue({
 new Vue({
   ...
   data: {
-    show_modal_1: false
+    showModal: false
   }
   ...
 });

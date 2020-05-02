@@ -2,14 +2,14 @@
   <div>
     <div class="row mb-3">
       <div class="col">
-        <button type="button" class="btn btn-primary" @click="show_modal_1=true">
+        <button type="button" class="btn btn-primary" @click="showfirstModal=true">
           Open a modal
         </button>
       </div>
     </div>
 
     <ClientOnly>
-      <Modal v-model="show_modal_1" title="First modal" cssClass="mw10">
+      <Modal v-model="showfirstModal" title="First modal" cssClass="mw10">
         <form novalidate>
           <div class="form-group">
             <label for="inputEmail4">Email</label>
@@ -52,18 +52,18 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="float-left">
-                <button class="btn btn-warning" type="button" @click="show_modal_2=true">Open second modal</button>
+                <button class="btn btn-warning" type="button" @click="showSecondModal=true">Open second modal</button>
               </div>
               <div class="float-right">
-                <button class="btn btn-primary" type="button" @click="show_modal_1=false">Ok</button>
-                <button class="btn btn-secondary ml-2" type="button" @click="show_modal_1=false">Cancel</button>
+                <button class="btn btn-primary" type="button" @click="showfirstModal=false">Ok</button>
+                <button class="btn btn-secondary ml-2" type="button" @click="showfirstModal=false">Cancel</button>
               </div>
             </div>
           </div>
         </form>
       </Modal>
 
-      <Modal v-model="show_modal_2" title="Second modal" cssClass="mw10">
+      <Modal v-model="showSecondModal" title="Second modal" cssClass="mw10">
         <form novalidate>
           <div class="form-group">
             <label for="formField1">Field 1</label>
@@ -77,8 +77,8 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="float-right">
-                <button class="btn btn-primary" type="button" @click="show_modal_2=false">Ok</button>
-                <button class="btn btn-secondary ml-2" type="button" @click="show_modal_2=false">Cancel</button>
+                <button class="btn btn-primary" type="button" @click="showSecondModal=false">Ok</button>
+                <button class="btn btn-secondary ml-2" type="button" @click="showSecondModal=false">Cancel</button>
               </div>
             </div>
           </div>
@@ -94,8 +94,8 @@
     name: 'Intro',
     data: function(){
       return {
-        show_modal_1: false,
-        show_modal_2: false
+        showfirstModal: false,
+        showSecondModal: false
       }
     }
   }

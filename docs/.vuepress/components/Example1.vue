@@ -2,14 +2,14 @@
   <div class="mt-3">
     <div class="row mb-3">
       <div class="col">
-        <button type="button" class="btn btn-primary" @click="show_modal_1=true">
+        <button type="button" class="btn btn-primary" @click="showModal=true">
           Open a modal
         </button>
       </div>
     </div>
 
     <ClientOnly>
-      <Modal v-model="show_modal_1" title="My first modal">
+      <Modal v-model="showModal" title="My first modal">
         <p>Modal content goes here...</p>
       </Modal>
     </ClientOnly>
@@ -22,7 +22,7 @@
     name: 'Example1',
     data: function(){
       return {
-        show_modal_1: false
+        showModal: false
       }
     }
   }
