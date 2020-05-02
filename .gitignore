@@ -1,6 +1,9 @@
 .DS_Store
 node_modules
 
+# Published files
+demo
+
 # local env files
 .env.local
 .env.*.local
