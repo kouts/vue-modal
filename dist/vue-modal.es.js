@@ -211,7 +211,7 @@ var script = {
     bgClass: {
       type: String,
       default: ''
-    },    
+    },
     wrapperClass: {
       type: String,
       default: ''
@@ -222,8 +222,8 @@ var script = {
     },
     modalStyle: {
       type: Object,
-      default: function (){}
-    },    
+      default: function () {}
+    },
     inClass: {
       type: String,
       default: 'vm-fadeIn'
@@ -231,7 +231,7 @@ var script = {
     outClass: {
       type: String,
       default: 'vm-fadeOut'
-    },    
+    },
     bgInClass: {
       type: String,
       default: 'vm-fadeIn'
@@ -239,7 +239,7 @@ var script = {
     bgOutClass: {
       type: String,
       default: 'vm-fadeOut'
-    },    
+    },
     appendTo: {
       type: String,
       default: 'body'
@@ -255,9 +255,9 @@ var script = {
     basedOn: {
       type: Boolean,
       default: false
-    }    
+    }
   },
-  data: function() {
+  data: function () {
     return {
       zIndex: 0,
       id: null,
@@ -266,17 +266,17 @@ var script = {
       elToFocus: null
     };
   },
-  created: function created(){
-    if (this.live){
+  created: function created () {
+    if (this.live) {
       this.mount = true;
     }
   },
-  mounted: function mounted(){
+  mounted: function mounted () {
     this.id = 'vm-' + this._uid;
-    this.$watch('basedOn', function(newVal){
+    this.$watch('basedOn', function (newVal) {
       var this$1 = this;
 
-      if (newVal){
+      if (newVal) {
         this.mount = true;
         this.$nextTick(function () {
           this$1.show = true;
@@ -288,121 +288,121 @@ var script = {
       immediate: true
     });
   },
-  beforeDestroy: function beforeDestroy(){
+  beforeDestroy: function beforeDestroy () {
     this.elToFocus = null;
-  },  
+  },
   methods: {
-    close: function close(){
-      if (this.enableClose === true){
+    close: function close () {
+      if (this.enableClose === true) {
         this.$emit('close', false);
       }
     },
-    clickOutside: function clickOutside(e){
-      if (e.target === this.$refs['vm-wrapper']){
+    clickOutside: function clickOutside (e) {
+      if (e.target === this.$refs['vm-wrapper']) {
         this.close();
       }
     },
-    keydown: function keydown(e){
-      if (e.which === 27){
+    keydown: function keydown (e) {
+      if (e.which === 27) {
         this.close();
       }
-      if (e.which === 9){
+      if (e.which === 9) {
         // Get only visible elements
         var all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll('input, select, textarea, button, a'));
-        all = all.filter(function(el){
+        all = all.filter(function (el) {
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
         });
-        if (e.shiftKey){
-          if (e.target === all[0] || e.target === this.$refs['vm-wrapper']){
+        if (e.shiftKey) {
+          if (e.target === all[0] || e.target === this.$refs['vm-wrapper']) {
             e.preventDefault();
             all[all.length - 1].focus();
           }
         } else {
-          if (e.target === all[all.length - 1]){
+          if (e.target === all[all.length - 1]) {
             e.preventDefault();
             all[0].focus();
           }
         }
       }
     },
-    getTopZindex: function getTopZindex(){
+    getTopZindex: function getTopZindex () {
       var toret = 0;
       var all = document.querySelectorAll('.vm-wrapper');
       for (var i = 0; i < all.length; i++) {
-        if (all[i].display === 'none'){
+        if (all[i].display === 'none') {
           continue;
         }
         toret = parseInt(all[i].style.zIndex) > toret ? parseInt(all[i].style.zIndex) : toret;
       }
       return toret;
     },
-    modalsVisible: function modalsVisible(){
+    modalsVisible: function modalsVisible () {
       var all = document.querySelectorAll('.vm-wrapper');
       // We cannot return false unless we make sure that there are not any modals visible
-      var found_visible = 0;
+      var foundVisible = 0;
       for (var i = 0; i < all.length; i++) {
-        if (all[i].display === 'none'){
+        if (all[i].display === 'none') {
           continue;
         }
-        if (parseInt(all[i].style.zIndex) > 0){
-          found_visible++;
+        if (parseInt(all[i].style.zIndex) > 0) {
+          foundVisible++;
         }
       }
-      return found_visible;
+      return foundVisible;
     },
-    handleFocus: function handleFocus(wrapper){
+    handleFocus: function handleFocus (wrapper) {
       var autofocus = wrapper.querySelector('[autofocus]');
-      if (autofocus){
+      if (autofocus) {
         autofocus.focus();
       } else {
         var focusable = wrapper.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
         focusable.length ? focusable[0].focus() : wrapper.focus();
       }
     },
-    beforeOpen: function beforeOpen(){
+    beforeOpen: function beforeOpen () {
       // console.log('beforeOpen');
       this.elToFocus = document.activeElement;
       var lastZindex = this.getTopZindex();
       this.zIndex = (lastZindex === 0) ? this.baseZindex : lastZindex + 2;
       this.$emit('beforeOpen');
     },
-    opening: function opening(){
+    opening: function opening () {
       // console.log('opening');
       this.$emit('opening');
     },
-    afterOpen: function afterOpen(){
+    afterOpen: function afterOpen () {
       // console.log('afterOpen');
       this.handleFocus(this.$refs['vm-wrapper']);
       this.$emit('afterOpen');
     },
-    beforeClose: function beforeClose(){
+    beforeClose: function beforeClose () {
       // console.log('beforeClose');
       this.$emit('beforeClose');
     },
-    closing: function closing(){
+    closing: function closing () {
       // console.log('closing');
       this.$emit('closing');
     },
-    afterClose: function afterClose(){
+    afterClose: function afterClose () {
       var this$1 = this;
 
       // console.log('afterClose');
       this.zIndex = 0;
-      if (!this.live){
+      if (!this.live) {
         this.mount = false;
       }
       this.$nextTick(function () {
-        window.requestAnimationFrame(function (){
+        window.requestAnimationFrame(function () {
           var lastZindex = this$1.getTopZindex();
-          if (lastZindex > 0){
+          if (lastZindex > 0) {
             var all = document.querySelectorAll('.vm-wrapper');
             for (var i = 0; i < all.length; i++) {
               var wrapper = all[i];
-              if (wrapper.display === 'none'){
+              if (wrapper.display === 'none') {
                 continue;
               }
-              if (parseInt(wrapper.style.zIndex) === lastZindex){
-                if (wrapper.contains(this$1.elToFocus)){
+              if (parseInt(wrapper.style.zIndex) === lastZindex) {
+                if (wrapper.contains(this$1.elToFocus)) {
                   this$1.elToFocus.focus();
                 } else {
                   // console.log(wrapper);
@@ -412,7 +412,7 @@ var script = {
               }
             }
           } else {
-            if (document.body.contains(this$1.elToFocus)){
+            if (document.body.contains(this$1.elToFocus)) {
               this$1.elToFocus.focus();
             }
           }
@@ -600,7 +600,11 @@ var __vue_render__ = function() {
                           _vm._t("titlebar", [
                             _c("div", { staticClass: "vm-titlebar" }, [
                               _c("h3", { staticClass: "vm-title" }, [
-                                _vm._v(_vm._s(_vm.title))
+                                _vm._v(
+                                  "\n                " +
+                                    _vm._s(_vm.title) +
+                                    "\n              "
+                                )
                               ]),
                               _vm._v(" "),
                               _vm.enableClose
