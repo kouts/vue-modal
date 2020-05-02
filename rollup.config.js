@@ -23,7 +23,7 @@ export default {
       globals: {
         vue: 'Vue'
       }
-    }		
+    }
   ],
   external: [
     'vue'

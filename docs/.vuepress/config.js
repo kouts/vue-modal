@@ -18,19 +18,19 @@ module.exports = {
   head: [
     [
       'script',
-      {src: 'https://polyfill.io/v3/polyfill.min.js?features=Array.from'}
-    ],    
-    [
-      'script',
-      {src: 'https://polyfill.io/v3/polyfill.min.js?features=Promise'}
+      { src: 'https://polyfill.io/v3/polyfill.min.js?features=Array.from' }
     ],
     [
       'script',
-      {src: 'https://polyfill.io/v3/polyfill.min.js?features=NodeList.prototype.forEach'}
+      { src: 'https://polyfill.io/v3/polyfill.min.js?features=Promise' }
     ],
     [
       'script',
-      {src: 'https://polyfill.io/v3/polyfill.min.js?features=Object.assign'}
+      { src: 'https://polyfill.io/v3/polyfill.min.js?features=NodeList.prototype.forEach' }
+    ],
+    [
+      'script',
+      { src: 'https://polyfill.io/v3/polyfill.min.js?features=Object.assign' }
     ]
   ]
 };

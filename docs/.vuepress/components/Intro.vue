@@ -9,24 +9,24 @@
     </div>
 
     <ClientOnly>
-      <Modal v-model="showfirstModal" title="First modal" cssClass="mw10">
+      <Modal v-model="showfirstModal" title="First modal" css-class="mw10">
         <form novalidate>
           <div class="form-group">
             <label for="inputEmail4">Email</label>
-            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+            <input id="inputEmail4" type="email" class="form-control" placeholder="Email">
           </div>
           <div class="form-group">
             <label for="inputAddress">Address</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+            <input id="inputAddress" type="text" class="form-control" placeholder="1234 Main St">
           </div>
           <div class="form-group">
             <label for="inputAddress2">Address 2</label>
-            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+            <input id="inputAddress2" type="text" class="form-control" placeholder="Apartment, studio, or floor">
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputCity">City</label>
-              <input type="text" class="form-control" id="inputCity">
+              <input id="inputCity" type="text" class="form-control">
             </div>
             <div class="form-group col-md-4">
               <label for="inputState">State</label>
@@ -37,12 +37,12 @@
             </div>
             <div class="form-group col-md-2">
               <label for="inputZip">Zip</label>
-              <input type="text" class="form-control" id="inputZip">
+              <input id="inputZip" type="text" class="form-control">
             </div>
           </div>
           <div class="form-group">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="gridCheck">
+              <input id="gridCheck" class="form-check-input" type="checkbox">
               <label class="form-check-label" for="gridCheck">
                 Check me out
               </label>
@@ -63,15 +63,15 @@
         </form>
       </Modal>
 
-      <Modal v-model="showSecondModal" title="Second modal" cssClass="mw10">
+      <Modal v-model="showSecondModal" title="Second modal" css-class="mw10">
         <form novalidate>
           <div class="form-group">
             <label for="formField1">Field 1</label>
-            <input type="text" class="form-control" id="formField1" placeholder="">
+            <input id="formField1" type="text" class="form-control" placeholder="">
           </div>
           <div class="form-group">
             <label for="formField2">Field 2</label>
-            <input type="text" class="form-control" id="formField2" placeholder="">
+            <input id="formField2" type="text" class="form-control" placeholder="">
           </div>
           <hr class="full-hr">
           <div class="row">
@@ -85,18 +85,17 @@
         </form>
       </Modal>
     </ClientOnly>
-    
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'Intro',
-    data: function(){
-      return {
-        showfirstModal: false,
-        showSecondModal: false
-      }
-    }
+export default {
+  name: 'Intro',
+  data: function () {
+    return {
+      showfirstModal: false,
+      showSecondModal: false
+    };
   }
+};
 </script>

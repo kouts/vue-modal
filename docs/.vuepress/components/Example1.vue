@@ -13,17 +13,16 @@
         <p>Modal content goes here...</p>
       </Modal>
     </ClientOnly>
-    
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'Example1',
-    data: function(){
-      return {
-        showModal: false
-      }
-    }
+export default {
+  name: 'Example1',
+  data: function () {
+    return {
+      showModal: false
+    };
   }
+};
 </script>

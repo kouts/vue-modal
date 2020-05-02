@@ -33,8 +33,10 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
 
-    // Custom for vue/recommended
+    // Custom for vue/recommended preset
+    'vue/max-attributes-per-line': 'off',
     'vue/html-self-closing': 'off',
+    'vue/singleline-html-element-content-newline': 'off',
 
     // Custom rules standard
     semi: ['error', 'always'],
