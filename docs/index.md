@@ -1,6 +1,8 @@
 # vue-modal
 
-A modal window component for Vue
+![Vue modal](./assets/img/vue-modal-logo.png)
+
+A modal window component for Vue!
 
 > vue-modal is designed with web applications in mind and tries to stick as much as possible
 > to the accessibility best practices set in the [WAI-ARIA Dialog (Modal)](https://www.w3.org/TR/wai-aria-practices/#dialog_modal) section
