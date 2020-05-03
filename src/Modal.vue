@@ -44,7 +44,8 @@
               <div class="vm-titlebar">
                 <h3 class="vm-title">
                   {{ title }}
-                </h3> <button
+                </h3>
+                <button
                   v-if="enableClose"
                   type="button"
                   class="vm-btn-close"

@@ -109,13 +109,15 @@ The slot to use for overriding the titlebar of the modal
 Default value:
 ``` vue
 <div class="vm-titlebar">
-  <h3 class="vm-title">{{title}}</h3> 
-  <button 
-    type="button" 
-    class="vm-btn-close" 
-    v-if="enableClose" 
-    @click.prevent="close">
-  </button>
+  <h3 class="vm-title">
+    {{ title }}
+  </h3>
+  <button
+    v-if="enableClose"
+    type="button"
+    class="vm-btn-close"
+    @click.prevent="close"
+  ></button>
 </div>
 ```
 
