@@ -1,6 +1,6 @@
 ## Basic
 
-Download the repo, extract ```vue-modal.umd.min.js``` and ```vue-modal.css``` out of the the ```dist``` folder
+Download the repo, extract ```vue-modal.umd.min.js``` and ```vue-modal.css``` out of the ```dist``` folder
 and insert them in your page.
 
 ``` html
@@ -17,7 +17,7 @@ Install it via npm
 ```
 npm i @kouts/vue-modal --save
 ```
-import to use it
+Use the ```import``` to include it into your js
 ``` js
 import VueModal from '@kouts/vue-modal';
 import '@kouts/vue-modal/dist/vue-modal.css';
