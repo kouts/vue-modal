@@ -304,7 +304,7 @@ export default {
   .vm {position: relative; margin: 0px auto; width: calc(100% - 20px); min-width: 110px; max-width:500px; color: $body-color; background-color: #fff; top:30px; cursor: default; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);}
   .vm-titlebar {padding:10px 15px 10px 15px; color: $body-color; overflow: auto; border-bottom: 1px solid #e5e5e5;}
   .vm-title {margin-top:2px; margin-bottom: 0px; display: inline-block; font-size:18px; font-weight: normal;}
-  .vm-btn-close {color: #ccc; padding: 0px; cursor: pointer;  background: 0 0; border: 0; float: right; font-size: 24px; line-height: 1em; color:#ccc;}
+  .vm-btn-close {color: #ccc; padding: 0px; cursor: pointer;  background: 0 0; border: 0; float: right; font-size: 24px; line-height: 1em;}
   .vm-btn-close:before {content: '×'; font-family: Arial;}
   .vm-btn-close:hover, .vm-btn-close:focus, .vm-btn-close:focus:hover{color:#bbb; border-color: transparent; background-color: transparent;}
   .vm-content {padding:10px 15px 15px 15px;}
