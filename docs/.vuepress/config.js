@@ -1,5 +1,5 @@
 module.exports = {
-  dest: 'demo',
+  dest: 'public',
   // base: '/vue-modal/demo/',
   // base: '/demo/',
   title: 'vue-modal',
