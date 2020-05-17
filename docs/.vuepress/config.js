@@ -1,6 +1,6 @@
 module.exports = {
   dest: 'demo',
-  base: '/vue-modal/demo/',
+  // base: '/vue-modal/demo/',
   // base: '/demo/',
   title: 'vue-modal',
   description: 'A modal plugin for Vue',
