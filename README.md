@@ -31,7 +31,7 @@ A modal window component for Vue
 
 
 Click here for documentation and examples
-https://kouts.github.io/vue-modal/demo/
+https://vue-modal-demo.netlify.app/
 
 # Development
 
