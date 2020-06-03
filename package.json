@@ -1,7 +1,7 @@
 {
   "name": "@kouts/vue-modal",
   "description": "A modal window component for Vue",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "license": "MIT",
   "files": [
     "dist",
