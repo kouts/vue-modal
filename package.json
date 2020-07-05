@@ -1,14 +1,18 @@
 {
   "name": "@kouts/vue-modal",
   "description": "A modal window component for Vue",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "author": "Giannis Koutsaftakis",
   "license": "MIT",
-  "files": [
-    "dist",
-    "src"
-  ],
+  "repository": "https://github.com/kouts/vue-modal",
+  "keywords": [
+    "vue",
+    "component",
+    "modal",
+    "popup"
+  ],  
   "main": "dist/vue-modal.umd.min.js",
-  "jsnext:main": "vue-modal.es.js",
+  "module": "vue-modal.es.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build:vue": "vue-cli-service build",
