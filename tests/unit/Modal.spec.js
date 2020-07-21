@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import '@testing-library/jest-dom';
+import { waitNT, waitRAF } from '../utils';
 import Modal from '@/Modal.vue';
 
 describe('Modal', () => {
@@ -26,18 +27,21 @@ describe('Modal', () => {
   });
 
   it('shows a modal', async () => {
-    await wrapper.setData({ showModal: true });
+    wrapper.setData({ showModal: true });
     // console.log(document.body.innerHTML);
-    // const div = wrapper.find('div');
-    // expect(div.exists()).toBe(true);
+    await waitNT(wrapper.vm);
+    await waitRAF();
+    await waitNT(wrapper.vm);
+    await waitRAF();
     expect(document.querySelector('.vm')).toBeInstanceOf(HTMLElement);
   });
 
-  it('hides a modal', (done) => {
+  it('hides a modal', async () => {
     wrapper.setData({ showModal: false });
-    setTimeout(() => {
-      expect(document.querySelector('.vm')).toBeFalsy();
-      done();
-    }, 750);
+    await waitNT(wrapper.vm);
+    await waitRAF();
+    await waitNT(wrapper.vm);
+    await waitRAF();
+    expect(document.querySelector('.vm')).toBeFalsy();
   });
 });
