@@ -240,7 +240,7 @@ export default {
       this.elToFocus = document.activeElement;
       const lastZindex = this.getTopZindex();
       this.zIndex = (lastZindex === 0) ? this.baseZindex : lastZindex + 2;
-      this.$emit('beforeOpen');
+      this.$emit('before-open');
     },
     opening () {
       // console.log('opening');
@@ -249,11 +249,11 @@ export default {
     afterOpen () {
       // console.log('afterOpen');
       this.handleFocus(this.$refs['vm-wrapper']);
-      this.$emit('afterOpen');
+      this.$emit('after-open');
     },
     beforeClose () {
       // console.log('beforeClose');
-      this.$emit('beforeClose');
+      this.$emit('before-close');
     },
     closing () {
       // console.log('closing');
@@ -290,7 +290,7 @@ export default {
               this.elToFocus.focus();
             }
           }
-          this.$emit('afterClose');
+          this.$emit('after-close');
         });
       });
     }
