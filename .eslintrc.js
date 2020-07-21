@@ -15,7 +15,10 @@ module.exports = {
   globals: {
     'module': true,
     'require': true,
-    'process': true
+    'process': true,
+    'describe': true,
+    'it': true,
+    'expect': true
   },
   overrides: [
     {

@@ -30,6 +30,7 @@
   "devDependencies": {
     "@linusborg/vue-simple-portal": "^0.1.4",
     "@rollup/plugin-buble": "^0.21.3",
+    "@testing-library/jest-dom": "^5.11.1",
     "@vue/cli-plugin-babel": "^4.4.6",
     "@vue/cli-plugin-unit-jest": "^4.4.6",
     "@vue/cli-service": "^4.4.6",
