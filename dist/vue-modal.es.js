@@ -364,7 +364,7 @@ var script = {
       this.elToFocus = document.activeElement;
       var lastZindex = this.getTopZindex();
       this.zIndex = (lastZindex === 0) ? this.baseZindex : lastZindex + 2;
-      this.$emit('beforeOpen');
+      this.$emit('before-open');
     },
     opening: function opening () {
       // console.log('opening');
@@ -373,11 +373,11 @@ var script = {
     afterOpen: function afterOpen () {
       // console.log('afterOpen');
       this.handleFocus(this.$refs['vm-wrapper']);
-      this.$emit('afterOpen');
+      this.$emit('after-open');
     },
     beforeClose: function beforeClose () {
       // console.log('beforeClose');
-      this.$emit('beforeClose');
+      this.$emit('before-close');
     },
     closing: function closing () {
       // console.log('closing');
@@ -416,7 +416,7 @@ var script = {
               this$1.elToFocus.focus();
             }
           }
-          this$1.$emit('afterClose');
+          this$1.$emit('after-close');
         });
       });
     }
