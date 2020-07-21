@@ -4,30 +4,17 @@ import { waitNT, waitRAF } from '../utils';
 import Modal from '@/Modal.vue';
 
 describe('Modal', () => {
-  const WrapperComponent = {
-    data: function () {
-      return {
-        showModal: false
-      };
-    },
-    template: `
-    <Modal v-model="showModal" title="My first modal">
-      <p>Modal content goes here...</p>
-    </Modal>
-    `,
-    components: {
-      Modal
-    }
-  };
-
-  const wrapper = mount(WrapperComponent, {
+  const wrapper = mount(Modal, {
     stubs: {
       transition: false
+    },
+    slots: {
+      default: '<p>Modal content goes here...</p>'
     }
   });
 
   it('shows a modal', async () => {
-    wrapper.setData({ showModal: true });
+    wrapper.setProps({ basedOn: true });
     // console.log(document.body.innerHTML);
     await waitNT(wrapper.vm);
     await waitRAF();
@@ -37,11 +24,65 @@ describe('Modal', () => {
   });
 
   it('hides a modal', async () => {
-    wrapper.setData({ showModal: false });
+    wrapper.setProps({ basedOn: false });
     await waitNT(wrapper.vm);
     await waitRAF();
     await waitNT(wrapper.vm);
     await waitRAF();
     expect(document.querySelector('.vm')).toBeFalsy();
+  });
+
+  it('emits a before-open event', async () => {
+    wrapper.setProps({ basedOn: true });
+    await waitNT(wrapper.vm);
+    await waitRAF();
+    await waitNT(wrapper.vm);
+    await waitRAF();
+    expect(wrapper.emitted('before-open')).toBeTruthy();
+  });
+
+  it('emits an opening event', async () => {
+    wrapper.setProps({ basedOn: true });
+    await waitNT(wrapper.vm);
+    await waitRAF();
+    await waitNT(wrapper.vm);
+    await waitRAF();
+    expect(wrapper.emitted('opening')).toBeTruthy();
+  });
+
+  it('emits an after-open event', async () => {
+    wrapper.setProps({ basedOn: true });
+    await waitNT(wrapper.vm);
+    await waitRAF();
+    await waitNT(wrapper.vm);
+    await waitRAF();
+    expect(wrapper.emitted('after-open')).toBeTruthy();
+  });
+
+  it('emits a before-close event', async () => {
+    wrapper.setProps({ basedOn: false });
+    await waitNT(wrapper.vm);
+    await waitRAF();
+    await waitNT(wrapper.vm);
+    await waitRAF();
+    expect(wrapper.emitted('before-close')).toBeTruthy();
+  });
+
+  it('emits an closing event', async () => {
+    wrapper.setProps({ basedOn: false });
+    await waitNT(wrapper.vm);
+    await waitRAF();
+    await waitNT(wrapper.vm);
+    await waitRAF();
+    expect(wrapper.emitted('closing')).toBeTruthy();
+  });
+
+  it('emits an after-close event', async () => {
+    wrapper.setProps({ basedOn: false });
+    await waitNT(wrapper.vm);
+    await waitRAF();
+    await waitNT(wrapper.vm);
+    await waitRAF();
+    expect(wrapper.emitted('after-close')).toBeTruthy();
   });
 });
