@@ -1,7 +1,7 @@
 {
   "name": "@kouts/vue-modal",
   "description": "A modal window component for Vue",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "author": "Giannis Koutsaftakis",
   "license": "MIT",
   "repository": "https://github.com/kouts/vue-modal",
