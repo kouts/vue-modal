@@ -18,7 +18,9 @@ module.exports = {
     'process': true,
     'describe': true,
     'it': true,
-    'expect': true
+    'expect': true,
+    'beforeEach': true,
+    'afterEach': true
   },
   overrides: [
     {

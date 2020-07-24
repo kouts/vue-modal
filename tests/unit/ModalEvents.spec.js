@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { waitNT, waitRAF } from '../utils';
 import Modal from '@/Modal.vue';
 
-describe('Modal', () => {
+describe('Modal events', () => {
   const wrapper = mount(Modal, {
     stubs: {
       transition: false
@@ -13,23 +13,10 @@ describe('Modal', () => {
     }
   });
 
-  it('shows a modal', async () => {
-    wrapper.setProps({ basedOn: true });
-    // console.log(document.body.innerHTML);
-    await waitNT(wrapper.vm);
-    await waitRAF();
-    await waitNT(wrapper.vm);
-    await waitRAF();
-    expect(document.querySelector('.vm')).toBeInstanceOf(HTMLElement);
-  });
-
-  it('hides a modal', async () => {
-    wrapper.setProps({ basedOn: false });
-    await waitNT(wrapper.vm);
-    await waitRAF();
-    await waitNT(wrapper.vm);
-    await waitRAF();
-    expect(document.querySelector('.vm')).toBeFalsy();
+  afterEach(() => {
+    wrapper.setProps({
+      basedOn: false
+    });
   });
 
   it('emits a before-open event', async () => {
