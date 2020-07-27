@@ -67,6 +67,7 @@
 
 <script>
 import { Portal } from '@linusborg/vue-simple-portal';
+let animatingZIndex = 0;
 
 export default {
   name: 'VueModal',
@@ -239,7 +240,12 @@ export default {
       // console.log('beforeOpen');
       this.elToFocus = document.activeElement;
       const lastZindex = this.getTopZindex();
-      this.zIndex = (lastZindex === 0) ? this.baseZindex : lastZindex + 2;
+      if (animatingZIndex) {
+        this.zIndex = animatingZIndex + 2;
+      } else {
+        this.zIndex = (lastZindex === 0) ? this.baseZindex : lastZindex + 2;
+      }
+      animatingZIndex = this.zIndex;
       this.$emit('before-open');
     },
     opening () {
@@ -290,6 +296,7 @@ export default {
               this.elToFocus.focus();
             }
           }
+          animatingZIndex = 0;
           this.$emit('after-close');
         });
       });

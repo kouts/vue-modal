@@ -5,6 +5,9 @@
         <button type="button" class="btn btn-primary" @click="showfirstModal=true">
           Open a modal
         </button>
+        <button type="button" class="btn btn-primary" @click="showfirstModal=true; showSecondModal=true;">
+          Show all modals
+        </button>
       </div>
     </div>
 
