@@ -101,7 +101,7 @@ export default {
     },
     modalStyle: {
       type: Object,
-      default: () => {}
+      default: () => ({})
     },
     inClass: {
       type: String,
