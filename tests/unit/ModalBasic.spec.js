@@ -39,6 +39,8 @@ describe('Modal basic functionality', () => {
   });
 
   it('tests whether the backdrop and the modal have the right z-index', async () => {
+    await waitNT(wrapper.vm);
+    await waitRAF();
     wrapper.setProps({
       basedOn: true,
       baseZindex: 1051
