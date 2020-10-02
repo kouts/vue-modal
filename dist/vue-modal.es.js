@@ -1,6 +1,21 @@
 import Vue from 'vue';
 
-var url = 'bjectSymhasOwnProp-0123456789ABCDEFGHIJKLMNQRTUVWXYZ_dfgiklquvxz';
+// This alphabet uses a-z A-Z 0-9 _- symbols.
+// Symbols are generated for smaller size.
+// -_zyxwvutsrqponmlkjihgfedcba9876543210ZYXWVUTSRQPONMLKJIHGFEDCBA
+var url = '-_';
+// Loop from 36 to 0 (from z to a and 9 to 0 in Base36).
+var i = 36;
+while (i--) {
+  // 36 is radix. Number.prototype.toString(36) returns number
+  // in Base36 representation. Base36 is like hex, but it uses 0–9 and a-z.
+  url += i.toString(36);
+}
+// Loop from 36 to 10 (from Z to A in Base36).
+i = 36;
+while (i-- - 10) {
+  url += i.toString(36).toUpperCase();
+}
 
 /**
  * Generate URL-friendly unique ID. This method use non-secure predictable
@@ -18,9 +33,11 @@ var url = 'bjectSymhasOwnProp-0123456789ABCDEFGHIJKLMNQRTUVWXYZ_dfgiklquvxz';
  * @function
  */
 var nonSecure = function (size) {
-  size = size || 21;
   var id = '';
-  while (size--) {
+  i = size || 21;
+  // Compact alternative for `for (var i = 0; i < size; i++)`
+  while (i--) {
+    // `| 0` is compact and faster alternative for `Math.floor()`
     id += url[Math.random() * 64 | 0];
   }
   return id
@@ -189,6 +206,7 @@ if (typeof window !== 'undefined' && window.Vue && window.Vue === Vue) {
 }
 
 //
+var animatingZIndex = 0;
 
 var script = {
   name: 'VueModal',
@@ -222,7 +240,7 @@ var script = {
     },
     modalStyle: {
       type: Object,
-      default: function () {}
+      default: function () { return ({}); }
     },
     inClass: {
       type: String,
@@ -363,7 +381,12 @@ var script = {
       // console.log('beforeOpen');
       this.elToFocus = document.activeElement;
       var lastZindex = this.getTopZindex();
-      this.zIndex = (lastZindex === 0) ? this.baseZindex : lastZindex + 2;
+      if (animatingZIndex) {
+        this.zIndex = animatingZIndex + 2;
+      } else {
+        this.zIndex = (lastZindex === 0) ? this.baseZindex : lastZindex + 2;
+      }
+      animatingZIndex = this.zIndex;
       this.$emit('before-open');
     },
     opening: function opening () {
@@ -416,6 +439,7 @@ var script = {
               this$1.elToFocus.focus();
             }
           }
+          animatingZIndex = 0;
           this$1.$emit('after-close');
         });
       });
