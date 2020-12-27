@@ -100,7 +100,7 @@ Pass a Boolean value to the ```v-model``` directive to open and close the modal 
 </table>
 
 ## Slots
-### Default
+### default
 The default slot to use for the content of the modal.
 
 ### titlebar
