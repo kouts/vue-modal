@@ -157,15 +157,15 @@ Default value:
       <td>Event that fires when the modal opening transition is finished</td>
     </tr>
     <tr>
-      <td>before-open</td>
+      <td>before-close</td>
       <td>Event that fires before the modal closing transition starts</td>
     </tr>
     <tr>
-      <td>opening</td>
+      <td>closing</td>
       <td>Event that fires while the modal closing transition is in progress</td>
     </tr>
     <tr>
-      <td>after-open</td>
+      <td>after-close</td>
       <td>Event that fires when the modal closing transition is finished</td>
     </tr>    
   </tbody>
