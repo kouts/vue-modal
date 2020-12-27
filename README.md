@@ -13,7 +13,7 @@ A modal window component for Vue
 - Includes sensible default styling but it's also highly customizable via user CSS classes and styles
 - Override modal title and content via slots
 - Modal intro and outro effects using CSS animation classes
-- Exposes Component events - close, before-open, opening, after-open, before-close, after-close
+- Exposes Component events - close, before-open, opening, after-open, before-close, closing, after-close
 - Scrollable when it's contents exceed screen height
 - Closeable by clicking on the upper right "x", the overlay or the ```esc``` key
 - **Stackable** - Multiple modal windows on top of each other
