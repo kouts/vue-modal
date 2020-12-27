@@ -100,7 +100,7 @@ Pass a Boolean value to the ```v-model``` directive to open and close the modal 
 </table>
 
 ## Slots
-### Default
+### default
 The default slot to use for the content of the modal.
 
 ### titlebar
@@ -130,3 +130,43 @@ Default value:
   <slot></slot>
 </div>
 ```
+
+## Events
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>close</td>
+      <td>Event that fires when dialog closes</td>
+    </tr>
+    <tr>
+      <td>before-open</td>
+      <td>Event that fires before the modal opening transition starts</td>
+    </tr>
+    <tr>
+      <td>opening</td>
+      <td>Event that fires while the modal opening transition is in progress</td>
+    </tr>
+    <tr>
+      <td>after-open</td>
+      <td>Event that fires when the modal opening transition is finished</td>
+    </tr>
+    <tr>
+      <td>before-close</td>
+      <td>Event that fires before the modal closing transition starts</td>
+    </tr>
+    <tr>
+      <td>closing</td>
+      <td>Event that fires while the modal closing transition is in progress</td>
+    </tr>
+    <tr>
+      <td>after-close</td>
+      <td>Event that fires when the modal closing transition is finished</td>
+    </tr>    
+  </tbody>
+</table>
