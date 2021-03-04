@@ -63,6 +63,10 @@ h1#vue-modal + p + p {
   margin-bottom: 30px;
 }
 
+/* Content width fix */
+.theme-default-content:not(.custom) {
+  box-sizing: content-box;
+}
 
 /* Browsers support table */
 #browsers-support + table .icon.outbound {
