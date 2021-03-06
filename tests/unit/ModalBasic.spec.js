@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import '@testing-library/jest-dom';
-import { waitNT, waitRAF } from '../utils';
+import { waitNT, waitRAF, sleep } from '../utils';
 import Modal from '@/Modal.vue';
 
 describe('Modal basic functionality', () => {
@@ -24,8 +24,6 @@ describe('Modal basic functionality', () => {
     // console.log(document.body.innerHTML);
     await waitNT(wrapper.vm);
     await waitRAF();
-    await waitNT(wrapper.vm);
-    await waitRAF();
     expect(document.querySelector('.vm')).toBeInstanceOf(HTMLElement);
   });
 
@@ -33,8 +31,7 @@ describe('Modal basic functionality', () => {
     wrapper.setProps({ basedOn: false });
     await waitNT(wrapper.vm);
     await waitRAF();
-    await waitNT(wrapper.vm);
-    await waitRAF();
+    await sleep(200);
     expect(document.querySelector('.vm')).toBeFalsy();
   });
 
@@ -46,8 +43,6 @@ describe('Modal basic functionality', () => {
       baseZindex: 1051
     });
     // console.log(document.body.innerHTML);
-    await waitNT(wrapper.vm);
-    await waitRAF();
     await waitNT(wrapper.vm);
     await waitRAF();
     expect(document.querySelector('.vm-backdrop')).toHaveStyle('z-index: 1050;');
