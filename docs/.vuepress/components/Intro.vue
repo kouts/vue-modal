@@ -12,7 +12,7 @@
     </div>
 
     <ClientOnly>
-      <Modal v-model="showfirstModal" title="First modal" css-class="mw10">
+      <Modal v-model="showfirstModal" title="First modal">
         <form novalidate>
           <div class="form-group">
             <label for="inputEmail4">Email</label>
@@ -66,7 +66,7 @@
         </form>
       </Modal>
 
-      <Modal v-model="showSecondModal" title="Second modal" css-class="mw10">
+      <Modal v-model="showSecondModal" title="Second modal">
         <form novalidate>
           <div class="form-group">
             <label for="formField1">Field 1</label>
