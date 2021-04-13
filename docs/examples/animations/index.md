@@ -1,4 +1,4 @@
-## CSS Animation classes
+<h2>Animations</h2>
 
 vue-modal comes with a fade-in/fade-out animation (250ms duration by default) for the modal and the modal backdrop.
 It is also designed so that you can put your favorite animations using any CSS animation framework like Animate.css, Anicollection etc
