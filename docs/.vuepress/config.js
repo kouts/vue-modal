@@ -1,4 +1,11 @@
+const VueExamplePlugin = require('vuepress-plugin-vue-example');
+
 module.exports = {
+  plugins: [
+    VueExamplePlugin({
+      componentsPath: '/docs/.examples/'
+    })
+  ],
   dest: 'public',
   // base: '/vue-modal/demo/',
   // base: '/demo/',
@@ -12,7 +19,15 @@ module.exports = {
       ['/', 'Introduction'],
       ['/installation/', 'Installation'],
       ['/usage/', 'Usage'],
-      ['/options/', 'Options']
+      ['/options/', 'Options'],
+      {
+        title: 'Examples',
+        collapsable: true,
+        children: [
+          ['/examples/animations/', 'Animations'],
+          ['/examples/prevent-body-scroll/', 'Prevent body scroll']
+        ]
+      }
     ]
   },
   head: [
@@ -40,6 +55,6 @@ module.exports = {
     ['script', { src: 'https://polyfill.io/v3/polyfill.min.js?features=Object.assign' }]
   ],
   chainWebpack: (config, isServer) => {
-    config.resolve.alias.set('vue', 'vue/dist/vue.esm.js')
-  }  
+    config.resolve.alias.set('vue', 'vue/dist/vue.esm.js');
+  }
 };
