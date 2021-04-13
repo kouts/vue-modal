@@ -24,8 +24,8 @@ module.exports = {
         title: 'Examples',
         collapsable: true,
         children: [
-          ['/examples/animations/', 'Animations']
-          // ['/examples/live/', 'Live']
+          ['/examples/animations/', 'Animations'],
+          ['/examples/prevent-body-scroll/', 'Prevent body scroll']
         ]
       }
     ]
