@@ -5,7 +5,9 @@
         <div class="form-group">
           <label>Modal intro</label>
           <select class="custom-select" v-model="inClass">
-            <option v-for="animClass in inClasses" :key="animClass">{{ animClass }}</option>
+            <option v-for="animClass in inClasses" :key="animClass">
+              {{ animClass }}
+            </option>
           </select>
         </div>
       </div>
@@ -13,7 +15,9 @@
         <div class="form-group">
           <label>Modal outro</label>
           <select class="custom-select" v-model="outClass">
-            <option v-for="animClass in outClasses" :key="animClass">{{ animClass }}</option>
+            <option v-for="animClass in outClasses" :key="animClass">
+              {{ animClass }}
+            </option>
           </select>
         </div>
       </div>
@@ -21,7 +25,9 @@
         <div class="form-group">
           <label>Background intro</label>
           <select class="custom-select" v-model="bgInClass">
-            <option v-for="animClass in bgInClasses" :key="animClass">{{ animClass }}</option>
+            <option v-for="animClass in bgInClasses" :key="animClass">
+              {{ animClass }}
+            </option>
           </select>          
         </div>
       </div>
@@ -29,7 +35,9 @@
         <div class="form-group">
           <label>Background outro</label>
           <select class="custom-select" v-model="bgOutClass">
-            <option v-for="animClass in bgOutClasses" :key="animClass">{{ animClass }}</option>
+            <option v-for="animClass in bgOutClasses" :key="animClass">
+              {{ animClass }}
+            </option>
           </select>
         </div>
       </div>
@@ -66,13 +74,13 @@ export default {
   data: function() {
     return {
       showModal: false,
-      inClass: 'bounceIn',
-      inClasses: ['bounceIn', 'fadeInDown', 'fadeInUp'],
-      outClass: 'bounceOut',
-      outClasses: ['bounceOut', 'fadeOutDown', 'fadeOutUp'],
-      bgInClass: 'bounceIn',
+      inClass: 'backInDown',
+      inClasses: ['backInDown', 'bounceIn', 'fadeInDown', 'fadeInUp'],
+      outClass: 'backOutUp',
+      outClasses: ['backOutUp', 'bounceOut', 'fadeOutDown', 'fadeOutUp'],
+      bgInClass: 'fadeInUp',
       bgInClasses: ['bounceIn', 'fadeInDown', 'fadeInUp'],
-      bgOutClass: 'bounceOut',
+      bgOutClass: 'fadeOutDown',
       bgOutClasses: ['bounceOut', 'fadeOutDown', 'fadeOutUp']
     };
   }
