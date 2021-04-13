@@ -4,7 +4,7 @@ A common need when a modal window is open, is to prevent the `<body>` of the und
 vue-modal does not impose any specific scroll behavior on the `<body>` by default.  
 This functionality can be added with an external plugin.
 
-Scroll down for demo &darr;
+**Scroll down for demo &darr;**
 
 .  
 .  
