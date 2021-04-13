@@ -51,9 +51,8 @@
     </div>
 
     <Modal
-      :based-on="showModal"
+      v-model="showModal"
       title="Animated modal"
-      @close="showModal = false"
       wrapper-class="animate__animated"
       :in-class="`animate__${inClass}`"
       :out-class="`animate__${outClass}`"
