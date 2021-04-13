@@ -14,15 +14,24 @@ new Vue({
 ```
 ## Use
 ### Template
-
+with `v-model`
 ``` vue
 <button type="button" class="btn btn-primary" @click="showModal=true">
   Open a modal
 </button>
+
 <Modal v-model="showModal" title="My first modal">
   <p>Modal content goes here...</p>
 </Modal>
 ```
+or
+with `based-on` value and event
+``` vue
+<Modal :based-on="showModal" title="My first modal" @close="showModal = false">
+  <p>Modal content goes here...</p>
+</Modal>
+```
+
 
 ### Script
 ``` js
