@@ -26,7 +26,8 @@ module.exports = {
         children: [
           ['/examples/animations/', 'Animations'],
           ['/examples/prevent-body-scroll/', 'Prevent body scroll'],
-          ['/examples/prevent-close/', 'Prevent modal from closing']
+          ['/examples/prevent-close/', 'Prevent modal from closing'],
+          ['/examples/customizing/', 'Customizing']
         ]
       }
     ]

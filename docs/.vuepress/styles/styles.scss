@@ -92,3 +92,16 @@ h1#vue-modal + p + p {
   background-color: rgba(27,31,35,0.05);
   border-radius: 3px;
 }
+
+/* For grid examples */
+.bd-example-row .row + .row {
+  margin-top: 1rem;
+}
+
+.bd-example-row .row > .col,
+.bd-example-row .row > [class^='col-'] {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  background-color: rgba(86, 61, 124, 0.15);
+  border: 1px solid rgba(86, 61, 124, 0.2);
+}
