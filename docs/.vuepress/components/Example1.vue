@@ -18,7 +18,6 @@
 
 <script>
 export default {
-  name: 'Example1',
   data: function () {
     return {
       showModal: false

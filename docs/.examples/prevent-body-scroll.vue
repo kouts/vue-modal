@@ -8,11 +8,22 @@
       </div>
     </div>
 
-    <Modal v-model="showModal" title="Body freeze modal" @before-open="beforeOpen" @before-close="beforeClose">
-      <p class="mb-0">
-        This modal uses the built-in events of vue-modal<br />
-        and the <a href="https://github.com/ramonvictor/body-scroll-freezer" target="_blank" rel="noopener">body-scroll-freezer</a> 
-        plugin, in order to stop <code>&lt;body&gt;</code> from scrolling. 
+    <Modal 
+      v-model="showModal" 
+      title="Body freeze modal" 
+      @before-open="beforeOpen" 
+      @before-close="beforeClose"
+    >
+      <p class="mb-0 text-center">
+        This modal uses the built-in events of vue-modal and the<br />
+        <a 
+          href="https://github.com/ramonvictor/body-scroll-freezer" 
+          target="_blank" 
+          rel="noopener"
+        >
+          body-scroll-freezer
+        </a> plugin,<br />
+        in order to stop <code>&lt;body&gt;</code> from scrolling. 
       </p>
     </Modal>
   </div>
