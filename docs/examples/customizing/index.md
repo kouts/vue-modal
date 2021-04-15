@@ -12,4 +12,13 @@ we can have a modal that allows scroll on the modal content.
 <br />
 <br />
 
-<vue-example file="customizing/scrollable-content" />
+<vue-example file="customizing/scrollable-content" class="mb-4" />
+
+## Vertically centered
+<br />
+Using the <code>wrapper-class</code> prop and some additional CSS, 
+we can have a vertically centered modal.
+<br />
+<br />
+
+<vue-example file="customizing/vertically-centered" />
