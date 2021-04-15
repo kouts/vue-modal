@@ -86,6 +86,12 @@ export default {
   min-width: 300px;
 }
 
+@media (min-width: 480px) {
+  .modal-sm {
+    max-width: 300px;
+  }
+}
+
 @media (min-width: 992px) {
   .modal-lg,
   .modal-xl {
