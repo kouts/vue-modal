@@ -48,6 +48,20 @@
           <div class="col-6">.col-6</div>
         </div>
       </div>
+      <hr class="full-hr" />
+      <div class="row scrollable-modal-footer">
+        <div class="col-sm-12">
+          <div class="float-right">
+            <button
+              class="btn btn-secondary ml-2"
+              type="button"
+              @click="showModal = false"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>      
     </Modal>
   </div>
 </template>
