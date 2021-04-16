@@ -113,16 +113,30 @@ export default {
 </script>
 
 <style>
+.scrollable-modal {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 50px);
+}
+
+.scrollable-modal .vm-titlebar {
+  flex-shrink: 0;
+}
+
 .scrollable-modal .vm-content {
   padding: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* https://moduscreate.com/blog/how-to-fix-overflow-issues-in-css-flex-layouts/ */
 }
 
 .scrollable-modal .vm-content .scrollable-content {
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: calc(100vh - 190px);
   padding: 10px 15px 10px 15px;
+  flex-grow: 1;
 }
 
 .scrollable-modal .scrollable-modal-footer {
