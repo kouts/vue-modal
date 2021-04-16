@@ -29,7 +29,7 @@
       :title="`Modal size: ${modalClasses.find(m => m.value === modalClass).text}`"
       :modal-class="`modal ${modalClass}`"
     >
-      <div class="bd-example-row py-3 px-4">
+      <div class="bd-example-row py-2 px-3">
         <div class="row">
           <div class="col-md-8">.col-md-8</div>
           <div class="col-md-4">.col-md-4</div>
@@ -95,26 +95,26 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style>
 .modal {
   min-width: 300px;
 }
 
 @media (min-width: 480px) {
-  .modal-sm {
+  .modal.modal-sm {
     max-width: 300px;
   }
 }
 
 @media (min-width: 992px) {
-  .modal-lg,
-  .modal-xl {
+  .modal.modal-lg,
+  .modal.modal-xl {
     max-width: 800px;
   }
 }
 
 @media (min-width: 1200px) {
-  .modal-xl {
+  .modal.modal-xl {
     max-width: 1140px;
   }
 }
