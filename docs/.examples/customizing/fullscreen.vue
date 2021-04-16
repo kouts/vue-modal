@@ -94,7 +94,7 @@
         <div class="col-sm-12">
           <div class="float-right">
             <button
-              class="btn btn-secondary ml-2"
+              class="btn btn-secondary"
               type="button"
               @click="showModal = false"
             >
