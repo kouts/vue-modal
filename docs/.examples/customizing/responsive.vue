@@ -48,8 +48,7 @@
           <div class="col-6">.col-6</div>
         </div>
       </div>
-      <hr class="full-hr" />
-      <div class="row scrollable-modal-footer">
+      <div class="row modal-footer mt-2">
         <div class="col-sm-12">
           <div class="float-right">
             <button
@@ -117,5 +116,12 @@ export default {
   .modal.modal-xl {
     max-width: 1140px;
   }
+}
+
+.modal-footer {
+  padding: 15px 0px 0px 0px;
+  border-top: 1px solid #e5e5e5;
+  margin-left: -14px;
+  margin-right: -14px;  
 }
 </style>

@@ -85,7 +85,6 @@
           shockin'. End of the rainbow looking treasure.
         </p>
       </div>
-      <hr class="full-hr" />
       <div class="row scrollable-modal-footer">
         <div class="col-sm-12">
           <div class="float-right">
@@ -127,12 +126,9 @@ export default {
 }
 
 .scrollable-modal .scrollable-modal-footer {
-  padding: 0px 15px 15px 15px;
-}
-
-.scrollable-modal .vm-content .full-hr {
-  margin-top: auto;
-  margin-left: auto;
-  margin-right: auto;
+  padding: 15px 0px 15px 0px;
+  border-top: 1px solid #e5e5e5;
+  margin-left: 0;
+  margin-right: 0;
 }
 </style>
