@@ -113,7 +113,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style>
 .scrollable-modal .vm-content {
   padding: 0;
 }

@@ -48,7 +48,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style>
 .modal-wrapper {
   display: flex;
   align-items: center;
