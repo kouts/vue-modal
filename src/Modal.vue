@@ -8,7 +8,9 @@
       >
         <div
           v-show="show"
-          :class="['vm-backdrop', id+'-backdrop', bgClass]"
+          :data-vm-backdrop-id="id"
+          class="vm-backdrop"
+          :class="bgClass"
           :style="{ 'z-index': zIndex-1 }"
         ></div>
       </transition>
@@ -26,15 +28,18 @@
         <div
           v-show="show"
           ref="vm-wrapper"
+          :data-vm-wrapper-id="id"
           tabindex="0"
-          :class="['vm-wrapper', wrapperClass, id]"
+          class="vm-wrapper"
+          :class="wrapperClass"
           :style="{ 'z-index': zIndex, cursor: enableClose ? 'pointer' : 'default' }"
           @click="clickOutside($event)"
           @keydown="keydown($event)"
         >
           <div
             ref="vm"
-            :class="['vm', modalClass]"
+            class="vm"
+            :class="modalClass"
             :style="modalStyle"
             role="dialog"
             :aria-label="title"
@@ -67,6 +72,11 @@
 
 <script>
 import { Portal } from '@linusborg/vue-simple-portal';
+
+const TYPE_CSS = {
+  type: [String, Object, Array],
+  default: ''
+};
 let animatingZIndex = 0;
 
 export default {
@@ -87,38 +97,17 @@ export default {
       type: Number,
       default: 1051
     },
-    bgClass: {
-      type: String,
-      default: ''
-    },
-    wrapperClass: {
-      type: String,
-      default: ''
-    },
-    modalClass: {
-      type: String,
-      default: ''
-    },
+    bgClass: TYPE_CSS,
+    wrapperClass: TYPE_CSS,
+    modalClass: TYPE_CSS,
     modalStyle: {
       type: Object,
       default: () => ({})
     },
-    inClass: {
-      type: String,
-      default: 'vm-fadeIn'
-    },
-    outClass: {
-      type: String,
-      default: 'vm-fadeOut'
-    },
-    bgInClass: {
-      type: String,
-      default: 'vm-fadeIn'
-    },
-    bgOutClass: {
-      type: String,
-      default: 'vm-fadeOut'
-    },
+    inClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeIn' }),
+    outClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeOut' }),
+    bgInClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeIn' }),
+    bgOutClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeOut' }),
     appendTo: {
       type: String,
       default: 'body'
@@ -202,9 +191,12 @@ export default {
         }
       }
     },
+    getAllWrappers () {
+      return document.querySelectorAll('[data-vm-wrapper-id]');
+    },
     getTopZindex () {
       let toret = 0;
-      const all = document.querySelectorAll('.vm-wrapper');
+      const all = this.getAllWrappers();
       for (let i = 0; i < all.length; i++) {
         if (all[i].display === 'none') {
           continue;
@@ -214,7 +206,7 @@ export default {
       return toret;
     },
     modalsVisible () {
-      const all = document.querySelectorAll('.vm-wrapper');
+      const all = this.getAllWrappers();
       // We cannot return false unless we make sure that there are not any modals visible
       let foundVisible = 0;
       for (let i = 0; i < all.length; i++) {
@@ -275,7 +267,7 @@ export default {
         window.requestAnimationFrame(() => {
           const lastZindex = this.getTopZindex();
           if (lastZindex > 0) {
-            const all = document.querySelectorAll('.vm-wrapper');
+            const all = this.getAllWrappers();
             for (let i = 0; i < all.length; i++) {
               const wrapper = all[i];
               if (wrapper.display === 'none') {
