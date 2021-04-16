@@ -100,10 +100,7 @@ export default {
     bgClass: TYPE_CSS,
     wrapperClass: TYPE_CSS,
     modalClass: TYPE_CSS,
-    modalStyle: {
-      type: Object,
-      default: () => ({})
-    },
+    modalStyle: TYPE_CSS,
     inClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeIn' }),
     outClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeOut' }),
     bgInClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeIn' }),
