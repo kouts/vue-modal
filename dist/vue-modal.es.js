@@ -1,49 +1,26 @@
 import Vue from 'vue';
 
-// This alphabet uses a-z A-Z 0-9 _- symbols.
-// Symbols are generated for smaller size.
-// -_zyxwvutsrqponmlkjihgfedcba9876543210ZYXWVUTSRQPONMLKJIHGFEDCBA
-var url = '-_';
-// Loop from 36 to 0 (from z to a and 9 to 0 in Base36).
-var i = 36;
-while (i--) {
-  // 36 is radix. Number.prototype.toString(36) returns number
-  // in Base36 representation. Base36 is like hex, but it uses 0–9 and a-z.
-  url += i.toString(36);
-}
-// Loop from 36 to 10 (from Z to A in Base36).
-i = 36;
-while (i-- - 10) {
-  url += i.toString(36).toUpperCase();
-}
+// This alphabet uses `A-Za-z0-9_-` symbols. The genetic algorithm helped
+// optimize the gzip compression for this alphabet.
+var urlAlphabet =
+  'ModuleSymbhasOwnPr-0123456789ABCDEFGHNRVfgctiUvz_KqYTJkLxpZXIjQW';
 
-/**
- * Generate URL-friendly unique ID. This method use non-secure predictable
- * random generator with bigger collision probability.
- *
- * @param {number} [size=21] The number of symbols in ID.
- *
- * @return {string} Random string.
- *
- * @example
- * const nanoid = require('nanoid/non-secure')
- * model.id = nanoid() //=> "Uakgb_J5m9g-0JDMbcJqL"
- *
- * @name nonSecure
- * @function
- */
-var nonSecure = function (size) {
+var nanoid = function (size) {
+  if ( size === void 0 ) size = 21;
+
   var id = '';
-  i = size || 21;
-  // Compact alternative for `for (var i = 0; i < size; i++)`
+  // A compact alternative for `for (var i = 0; i < step; i++)`.
+  var i = size;
   while (i--) {
-    // `| 0` is compact and faster alternative for `Math.floor()`
-    id += url[Math.random() * 64 | 0];
+    // `| 0` is more compact and faster than `Math.floor()`.
+    id += urlAlphabet[(Math.random() * 64) | 0];
   }
   return id
 };
 
 function _typeof(obj) {
+  "@babel/helpers - typeof";
+
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function (obj) {
       return typeof obj;
@@ -58,7 +35,7 @@ function _typeof(obj) {
 }
 
 var config = {
-  selector: "vue-portal-target-".concat(nonSecure())
+  selector: "vue-portal-target-".concat(nanoid())
 };
 var setSelector = function setSelector(selector) {
   return config.selector = selector;
@@ -69,7 +46,8 @@ var TargetContainer = Vue.extend({
   // as an abstract component, it doesn't appear in
   // the $parent chain of components.
   // which means the next parent of any component rendered inside of this oen
-  // will be the parent from which is was portal'd
+  // will be the parent from which is was sent
+  // @ts-expect-error
   abstract: true,
   name: 'PortalOutlet',
   props: ['nodes', 'tag'],
@@ -81,11 +59,11 @@ var TargetContainer = Vue.extend({
   render: function render(h) {
     var nodes = this.updatedNodes && this.updatedNodes();
     if (!nodes) { return h(); }
-    return nodes.length < 2 && !nodes[0].text ? nodes : h(this.tag || 'DIV', nodes);
+    return nodes.length === 1 && !nodes[0].text ? nodes : h(this.tag || 'DIV', nodes);
   },
   destroyed: function destroyed() {
     var el = this.$el;
-    el.parentNode.removeChild(el);
+    el && el.parentNode.removeChild(el);
   }
 });
 
@@ -163,6 +141,7 @@ var Portal = Vue.extend({
       parent.appendChild(child);
     },
     mount: function mount() {
+      if (!isBrowser) { return; }
       var targetEl = this.getTargetEl();
       var el = document.createElement('DIV');
 
@@ -206,6 +185,11 @@ if (typeof window !== 'undefined' && window.Vue && window.Vue === Vue) {
 }
 
 //
+
+var TYPE_CSS = {
+  type: [String, Object, Array],
+  default: ''
+};
 var animatingZIndex = 0;
 
 var script = {
@@ -226,38 +210,14 @@ var script = {
       type: Number,
       default: 1051
     },
-    bgClass: {
-      type: String,
-      default: ''
-    },
-    wrapperClass: {
-      type: String,
-      default: ''
-    },
-    modalClass: {
-      type: String,
-      default: ''
-    },
-    modalStyle: {
-      type: Object,
-      default: function () { return ({}); }
-    },
-    inClass: {
-      type: String,
-      default: 'vm-fadeIn'
-    },
-    outClass: {
-      type: String,
-      default: 'vm-fadeOut'
-    },
-    bgInClass: {
-      type: String,
-      default: 'vm-fadeIn'
-    },
-    bgOutClass: {
-      type: String,
-      default: 'vm-fadeOut'
-    },
+    bgClass: TYPE_CSS,
+    wrapperClass: TYPE_CSS,
+    modalClass: TYPE_CSS,
+    modalStyle: TYPE_CSS,
+    inClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeIn' }),
+    outClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeOut' }),
+    bgInClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeIn' }),
+    bgOutClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeOut' }),
     appendTo: {
       type: String,
       default: 'body'
@@ -275,7 +235,7 @@ var script = {
       default: false
     }
   },
-  data: function () {
+  data: function data() {
     return {
       zIndex: 0,
       id: null,
@@ -284,50 +244,56 @@ var script = {
       elToFocus: null
     };
   },
-  created: function created () {
+  created: function created() {
     if (this.live) {
       this.mount = true;
     }
   },
-  mounted: function mounted () {
+  mounted: function mounted() {
     this.id = 'vm-' + this._uid;
-    this.$watch('basedOn', function (newVal) {
-      var this$1 = this;
+    this.$watch(
+      'basedOn',
+      function(newVal) {
+        var this$1 = this;
 
-      if (newVal) {
-        this.mount = true;
-        this.$nextTick(function () {
-          this$1.show = true;
-        });
-      } else {
-        this.show = false;
+        if (newVal) {
+          this.mount = true;
+          this.$nextTick(function () {
+            this$1.show = true;
+          });
+        } else {
+          this.show = false;
+        }
+      },
+      {
+        immediate: true
       }
-    }, {
-      immediate: true
-    });
+    );
   },
-  beforeDestroy: function beforeDestroy () {
+  beforeDestroy: function beforeDestroy() {
     this.elToFocus = null;
   },
   methods: {
-    close: function close () {
+    close: function close() {
       if (this.enableClose === true) {
         this.$emit('close', false);
       }
     },
-    clickOutside: function clickOutside (e) {
+    clickOutside: function clickOutside(e) {
       if (e.target === this.$refs['vm-wrapper']) {
         this.close();
       }
     },
-    keydown: function keydown (e) {
+    keydown: function keydown(e) {
       if (e.which === 27) {
         this.close();
       }
       if (e.which === 9) {
         // Get only visible elements
-        var all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll('input, select, textarea, button, a'));
-        all = all.filter(function (el) {
+        var all = [].slice.call(
+          this.$refs['vm-wrapper'].querySelectorAll('input, select, textarea, button, a')
+        );
+        all = all.filter(function(el) {
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
         });
         if (e.shiftKey) {
@@ -343,9 +309,12 @@ var script = {
         }
       }
     },
-    getTopZindex: function getTopZindex () {
+    getAllWrappers: function getAllWrappers() {
+      return document.querySelectorAll('[data-vm-wrapper-id]');
+    },
+    getTopZindex: function getTopZindex() {
       var toret = 0;
-      var all = document.querySelectorAll('.vm-wrapper');
+      var all = this.getAllWrappers();
       for (var i = 0; i < all.length; i++) {
         if (all[i].display === 'none') {
           continue;
@@ -354,8 +323,8 @@ var script = {
       }
       return toret;
     },
-    modalsVisible: function modalsVisible () {
-      var all = document.querySelectorAll('.vm-wrapper');
+    modalsVisible: function modalsVisible() {
+      var all = this.getAllWrappers();
       // We cannot return false unless we make sure that there are not any modals visible
       var foundVisible = 0;
       for (var i = 0; i < all.length; i++) {
@@ -368,45 +337,47 @@ var script = {
       }
       return foundVisible;
     },
-    handleFocus: function handleFocus (wrapper) {
+    handleFocus: function handleFocus(wrapper) {
       var autofocus = wrapper.querySelector('[autofocus]');
       if (autofocus) {
         autofocus.focus();
       } else {
-        var focusable = wrapper.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        var focusable = wrapper.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
         focusable.length ? focusable[0].focus() : wrapper.focus();
       }
     },
-    beforeOpen: function beforeOpen () {
+    beforeOpen: function beforeOpen() {
       // console.log('beforeOpen');
       this.elToFocus = document.activeElement;
       var lastZindex = this.getTopZindex();
       if (animatingZIndex) {
         this.zIndex = animatingZIndex + 2;
       } else {
-        this.zIndex = (lastZindex === 0) ? this.baseZindex : lastZindex + 2;
+        this.zIndex = lastZindex === 0 ? this.baseZindex : lastZindex + 2;
       }
       animatingZIndex = this.zIndex;
       this.$emit('before-open');
     },
-    opening: function opening () {
+    opening: function opening() {
       // console.log('opening');
       this.$emit('opening');
     },
-    afterOpen: function afterOpen () {
+    afterOpen: function afterOpen() {
       // console.log('afterOpen');
       this.handleFocus(this.$refs['vm-wrapper']);
       this.$emit('after-open');
     },
-    beforeClose: function beforeClose () {
+    beforeClose: function beforeClose() {
       // console.log('beforeClose');
       this.$emit('before-close');
     },
-    closing: function closing () {
+    closing: function closing() {
       // console.log('closing');
       this.$emit('closing');
     },
-    afterClose: function afterClose () {
+    afterClose: function afterClose() {
       var this$1 = this;
 
       // console.log('afterClose');
@@ -418,7 +389,7 @@ var script = {
         window.requestAnimationFrame(function () {
           var lastZindex = this$1.getTopZindex();
           if (lastZindex > 0) {
-            var all = document.querySelectorAll('.vm-wrapper');
+            var all = this$1.getAllWrappers();
             for (var i = 0; i < all.length; i++) {
               var wrapper = all[i];
               if (wrapper.display === 'none') {
@@ -556,8 +527,10 @@ var __vue_render__ = function() {
                         expression: "show"
                       }
                     ],
-                    class: ["vm-backdrop", _vm.id + "-backdrop", _vm.bgClass],
-                    style: { "z-index": _vm.zIndex - 1 }
+                    staticClass: "vm-backdrop",
+                    class: _vm.bgClass,
+                    style: { "z-index": _vm.zIndex - 1 },
+                    attrs: { "data-vm-backdrop-id": _vm.id }
                   })
                 ]
               ),
@@ -592,12 +565,13 @@ var __vue_render__ = function() {
                         }
                       ],
                       ref: "vm-wrapper",
-                      class: ["vm-wrapper", _vm.wrapperClass, _vm.id],
+                      staticClass: "vm-wrapper",
+                      class: _vm.wrapperClass,
                       style: {
                         "z-index": _vm.zIndex,
                         cursor: _vm.enableClose ? "pointer" : "default"
                       },
-                      attrs: { tabindex: "0" },
+                      attrs: { "data-vm-wrapper-id": _vm.id, tabindex: "0" },
                       on: {
                         click: function($event) {
                           return _vm.clickOutside($event)
@@ -612,7 +586,8 @@ var __vue_render__ = function() {
                         "div",
                         {
                           ref: "vm",
-                          class: ["vm", _vm.modalClass],
+                          staticClass: "vm",
+                          class: _vm.modalClass,
                           style: _vm.modalStyle,
                           attrs: {
                             role: "dialog",
@@ -675,7 +650,7 @@ __vue_render__._withStripped = true;
   /* style */
   var __vue_inject_styles__ = undefined;
   /* scoped */
-  var __vue_scope_id__ = undefined;
+  var __vue_scope_id__ = "data-v-758abafd";
   /* module identifier */
   var __vue_module_identifier__ = undefined;
   /* functional template */
