@@ -302,7 +302,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .vm-backdrop {
   position: fixed;
   top: 0;
@@ -368,7 +368,7 @@ export default {
 .vm-content {
   padding: 10px 15px 15px 15px;
 }
-.vm-content >>> .full-hr {
+.vm-content .full-hr {
   width: auto;
   border: 0;
   border-top: 1px solid #e5e5e5;
