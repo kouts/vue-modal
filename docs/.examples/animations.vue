@@ -5,7 +5,7 @@
         <div class="form-group">
           <label>Modal intro</label>
           <select class="custom-select" v-model="inClass">
-            <option v-for="animClass in inClasses" :key="animClass">
+            <option v-for="animClass in inClasses" :key="animClass" :value="animClass">
               {{ animClass }}
             </option>
           </select>
@@ -15,7 +15,7 @@
         <div class="form-group">
           <label>Modal outro</label>
           <select class="custom-select" v-model="outClass">
-            <option v-for="animClass in outClasses" :key="animClass">
+            <option v-for="animClass in outClasses" :key="animClass" :value="animClass">
               {{ animClass }}
             </option>
           </select>
@@ -25,17 +25,17 @@
         <div class="form-group">
           <label>Background intro</label>
           <select class="custom-select" v-model="bgInClass">
-            <option v-for="animClass in bgInClasses" :key="animClass">
+            <option v-for="animClass in bgInClasses" :key="animClass" :value="animClass">
               {{ animClass }}
             </option>
-          </select>          
+          </select>
         </div>
       </div>
       <div class="col">
         <div class="form-group">
           <label>Background outro</label>
           <select class="custom-select" v-model="bgOutClass">
-            <option v-for="animClass in bgOutClasses" :key="animClass">
+            <option v-for="animClass in bgOutClasses" :key="animClass" :value="animClass">
               {{ animClass }}
             </option>
           </select>
@@ -58,7 +58,7 @@
       :out-class="`animate__${outClass}`"
       bg-class="animate__animated"
       :bg-in-class="`animate__${bgInClass}`"
-      :bg-out-class="`animate__${bgOutClass}`"      
+      :bg-out-class="`animate__${bgOutClass}`"
     >
       <p class="text-center mt-3">
         This is a modal animated using CSS classes from <br />
