@@ -176,9 +176,7 @@ export default {
       }
       if (e.which === 9) {
         // Get only visible elements
-        let all = [].slice.call(
-          this.$refs['vm-wrapper'].querySelectorAll(FOCUSABLE_ELEMENTS)
-        ).filter(function(el) {
+        let all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll(FOCUSABLE_ELEMENTS)).filter(function(el) {
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
         });
         if (e.shiftKey) {
@@ -194,28 +192,19 @@ export default {
         }
       }
     },
-    getAllWrappers() {
-      return document.querySelectorAll('[data-vm-wrapper-id]');
+    getAllVisibleWrappers() {
+      return [].slice.call(document.querySelectorAll('[data-vm-wrapper-id]')).filter(w => w.display !== 'none');
     },
     getTopZindex() {
-      let toret = 0;
-      const all = this.getAllWrappers();
-      for (let i = 0; i < all.length; i++) {
-        if (all[i].display === 'none') {
-          continue;
-        }
-        toret = parseInt(all[i].style.zIndex) > toret ? parseInt(all[i].style.zIndex) : toret;
-      }
-      return toret;
+      return this.getAllVisibleWrappers().reduce((acc, curr) => {
+        return parseInt(curr.style.zIndex) > acc ? parseInt(curr.style.zIndex) : acc;
+      }, 0);
     },
     modalsVisible() {
-      const all = this.getAllWrappers();
+      const all = this.getAllVisibleWrappers();
       // We cannot return false unless we make sure that there are not any modals visible
       let foundVisible = 0;
       for (let i = 0; i < all.length; i++) {
-        if (all[i].display === 'none') {
-          continue;
-        }
         if (parseInt(all[i].style.zIndex) > 0) {
           foundVisible++;
         }
@@ -270,12 +259,9 @@ export default {
         window.requestAnimationFrame(() => {
           const lastZindex = this.getTopZindex();
           if (lastZindex > 0) {
-            const all = this.getAllWrappers();
+            const all = this.getAllVisibleWrappers();
             for (let i = 0; i < all.length; i++) {
               const wrapper = all[i];
-              if (wrapper.display === 'none') {
-                continue;
-              }
               if (parseInt(wrapper.style.zIndex) === lastZindex) {
                 if (wrapper.contains(this.elToFocus)) {
                   this.elToFocus.focus();
