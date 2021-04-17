@@ -51,6 +51,9 @@ export default {
 .modal-wrapper {
   display: flex;
   align-items: center;
-  justify-content: center; 
+}
+
+.modal-wrapper .vm {
+  top: auto;
 }
 </style>
