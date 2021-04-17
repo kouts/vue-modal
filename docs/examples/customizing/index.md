@@ -25,8 +25,8 @@ we can have a vertically centered modal.
 
 ## Fullscreen
 <br />
-Using the <code>wrapper-class</code> prop and some additional CSS, 
-we can have a vertically centered modal.
+Sometimes we want a modal that covers the entire viewport.<br /> 
+We can achieve that using the <code>wrapper-class</code> and <code>modal-class</code> props. 
 <br />
 <br />
 
