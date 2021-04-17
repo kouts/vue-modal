@@ -29,10 +29,13 @@
           v-show="show"
           ref="vm-wrapper"
           :data-vm-wrapper-id="id"
-          tabindex="0"
+          tabindex="-1"
           class="vm-wrapper"
           :class="wrapperClass"
           :style="{ 'z-index': zIndex, cursor: enableClose ? 'pointer' : 'default' }"
+          role="dialog"
+          :aria-label="title"
+          aria-modal="true"
           @click="clickOutside($event)"
           @keydown="keydown($event)"
         >
@@ -41,9 +44,6 @@
             class="vm"
             :class="modalClass"
             :style="modalStyle"
-            role="dialog"
-            :aria-label="title"
-            aria-modal="true"
           >
             <slot name="titlebar">
               <div class="vm-titlebar">
@@ -77,6 +77,7 @@ const TYPE_CSS = {
   type: [String, Object, Array],
   default: ''
 };
+const FOCUSABLE_ELEMENTS = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 let animatingZIndex = 0;
 
 export default {
@@ -176,9 +177,8 @@ export default {
       if (e.which === 9) {
         // Get only visible elements
         let all = [].slice.call(
-          this.$refs['vm-wrapper'].querySelectorAll('input, select, textarea, button, a')
-        );
-        all = all.filter(function(el) {
+          this.$refs['vm-wrapper'].querySelectorAll(FOCUSABLE_ELEMENTS)
+        ).filter(function(el) {
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
         });
         if (e.shiftKey) {
@@ -227,9 +227,7 @@ export default {
       if (autofocus) {
         autofocus.focus();
       } else {
-        const focusable = wrapper.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
+        const focusable = wrapper.querySelectorAll(FOCUSABLE_ELEMENTS);
         focusable.length ? focusable[0].focus() : wrapper.focus();
       }
     },
