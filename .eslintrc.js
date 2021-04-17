@@ -45,5 +45,6 @@ module.exports = {
 
     // Custom rules standard
     semi: ['error', 'always'],
+    'space-before-function-paren': [true, 'never']
   },
 };

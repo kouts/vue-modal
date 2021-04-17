@@ -27,19 +27,19 @@ Pass a Boolean value to the ```v-model``` directive to open and close the modal 
     <tr>
       <td>wrapperClass</td>
       <td>Extra CSS classes for the modal wrapper</td>
-      <td>String</td>
+      <td>String, Object, Array</td>
       <td><em>Empty</em></td>
     </tr>
     <tr>
       <td>bgClass</td>
       <td>Extra CSS classes for the modal backdrop</td>
-      <td>String</td>
+      <td>String, Object, Array</td>
       <td><em>Empty</em></td>
     </tr>        
     <tr>
       <td>modalClass</td>
       <td>Extra CSS classes for the modal element</td>
-      <td>String</td>
+      <td>String, Object, Array</td>
       <td><em>Empty</em></td>
     </tr>
     <tr>
@@ -51,25 +51,25 @@ Pass a Boolean value to the ```v-model``` directive to open and close the modal 
     <tr>
       <td>inClass</td>
       <td>Animation class for the modal intro</td>
-      <td>String</td>
+      <td>String, Object, Array</td>
       <td>vm-fadeIn</td>
     </tr>
     <tr>
       <td>outClass</td>
       <td>Animation class for the modal outro</td>
-      <td>String</td>
+      <td>String, Object, Array</td>
       <td>vm-fadeOut</td>
     </tr>
     <tr>
       <td>bgInClass</td>
       <td>Animation class for the modal backdrop intro</td>
-      <td>String</td>
+      <td>String, Object, Array</td>
       <td>vm-fadeIn</td>
     </tr>
     <tr>
       <td>bgOutClass</td>
       <td>Animation class for the modal backdrop outro</td>
-      <td>String</td>
+      <td>String, Object, Array</td>
       <td>vm-fadeOut</td>
     </tr>    
     <tr>

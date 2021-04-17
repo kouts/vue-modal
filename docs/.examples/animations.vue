@@ -86,6 +86,6 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style>
 @import '~animate.css/animate.css';
 </style>

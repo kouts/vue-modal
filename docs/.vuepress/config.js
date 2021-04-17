@@ -24,6 +24,7 @@ module.exports = {
         title: 'Examples',
         collapsable: true,
         children: [
+          ['/examples/basic/', 'Basic'],
           ['/examples/animations/', 'Animations'],
           ['/examples/prevent-body-scroll/', 'Prevent body scroll'],
           ['/examples/prevent-close/', 'Prevent modal from closing'],

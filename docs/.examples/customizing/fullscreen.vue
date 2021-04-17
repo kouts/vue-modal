@@ -14,8 +14,13 @@
 
     <Modal
       v-model="showModal"
-      title="Modal with scrollable content"
-      modal-class="scrollable-modal"
+      title="Fullscreen modal"
+      wrapper-class="animate__animated"
+      in-class="animate__fadeInDown"
+      out-class="animate__zoomOut"      
+      modal-class="fullscreen-modal"
+      @before-open="beforeOpen" 
+      @before-close="beforeClose"      
     >
       <div class="scrollable-content">
         <p>
@@ -85,7 +90,7 @@
           shockin'. End of the rainbow looking treasure.
         </p>
       </div>
-      <div class="row scrollable-modal-footer">
+      <div class="row fullscreen-modal-footer">
         <div class="col-sm-12">
           <div class="float-right">
             <button
@@ -103,27 +108,46 @@
 </template>
 
 <script>
+import bodyScroll from 'body-scroll-freezer';
+
 export default {
   data: function () {
     return {
       showModal: false
     };
+  },
+  mounted() {
+    bodyScroll.init();
+  },
+  methods: {
+    beforeOpen() {
+      bodyScroll.freeze();
+    },
+    beforeClose() {
+      bodyScroll.unfreeze();
+    }
   }
 };
 </script>
 
 <style>
-.scrollable-modal {
+@import '~animate.css/animate.css';
+
+.fullscreen-modal {
+  width: 100%;
+  max-width: 100%;
+  top: 0;
+  margin: 0;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: calc(100% - 50px);
 }
 
-.scrollable-modal .vm-titlebar {
+.fullscreen-modal .vm-titlebar {
   flex-shrink: 0;
 }
 
-.scrollable-modal .vm-content {
+.fullscreen-modal .vm-content {
   padding: 0;
   flex-grow: 1;
   display: flex;
@@ -131,7 +155,7 @@ export default {
   min-height: 0; /* https://moduscreate.com/blog/how-to-fix-overflow-issues-in-css-flex-layouts/ */
 }
 
-.scrollable-modal .vm-content .scrollable-content {
+.fullscreen-modal .vm-content .scrollable-content {
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
@@ -139,10 +163,8 @@ export default {
   flex-grow: 1;
 }
 
-.scrollable-modal .scrollable-modal-footer {
-  padding: 15px 0px 15px 0px;
+.fullscreen-modal .fullscreen-modal-footer {
   border-top: 1px solid #e5e5e5;
-  margin-left: 0;
-  margin-right: 0;
+  padding: 15px;
 }
 </style>

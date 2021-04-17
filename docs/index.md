@@ -10,7 +10,8 @@ A modal window component for Vue!
 
 <Intro />
 
-## Features at a glance
+## Features at a glance  
+<p class="mb-n3">&nbsp;</p>  
 
 - Lightweight, minified gzipped version is < **8kb**
 - Opens and closes with a data variable using ```v-model```

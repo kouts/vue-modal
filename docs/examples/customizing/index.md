@@ -21,4 +21,13 @@ we can have a vertically centered modal.
 <br />
 <br />
 
-<vue-example file="customizing/vertically-centered" />
+<vue-example file="customizing/vertically-centered" class="mb-4" />
+
+## Fullscreen
+<br />
+Sometimes we want a modal that covers the entire viewport.<br /> 
+We can achieve that using the <code>wrapper-class</code> and <code>modal-class</code> props. 
+<br />
+<br />
+
+<vue-example file="customizing/fullscreen" class="mb-4" />

@@ -1,5 +1,6 @@
 import vue from 'rollup-plugin-vue';
-import css from 'rollup-plugin-css-only';
+import postcss from 'rollup-plugin-postcss';
+import cssnano from 'cssnano';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import buble from '@rollup/plugin-buble';
@@ -31,8 +32,9 @@ export default {
   plugins: [
     resolve(),
     commonjs(),
-    css({
-      output: 'dist/vue-modal.css'
+    postcss({
+      extract: 'vue-modal.css',
+      plugins: [cssnano()]
     }),
     vue({
       css: false

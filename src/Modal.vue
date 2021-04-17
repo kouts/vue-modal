@@ -8,8 +8,10 @@
       >
         <div
           v-show="show"
-          :class="['vm-backdrop', id+'-backdrop', bgClass]"
-          :style="{ 'z-index': zIndex-1 }"
+          :data-vm-backdrop-id="id"
+          class="vm-backdrop"
+          :class="bgClass"
+          :style="{ 'z-index': zIndex - 1 }"
         ></div>
       </transition>
       <transition
@@ -26,19 +28,22 @@
         <div
           v-show="show"
           ref="vm-wrapper"
-          tabindex="0"
-          :class="['vm-wrapper', wrapperClass, id]"
+          :data-vm-wrapper-id="id"
+          tabindex="-1"
+          class="vm-wrapper"
+          :class="wrapperClass"
           :style="{ 'z-index': zIndex, cursor: enableClose ? 'pointer' : 'default' }"
+          role="dialog"
+          :aria-label="title"
+          aria-modal="true"
           @click="clickOutside($event)"
           @keydown="keydown($event)"
         >
           <div
             ref="vm"
-            :class="['vm', modalClass]"
+            class="vm"
+            :class="modalClass"
             :style="modalStyle"
-            role="dialog"
-            :aria-label="title"
-            aria-modal="true"
           >
             <slot name="titlebar">
               <div class="vm-titlebar">
@@ -67,6 +72,12 @@
 
 <script>
 import { Portal } from '@linusborg/vue-simple-portal';
+
+const TYPE_CSS = {
+  type: [String, Object, Array],
+  default: ''
+};
+const FOCUSABLE_ELEMENTS = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 let animatingZIndex = 0;
 
 export default {
@@ -87,38 +98,14 @@ export default {
       type: Number,
       default: 1051
     },
-    bgClass: {
-      type: String,
-      default: ''
-    },
-    wrapperClass: {
-      type: String,
-      default: ''
-    },
-    modalClass: {
-      type: String,
-      default: ''
-    },
-    modalStyle: {
-      type: Object,
-      default: () => ({})
-    },
-    inClass: {
-      type: String,
-      default: 'vm-fadeIn'
-    },
-    outClass: {
-      type: String,
-      default: 'vm-fadeOut'
-    },
-    bgInClass: {
-      type: String,
-      default: 'vm-fadeIn'
-    },
-    bgOutClass: {
-      type: String,
-      default: 'vm-fadeOut'
-    },
+    bgClass: TYPE_CSS,
+    wrapperClass: TYPE_CSS,
+    modalClass: TYPE_CSS,
+    modalStyle: TYPE_CSS,
+    inClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeIn' }),
+    outClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeOut' }),
+    bgInClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeIn' }),
+    bgOutClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeOut' }),
     appendTo: {
       type: String,
       default: 'body'
@@ -136,7 +123,7 @@ export default {
       default: false
     }
   },
-  data: function () {
+  data() {
     return {
       zIndex: 0,
       id: null,
@@ -145,48 +132,51 @@ export default {
       elToFocus: null
     };
   },
-  created () {
+  created() {
     if (this.live) {
       this.mount = true;
     }
   },
-  mounted () {
+  mounted() {
     this.id = 'vm-' + this._uid;
-    this.$watch('basedOn', function (newVal) {
-      if (newVal) {
-        this.mount = true;
-        this.$nextTick(() => {
-          this.show = true;
-        });
-      } else {
-        this.show = false;
+    this.$watch(
+      'basedOn',
+      function(newVal) {
+        if (newVal) {
+          this.mount = true;
+          this.$nextTick(() => {
+            this.show = true;
+          });
+        } else {
+          this.show = false;
+        }
+      },
+      {
+        immediate: true
       }
-    }, {
-      immediate: true
-    });
+    );
   },
-  beforeDestroy () {
+  beforeDestroy() {
     this.elToFocus = null;
   },
   methods: {
-    close () {
+    close() {
       if (this.enableClose === true) {
         this.$emit('close', false);
       }
     },
-    clickOutside (e) {
+    clickOutside(e) {
       if (e.target === this.$refs['vm-wrapper']) {
         this.close();
       }
     },
-    keydown (e) {
+    keydown(e) {
       if (e.which === 27) {
         this.close();
       }
       if (e.which === 9) {
         // Get only visible elements
-        let all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll('input, select, textarea, button, a'));
-        all = all.filter(function (el) {
+        let all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll(FOCUSABLE_ELEMENTS)).filter(function(el) {
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
         });
         if (e.shiftKey) {
@@ -202,70 +192,64 @@ export default {
         }
       }
     },
-    getTopZindex () {
-      let toret = 0;
-      const all = document.querySelectorAll('.vm-wrapper');
-      for (let i = 0; i < all.length; i++) {
-        if (all[i].display === 'none') {
-          continue;
-        }
-        toret = parseInt(all[i].style.zIndex) > toret ? parseInt(all[i].style.zIndex) : toret;
-      }
-      return toret;
+    getAllVisibleWrappers() {
+      return [].slice.call(document.querySelectorAll('[data-vm-wrapper-id]')).filter(w => w.display !== 'none');
     },
-    modalsVisible () {
-      const all = document.querySelectorAll('.vm-wrapper');
+    getTopZindex() {
+      return this.getAllVisibleWrappers().reduce((acc, curr) => {
+        return parseInt(curr.style.zIndex) > acc ? parseInt(curr.style.zIndex) : acc;
+      }, 0);
+    },
+    modalsVisible() {
+      const all = this.getAllVisibleWrappers();
       // We cannot return false unless we make sure that there are not any modals visible
       let foundVisible = 0;
       for (let i = 0; i < all.length; i++) {
-        if (all[i].display === 'none') {
-          continue;
-        }
         if (parseInt(all[i].style.zIndex) > 0) {
           foundVisible++;
         }
       }
       return foundVisible;
     },
-    handleFocus (wrapper) {
+    handleFocus(wrapper) {
       const autofocus = wrapper.querySelector('[autofocus]');
       if (autofocus) {
         autofocus.focus();
       } else {
-        const focusable = wrapper.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const focusable = wrapper.querySelectorAll(FOCUSABLE_ELEMENTS);
         focusable.length ? focusable[0].focus() : wrapper.focus();
       }
     },
-    beforeOpen () {
+    beforeOpen() {
       // console.log('beforeOpen');
       this.elToFocus = document.activeElement;
       const lastZindex = this.getTopZindex();
       if (animatingZIndex) {
         this.zIndex = animatingZIndex + 2;
       } else {
-        this.zIndex = (lastZindex === 0) ? this.baseZindex : lastZindex + 2;
+        this.zIndex = lastZindex === 0 ? this.baseZindex : lastZindex + 2;
       }
       animatingZIndex = this.zIndex;
       this.$emit('before-open');
     },
-    opening () {
+    opening() {
       // console.log('opening');
       this.$emit('opening');
     },
-    afterOpen () {
+    afterOpen() {
       // console.log('afterOpen');
       this.handleFocus(this.$refs['vm-wrapper']);
       this.$emit('after-open');
     },
-    beforeClose () {
+    beforeClose() {
       // console.log('beforeClose');
       this.$emit('before-close');
     },
-    closing () {
+    closing() {
       // console.log('closing');
       this.$emit('closing');
     },
-    afterClose () {
+    afterClose() {
       // console.log('afterClose');
       this.zIndex = 0;
       if (!this.live) {
@@ -275,12 +259,9 @@ export default {
         window.requestAnimationFrame(() => {
           const lastZindex = this.getTopZindex();
           if (lastZindex > 0) {
-            const all = document.querySelectorAll('.vm-wrapper');
+            const all = this.getAllVisibleWrappers();
             for (let i = 0; i < all.length; i++) {
               const wrapper = all[i];
-              if (wrapper.display === 'none') {
-                continue;
-              }
               if (parseInt(wrapper.style.zIndex) === lastZindex) {
                 if (wrapper.contains(this.elToFocus)) {
                   this.elToFocus.focus();
@@ -306,19 +287,105 @@ export default {
 </script>
 
 <style>
-  .vm-backdrop {position: fixed; top: 0; right: 0; bottom: 0; left: 0; background-color: rgba(0, 0, 0, 0.5);}
-  .vm-wrapper {position: fixed; top: 0; right: 0; bottom: 0; left: 0; overflow-x: hidden; overflow-y: auto; outline: 0;}
-  .vm {position: relative; margin: 0px auto; width: calc(100% - 20px); min-width: 110px; max-width:500px; background-color: #fff; top:30px; cursor: default; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);}
-  .vm-titlebar {padding:10px 15px 10px 15px; overflow: auto; border-bottom: 1px solid #e5e5e5;}
-  .vm-title {margin-top:2px; margin-bottom: 0px; display: inline-block; font-size:18px; font-weight: normal;}
-  .vm-btn-close {color: #ccc; padding: 0px; cursor: pointer;  background: 0 0; border: 0; float: right; font-size: 24px; line-height: 1em;}
-  .vm-btn-close:before {content: '×'; font-family: Arial;}
-  .vm-btn-close:hover, .vm-btn-close:focus, .vm-btn-close:focus:hover{color:#bbb; border-color: transparent; background-color: transparent;}
-  .vm-content {padding:10px 15px 15px 15px;}
-  .vm-content .full-hr {width: auto; border: 0; border-top: 1px solid #e5e5e5; margin-top:15px; margin-bottom:15px; margin-left:-14px; margin-right:-14px;}
-  .vm-fadeIn {animation-name: vm-fadeIn;}
-  @keyframes vm-fadeIn {0% {opacity: 0} 100% {opacity: 1}}
-  .vm-fadeOut {animation-name: vm-fadeOut;}
-  @keyframes vm-fadeOut {0% {opacity: 1} 100% {opacity: 0}}
-  .vm-fadeIn, .vm-fadeOut {animation-duration: .25s; animation-fill-mode: both;}
+.vm-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.vm-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+}
+.vm {
+  position: relative;
+  margin: 0px auto;
+  width: calc(100% - 20px);
+  min-width: 110px;
+  max-width: 500px;
+  background-color: #fff;
+  top: 30px;
+  cursor: default;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+.vm-titlebar {
+  padding: 10px 15px 10px 15px;
+  overflow: auto;
+  border-bottom: 1px solid #e5e5e5;
+}
+.vm-title {
+  margin-top: 2px;
+  margin-bottom: 0px;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: normal;
+}
+.vm-btn-close {
+  color: #ccc;
+  padding: 0px;
+  cursor: pointer;
+  background: 0 0;
+  border: 0;
+  float: right;
+  font-size: 24px;
+  line-height: 1em;
+}
+.vm-btn-close:before {
+  content: '×';
+  font-family: Arial;
+}
+.vm-btn-close:hover,
+.vm-btn-close:focus,
+.vm-btn-close:focus:hover {
+  color: #bbb;
+  border-color: transparent;
+  background-color: transparent;
+}
+.vm-content {
+  padding: 10px 15px 15px 15px;
+}
+.vm-content .full-hr {
+  width: auto;
+  border: 0;
+  border-top: 1px solid #e5e5e5;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: -14px;
+  margin-right: -14px;
+}
+.vm-fadeIn {
+  animation-name: vm-fadeIn;
+}
+@keyframes vm-fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.vm-fadeOut {
+  animation-name: vm-fadeOut;
+}
+@keyframes vm-fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.vm-fadeIn,
+.vm-fadeOut {
+  animation-duration: 0.25s;
+  animation-fill-mode: both;
+}
 </style>

@@ -20,12 +20,11 @@
       <p>
         Placeholder text for this demonstration of a vertically centered modal dialog.
       </p>
-      <hr class="full-hr" />
       <div class="row">
         <div class="col-sm-12">
           <div class="float-right">
             <button
-              class="btn btn-secondary ml-2"
+              class="btn btn-secondary"
               type="button"
               @click="showModal = false"
             >
@@ -48,7 +47,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style>
 .modal-wrapper {
   display: flex;
   align-items: center;
