@@ -200,17 +200,6 @@ export default {
         return parseInt(curr.style.zIndex) > acc ? parseInt(curr.style.zIndex) : acc;
       }, 0);
     },
-    modalsVisible() {
-      const all = this.getAllVisibleWrappers();
-      // We cannot return false unless we make sure that there are not any modals visible
-      let foundVisible = 0;
-      for (let i = 0; i < all.length; i++) {
-        if (parseInt(all[i].style.zIndex) > 0) {
-          foundVisible++;
-        }
-      }
-      return foundVisible;
-    },
     handleFocus(wrapper) {
       const autofocus = wrapper.querySelector('[autofocus]');
       if (autofocus) {
