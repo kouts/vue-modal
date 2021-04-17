@@ -50,14 +50,12 @@
                 <h3 class="vm-title">
                   {{ title }}
                 </h3>
-                <!--
                 <button
                   v-if="enableClose"
                   type="button"
                   class="vm-btn-close"
                   @click.prevent="close"
                 ></button>
-                -->
               </div>
             </slot>
             <slot name="content">
