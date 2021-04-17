@@ -190,6 +190,7 @@ var TYPE_CSS = {
   type: [String, Object, Array],
   default: ''
 };
+var FOCUSABLE_ELEMENTS = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 var animatingZIndex = 0;
 
 var script = {
@@ -290,10 +291,7 @@ var script = {
       }
       if (e.which === 9) {
         // Get only visible elements
-        var all = [].slice.call(
-          this.$refs['vm-wrapper'].querySelectorAll('input, select, textarea, button, a')
-        );
-        all = all.filter(function(el) {
+        var all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll(FOCUSABLE_ELEMENTS)).filter(function(el) {
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
         });
         if (e.shiftKey) {
@@ -309,28 +307,19 @@ var script = {
         }
       }
     },
-    getAllWrappers: function getAllWrappers() {
-      return document.querySelectorAll('[data-vm-wrapper-id]');
+    getAllVisibleWrappers: function getAllVisibleWrappers() {
+      return [].slice.call(document.querySelectorAll('[data-vm-wrapper-id]')).filter(function (w) { return w.display !== 'none'; });
     },
     getTopZindex: function getTopZindex() {
-      var toret = 0;
-      var all = this.getAllWrappers();
-      for (var i = 0; i < all.length; i++) {
-        if (all[i].display === 'none') {
-          continue;
-        }
-        toret = parseInt(all[i].style.zIndex) > toret ? parseInt(all[i].style.zIndex) : toret;
-      }
-      return toret;
+      return this.getAllVisibleWrappers().reduce(function (acc, curr) {
+        return parseInt(curr.style.zIndex) > acc ? parseInt(curr.style.zIndex) : acc;
+      }, 0);
     },
     modalsVisible: function modalsVisible() {
-      var all = this.getAllWrappers();
+      var all = this.getAllVisibleWrappers();
       // We cannot return false unless we make sure that there are not any modals visible
       var foundVisible = 0;
       for (var i = 0; i < all.length; i++) {
-        if (all[i].display === 'none') {
-          continue;
-        }
         if (parseInt(all[i].style.zIndex) > 0) {
           foundVisible++;
         }
@@ -342,9 +331,7 @@ var script = {
       if (autofocus) {
         autofocus.focus();
       } else {
-        var focusable = wrapper.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
+        var focusable = wrapper.querySelectorAll(FOCUSABLE_ELEMENTS);
         focusable.length ? focusable[0].focus() : wrapper.focus();
       }
     },
@@ -389,12 +376,9 @@ var script = {
         window.requestAnimationFrame(function () {
           var lastZindex = this$1.getTopZindex();
           if (lastZindex > 0) {
-            var all = this$1.getAllWrappers();
+            var all = this$1.getAllVisibleWrappers();
             for (var i = 0; i < all.length; i++) {
               var wrapper = all[i];
-              if (wrapper.display === 'none') {
-                continue;
-              }
               if (parseInt(wrapper.style.zIndex) === lastZindex) {
                 if (wrapper.contains(this$1.elToFocus)) {
                   this$1.elToFocus.focus();
@@ -571,7 +555,13 @@ var __vue_render__ = function() {
                         "z-index": _vm.zIndex,
                         cursor: _vm.enableClose ? "pointer" : "default"
                       },
-                      attrs: { "data-vm-wrapper-id": _vm.id, tabindex: "0" },
+                      attrs: {
+                        "data-vm-wrapper-id": _vm.id,
+                        tabindex: "-1",
+                        role: "dialog",
+                        "aria-label": _vm.title,
+                        "aria-modal": "true"
+                      },
                       on: {
                         click: function($event) {
                           return _vm.clickOutside($event)
@@ -588,12 +578,7 @@ var __vue_render__ = function() {
                           ref: "vm",
                           staticClass: "vm",
                           class: _vm.modalClass,
-                          style: _vm.modalStyle,
-                          attrs: {
-                            role: "dialog",
-                            "aria-label": _vm.title,
-                            "aria-modal": "true"
-                          }
+                          style: _vm.modalStyle
                         },
                         [
                           _vm._t("titlebar", [
