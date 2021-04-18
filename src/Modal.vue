@@ -42,6 +42,7 @@
           <div
             ref="vm"
             class="vm"
+            :data-vm-id="id"
             :class="modalClass"
             :style="modalStyle"
           >
