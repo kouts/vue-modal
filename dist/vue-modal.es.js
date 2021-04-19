@@ -336,17 +336,6 @@ var script = {
         return parseInt(curr.style.zIndex) > acc ? parseInt(curr.style.zIndex) : acc;
       }, 0);
     },
-    modalsVisible: function modalsVisible() {
-      var all = this.getAllVisibleWrappers();
-      // We cannot return false unless we make sure that there are not any modals visible
-      var foundVisible = 0;
-      for (var i = 0; i < all.length; i++) {
-        if (parseInt(all[i].style.zIndex) > 0) {
-          foundVisible++;
-        }
-      }
-      return foundVisible;
-    },
     handleFocus: function handleFocus(wrapper) {
       var autofocus = wrapper.querySelector('[autofocus]');
       if (autofocus) {
@@ -599,7 +588,8 @@ var __vue_render__ = function() {
                           ref: "vm",
                           staticClass: "vm",
                           class: _vm.modalClass,
-                          style: _vm.modalStyle
+                          style: _vm.modalStyle,
+                          attrs: { "data-vm-id": _vm.id }
                         },
                         [
                           _vm._t("titlebar", [

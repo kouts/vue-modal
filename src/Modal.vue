@@ -42,6 +42,7 @@
           <div
             ref="vm"
             class="vm"
+            :data-vm-id="id"
             :class="modalClass"
             :style="modalStyle"
           >
@@ -176,7 +177,7 @@ export default {
       }
       if (e.which === 9) {
         // Get only visible elements
-        let all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll(FOCUSABLE_ELEMENTS)).filter(function(el) {
+        const all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll(FOCUSABLE_ELEMENTS)).filter(function(el) {
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
         });
         if (e.shiftKey) {
@@ -199,17 +200,6 @@ export default {
       return this.getAllVisibleWrappers().reduce((acc, curr) => {
         return parseInt(curr.style.zIndex) > acc ? parseInt(curr.style.zIndex) : acc;
       }, 0);
-    },
-    modalsVisible() {
-      const all = this.getAllVisibleWrappers();
-      // We cannot return false unless we make sure that there are not any modals visible
-      let foundVisible = 0;
-      for (let i = 0; i < all.length; i++) {
-        if (parseInt(all[i].style.zIndex) > 0) {
-          foundVisible++;
-        }
-      }
-      return foundVisible;
     },
     handleFocus(wrapper) {
       const autofocus = wrapper.querySelector('[autofocus]');
