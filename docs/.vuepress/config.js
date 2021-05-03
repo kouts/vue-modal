@@ -1,4 +1,4 @@
-const VueExamplePlugin = require('vuepress-plugin-vue-example');
+const VueExamplePlugin = require('vuepress-plugin-vue-example')
 
 module.exports = {
   plugins: [
@@ -58,6 +58,6 @@ module.exports = {
     ['script', { src: 'https://polyfill.io/v3/polyfill.min.js?features=Object.assign' }]
   ],
   chainWebpack: (config, isServer) => {
-    config.resolve.alias.set('vue', 'vue/dist/vue.esm.js');
+    config.resolve.alias.set('vue', 'vue/dist/vue.esm.js')
   }
-};
+}

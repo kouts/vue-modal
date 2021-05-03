@@ -5,30 +5,34 @@ module.exports = {
     browser: true
   },
   extends: [
-    'plugin:vue/recommended',
     'standard',
+    'plugin:vue/recommended'
   ],
   parserOptions: {
     parser: 'babel-eslint',
-    ecmaVersion: 2020
+    sourceType: 'module'
   },
-  globals: {
-    'module': true,
-    'require': true,
-    'process': true,
-    'describe': true,
-    'it': true,
-    'expect': true,
-    'beforeEach': true,
-    'afterEach': true
-  },
+	ignorePatterns: [
+		'**/node_modules/**',
+		'{tmp,temp}/**',
+		'**/*.min.js',
+		'vendor/**',
+		'dist/**',
+    'public/**'
+	],  
   overrides: [
     {
-      'files': ['*data.json'],
+      'files': ['*.json'],
       'rules': {
         'quotes': [2, 'double']
       }
-    }
+    },
+		{
+			files: ['*.spec.js'],
+			env: {
+				jest: true
+			}
+		}
   ],
   rules: {
     // Windows style line breaks
@@ -44,7 +48,13 @@ module.exports = {
     'vue/singleline-html-element-content-newline': 'off',
 
     // Custom rules standard
-    semi: ['error', 'always'],
-    'space-before-function-paren': 0
-  },
+    'space-before-function-paren': [
+      'error',
+      {
+        anonymous: 'never',
+        named: 'never',
+        asyncArrow: 'always'
+      }
+    ]
+  }
 };

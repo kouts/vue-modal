@@ -1,10 +1,10 @@
-import vue from 'rollup-plugin-vue';
-import postcss from 'rollup-plugin-postcss';
-import cssnano from 'cssnano';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import buble from '@rollup/plugin-buble';
-import { terser } from 'rollup-plugin-terser';
+import vue from 'rollup-plugin-vue'
+import postcss from 'rollup-plugin-postcss'
+import cssnano from 'cssnano'
+import resolve from 'rollup-plugin-node-resolve'
+import commonjs from 'rollup-plugin-commonjs'
+import buble from '@rollup/plugin-buble'
+import { terser } from 'rollup-plugin-terser'
 
 export default {
   input: './src/Modal.vue',
@@ -45,4 +45,4 @@ export default {
       include: [/^.+\.min\.js$/]
     })
   ]
-};
+}

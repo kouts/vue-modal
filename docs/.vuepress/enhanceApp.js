@@ -1,5 +1,5 @@
-import Modal from '../../src/Modal.vue';
-import './styles/styles.scss';
+import Modal from '../../src/Modal.vue'
+import './styles/styles.scss'
 
 export default ({
   Vue, // the version of Vue being used in the VuePress app
@@ -9,6 +9,6 @@ export default ({
 }) => {
   if (typeof process === 'undefined') {
     // process is undefined in a browser
-    Vue.component('Modal', Modal);
+    Vue.component('Modal', Modal)
   }
-};
+}

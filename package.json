@@ -21,7 +21,8 @@
     "rollup": "rollup -c",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "build": "rollup -c && vuepress build docs"
+    "build": "rollup -c && vuepress build docs",
+    "lint": "eslint . --ext .js"
   },
   "dependencies": {
     "@linusborg/vue-simple-portal": "0.1.4",
