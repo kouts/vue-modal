@@ -1,6 +1,7 @@
+import { writeFileSync } from 'fs'
+import { renderSync } from 'node-sass'
 import vue from 'rollup-plugin-vue'
-import postcss from 'rollup-plugin-postcss'
-import cssnano from 'cssnano'
+import css from 'rollup-plugin-css-only'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import buble from '@rollup/plugin-buble'
@@ -26,15 +27,18 @@ export default {
       }
     }
   ],
-  external: [
-    'vue'
-  ],
+  external: ['vue'],
   plugins: [
     resolve(),
     commonjs(),
-    postcss({
-      extract: 'vue-modal.css',
-      plugins: [cssnano()]
+    css({
+      output: function (styles, styleNodes) {
+        const res = renderSync({
+          data: styles,
+          outputStyle: 'compressed'
+        })
+        writeFileSync('dist/vue-modal.css', res.css)
+      }
     }),
     vue({
       css: false

@@ -211,7 +211,8 @@ var TYPE_CSS = {
   type: [String, Object, Array],
   default: ''
 };
-var FOCUSABLE_ELEMENTS = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+var FOCUSABLE_ELEMENTS =
+  'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 var animatingZIndex = 0;
 
 var script = {
@@ -264,7 +265,7 @@ var script = {
       show: false,
       mount: false,
       elToFocus: null
-    };
+    }
   },
   created: function created() {
     if (this.live) {
@@ -275,7 +276,7 @@ var script = {
     this.id = 'vm-' + this._uid;
     this.$watch(
       'basedOn',
-      function(newVal) {
+      function (newVal) {
         var this$1 = this;
 
         if (newVal) {
@@ -312,8 +313,8 @@ var script = {
       }
       if (e.which === 9) {
         // Get only visible elements
-        var all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll(FOCUSABLE_ELEMENTS)).filter(function(el) {
-          return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+        var all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll(FOCUSABLE_ELEMENTS)).filter(function (el) {
+          return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length)
         });
         if (e.shiftKey) {
           if (e.target === all[0] || e.target === this.$refs['vm-wrapper']) {
@@ -329,12 +330,12 @@ var script = {
       }
     },
     getAllVisibleWrappers: function getAllVisibleWrappers() {
-      return [].slice.call(document.querySelectorAll('[data-vm-wrapper-id]')).filter(function (w) { return w.display !== 'none'; });
+      return [].slice.call(document.querySelectorAll('[data-vm-wrapper-id]')).filter(function (w) { return w.display !== 'none'; })
     },
     getTopZindex: function getTopZindex() {
       return this.getAllVisibleWrappers().reduce(function (acc, curr) {
-        return parseInt(curr.style.zIndex) > acc ? parseInt(curr.style.zIndex) : acc;
-      }, 0);
+        return parseInt(curr.style.zIndex) > acc ? parseInt(curr.style.zIndex) : acc
+      }, 0)
     },
     handleFocus: function handleFocus(wrapper) {
       var autofocus = wrapper.querySelector('[autofocus]');
@@ -396,7 +397,7 @@ var script = {
                   // console.log(wrapper);
                   this$1.handleFocus(wrapper);
                 }
-                break;
+                break
               }
             }
           } else {

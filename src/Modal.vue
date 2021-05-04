@@ -1,11 +1,7 @@
 <template>
   <div v-if="mount">
     <portal :selector="appendTo">
-      <transition
-        name="vm-backdrop-transition"
-        :enter-active-class="bgInClass"
-        :leave-active-class="bgOutClass"
-      >
+      <transition name="vm-backdrop-transition" :enter-active-class="bgInClass" :leave-active-class="bgOutClass">
         <div
           v-show="show"
           :data-vm-backdrop-id="id"
@@ -39,24 +35,13 @@
           @click="clickOutside($event)"
           @keydown="keydown($event)"
         >
-          <div
-            ref="vm"
-            class="vm"
-            :data-vm-id="id"
-            :class="modalClass"
-            :style="modalStyle"
-          >
+          <div ref="vm" class="vm" :data-vm-id="id" :class="modalClass" :style="modalStyle">
             <slot name="titlebar">
               <div class="vm-titlebar">
                 <h3 class="vm-title">
                   {{ title }}
                 </h3>
-                <button
-                  v-if="enableClose"
-                  type="button"
-                  class="vm-btn-close"
-                  @click.prevent="close"
-                ></button>
+                <button v-if="enableClose" type="button" class="vm-btn-close" @click.prevent="close"></button>
               </div>
             </slot>
             <slot name="content">
@@ -78,7 +63,8 @@ const TYPE_CSS = {
   type: [String, Object, Array],
   default: ''
 }
-const FOCUSABLE_ELEMENTS = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+const FOCUSABLE_ELEMENTS =
+  'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])'
 let animatingZIndex = 0
 
 export default {
@@ -142,7 +128,7 @@ export default {
     this.id = 'vm-' + this._uid
     this.$watch(
       'basedOn',
-      function(newVal) {
+      function (newVal) {
         if (newVal) {
           this.mount = true
           this.$nextTick(() => {
@@ -177,7 +163,7 @@ export default {
       }
       if (e.which === 9) {
         // Get only visible elements
-        const all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll(FOCUSABLE_ELEMENTS)).filter(function(el) {
+        const all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll(FOCUSABLE_ELEMENTS)).filter(function (el) {
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length)
         })
         if (e.shiftKey) {
@@ -194,7 +180,7 @@ export default {
       }
     },
     getAllVisibleWrappers() {
-      return [].slice.call(document.querySelectorAll('[data-vm-wrapper-id]')).filter(w => w.display !== 'none')
+      return [].slice.call(document.querySelectorAll('[data-vm-wrapper-id]')).filter((w) => w.display !== 'none')
     },
     getTopZindex() {
       return this.getAllVisibleWrappers().reduce((acc, curr) => {
