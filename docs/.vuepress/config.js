@@ -12,9 +12,7 @@ module.exports = {
   title: 'vue-modal',
   description: 'A modal plugin for Vue',
   themeConfig: {
-    nav: [
-      { text: 'Github', link: 'https://github.com/kouts/vue-modal' }
-    ],
+    nav: [{ text: 'Github', link: 'https://github.com/kouts/vue-modal' }],
     sidebar: [
       ['/', 'Introduction'],
       ['/installation/', 'Installation'],

@@ -2,9 +2,7 @@
   <div class="mt-3">
     <div class="row mb-3">
       <div class="col">
-        <button type="button" class="btn btn-primary" @click="showModal=true">
-          Open a modal
-        </button>
+        <button type="button" class="btn btn-primary" @click="showModal = true">Open a modal</button>
       </div>
     </div>
 
@@ -21,7 +19,7 @@ export default {
   data: function () {
     return {
       showModal: false
-    };
+    }
   }
-};
+}
 </script>
