@@ -4,12 +4,8 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label>Modal size</label>
-          <select class="custom-select" v-model="modalClass">
-            <option 
-              v-for="size in modalClasses" 
-              :key="size.value" 
-              :value="size.value"
-            >
+          <select v-model="modalClass" class="custom-select">
+            <option v-for="size in modalClasses" :key="size.value" :value="size.value">
               {{ size.text }}
             </option>
           </select>
@@ -18,15 +14,13 @@
     </div>
     <div class="row">
       <div class="col text-center pt-2">
-        <button type="button" class="btn btn-primary" @click="showModal = true">
-          Open modal
-        </button>
+        <button type="button" class="btn btn-primary" @click="showModal = true">Open modal</button>
       </div>
     </div>
 
     <Modal
       v-model="showModal"
-      :title="`Modal size: ${modalClasses.find(m => m.value === modalClass).text}`"
+      :title="`Modal size: ${modalClasses.find((m) => m.value === modalClass).text}`"
       :modal-class="`modal ${modalClass}`"
     >
       <div class="bd-example-row py-2 px-3">
@@ -51,23 +45,17 @@
       <div class="row modal-footer mt-2">
         <div class="col-sm-12">
           <div class="float-right">
-            <button
-              class="btn btn-secondary"
-              type="button"
-              @click="showModal = false"
-            >
-              Close
-            </button>
+            <button class="btn btn-secondary" type="button" @click="showModal = false">Close</button>
           </div>
         </div>
-      </div>      
+      </div>
     </Modal>
   </div>
 </template>
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
       showModal: false,
       modalClass: '',
@@ -89,9 +77,9 @@ export default {
           text: 'Extra large'
         }
       ]
-    };
+    }
   }
-};
+}
 </script>
 
 <style>
@@ -122,6 +110,6 @@ export default {
   padding: 15px 0px 0px 0px;
   border-top: 1px solid #e5e5e5;
   margin-left: -14px;
-  margin-right: -14px;  
+  margin-right: -14px;
 }
 </style>

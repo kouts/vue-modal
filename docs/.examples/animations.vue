@@ -4,7 +4,7 @@
       <div class="col">
         <div class="form-group">
           <label>Modal intro</label>
-          <select class="custom-select" v-model="inClass">
+          <select v-model="inClass" class="custom-select">
             <option v-for="animClass in inClasses" :key="animClass" :value="animClass">
               {{ animClass }}
             </option>
@@ -14,7 +14,7 @@
       <div class="col">
         <div class="form-group">
           <label>Modal outro</label>
-          <select class="custom-select" v-model="outClass">
+          <select v-model="outClass" class="custom-select">
             <option v-for="animClass in outClasses" :key="animClass" :value="animClass">
               {{ animClass }}
             </option>
@@ -24,7 +24,7 @@
       <div class="col">
         <div class="form-group">
           <label>Background intro</label>
-          <select class="custom-select" v-model="bgInClass">
+          <select v-model="bgInClass" class="custom-select">
             <option v-for="animClass in bgInClasses" :key="animClass" :value="animClass">
               {{ animClass }}
             </option>
@@ -34,7 +34,7 @@
       <div class="col">
         <div class="form-group">
           <label>Background outro</label>
-          <select class="custom-select" v-model="bgOutClass">
+          <select v-model="bgOutClass" class="custom-select">
             <option v-for="animClass in bgOutClasses" :key="animClass" :value="animClass">
               {{ animClass }}
             </option>
@@ -44,9 +44,7 @@
     </div>
     <div class="row">
       <div class="col text-center pt-2">
-        <button type="button" class="btn btn-primary" @click="showModal = true">
-          Open an animated modal
-        </button>
+        <button type="button" class="btn btn-primary" @click="showModal = true">Open an animated modal</button>
       </div>
     </div>
 
@@ -70,7 +68,7 @@
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
       showModal: false,
       inClass: 'backInDown',
@@ -81,9 +79,9 @@ export default {
       bgInClasses: ['bounceIn', 'fadeInDown', 'fadeInUp'],
       bgOutClass: 'fadeOutDown',
       bgOutClasses: ['bounceOut', 'fadeOutDown', 'fadeOutUp']
-    };
+    }
   }
-};
+}
 </script>
 
 <style>
