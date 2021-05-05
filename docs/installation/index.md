@@ -19,6 +19,6 @@ npm i @kouts/vue-modal --save
 ```
 Use the ```import``` to include it into your js
 ``` js
-import VueModal from '@kouts/vue-modal';
-import '@kouts/vue-modal/dist/vue-modal.css';
+import VueModal from '@kouts/vue-modal'
+import '@kouts/vue-modal/dist/vue-modal.css'
 ```

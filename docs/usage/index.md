@@ -1,7 +1,7 @@
 ## Register
 Register ```vue-modal``` in your application globbaly
 ``` js
-Vue.component('Modal', VueModal);
+Vue.component('Modal', VueModal)
 ```
 or locally
 ``` js
@@ -41,7 +41,7 @@ new Vue({
     showModal: false
   }
   ...
-});
+})
 ```
 ### Result
 <Example1 />
