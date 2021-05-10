@@ -1,7 +1,7 @@
 {
   "name": "@kouts/vue-modal",
   "description": "A modal window component for Vue",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "author": "Giannis Koutsaftakis",
   "license": "MIT",
   "repository": "https://github.com/kouts/vue-modal",
@@ -24,6 +24,9 @@
     "build": "rollup -c && vuepress build docs",
     "lint": "eslint . --ext .js,.vue",
     "lint-fix": "eslint . --fix --ext .js,.vue"
+  },
+  "dependencies": {
+    "vue": "^2.6.12"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",
@@ -58,7 +61,6 @@
     "rollup-plugin-terser": "^5.3.1",
     "rollup-plugin-vue": "^5.1.9",
     "sass-loader": "^8.0.2",
-    "vue": "^2.6.12",
     "vue-template-compiler": "^2.6.12",
     "vuepress": "^1.8.2",
     "vuepress-plugin-vue-example": "^1.1.1"
