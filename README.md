@@ -1,4 +1,4 @@
-# vue-modal
+# vue-modal <a href="https://npm.im/@kouts/vue-modal"><img src="https://badgen.net/npm/v/@kouts/vue-modal"></a> ![](https://img.badgesize.io/kouts/vue-modal/master/dist/vue-modal.umd.min.js.svg) ![](https://img.badgesize.io/kouts/vue-modal/master/dist/vue-modal.umd.min.js.svg?compression=gzip)
 A customizable, stackable, and lightweight modal component for Vue.
 
 > vue-modal is designed with web applications in mind and tries to stick as much as possible
@@ -8,7 +8,7 @@ A customizable, stackable, and lightweight modal component for Vue.
 
 ## Features at a glance
 
-- Lightweight, minified gzipped version is < **8kb**
+- Lightweight, minified gzipped version is < **4kb**
 - Opens and closes with a data variable using ```v-model```
 - Includes sensible default styling but it's also highly customizable via user CSS classes and styles
 - Override modal title and content via slots
