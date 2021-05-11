@@ -36,4 +36,6 @@ This functionality can be added with an external plugin.
 .  
 .  
 
-<vue-example file="prevent-body-scroll" />
+<ClientOnly>
+  <vue-example file="prevent-body-scroll" />
+</ClientOnly>

@@ -30,4 +30,6 @@ We can achieve that using the <code>wrapper-class</code> and <code>modal-class</
 <br />
 <br />
 
-<vue-example file="customizing/fullscreen" class="mb-4" />
+<ClientOnly>
+  <vue-example file="customizing/fullscreen" class="mb-4" />
+</ClientOnly>
