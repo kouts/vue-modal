@@ -2,6 +2,8 @@
 
 ![Vue modal](./assets/img/vue-modal-logo.png)
 
+<a href="https://npm.im/@kouts/vue-modal"><img src="https://badgen.net/npm/v/@kouts/vue-modal"></a> ![](https://img.badgesize.io/kouts/vue-modal/master/dist/vue-modal.umd.min.js.svg) ![](https://img.badgesize.io/kouts/vue-modal/master/dist/vue-modal.umd.min.js.svg?compression=gzip)
+
 A customizable, stackable, and lightweight modal component for Vue.
 
 > vue-modal is designed with web applications in mind and tries to stick as much as possible
