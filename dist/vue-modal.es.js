@@ -43,6 +43,8 @@ var nonSecure = function (size) {
   return id
 };
 
+var id = nonSecure;
+
 function _typeof(obj) {
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function (obj) {
@@ -58,7 +60,7 @@ function _typeof(obj) {
 }
 
 var config = {
-  selector: "vue-portal-target-".concat(nonSecure())
+  selector: "vue-portal-target-".concat(id())
 };
 var setSelector = function setSelector(selector) {
   return config.selector = selector;
@@ -277,12 +279,12 @@ var script = {
     this.$watch(
       'basedOn',
       function (newVal) {
-        var this$1 = this;
+        var this$1$1 = this;
 
         if (newVal) {
           this.mount = true;
           this.$nextTick(function () {
-            this$1.show = true;
+            this$1$1.show = true;
           });
         } else {
           this.show = false;
@@ -376,7 +378,7 @@ var script = {
       this.$emit('closing');
     },
     afterClose: function afterClose() {
-      var this$1 = this;
+      var this$1$1 = this;
 
       // console.log('afterClose');
       this.zIndex = 0;
@@ -385,28 +387,28 @@ var script = {
       }
       this.$nextTick(function () {
         window.requestAnimationFrame(function () {
-          var lastZindex = this$1.getTopZindex();
+          var lastZindex = this$1$1.getTopZindex();
           if (lastZindex > 0) {
-            var all = this$1.getAllVisibleWrappers();
+            var all = this$1$1.getAllVisibleWrappers();
             for (var i = 0; i < all.length; i++) {
               var wrapper = all[i];
               if (parseInt(wrapper.style.zIndex) === lastZindex) {
-                if (wrapper.contains(this$1.elToFocus)) {
-                  this$1.elToFocus.focus();
+                if (wrapper.contains(this$1$1.elToFocus)) {
+                  this$1$1.elToFocus.focus();
                 } else {
                   // console.log(wrapper);
-                  this$1.handleFocus(wrapper);
+                  this$1$1.handleFocus(wrapper);
                 }
                 break
               }
             }
           } else {
-            if (document.body.contains(this$1.elToFocus)) {
-              this$1.elToFocus.focus();
+            if (document.body.contains(this$1$1.elToFocus)) {
+              this$1$1.elToFocus.focus();
             }
           }
           animatingZIndex = 0;
-          this$1.$emit('after-close');
+          this$1$1.$emit('after-close');
         });
       });
     }
@@ -593,39 +595,49 @@ var __vue_render__ = function() {
                           attrs: { "data-vm-id": _vm.id }
                         },
                         [
-                          _vm._t("titlebar", [
-                            _c("div", { staticClass: "vm-titlebar" }, [
-                              _c("h3", { staticClass: "vm-title" }, [
-                                _vm._v(
-                                  "\n                " +
-                                    _vm._s(_vm.title) +
-                                    "\n              "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _vm.enableClose
-                                ? _c("button", {
-                                    staticClass: "vm-btn-close",
-                                    attrs: { type: "button" },
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault();
-                                        return _vm.close($event)
+                          _vm._t("titlebar", function() {
+                            return [
+                              _c("div", { staticClass: "vm-titlebar" }, [
+                                _c("h3", { staticClass: "vm-title" }, [
+                                  _vm._v(
+                                    "\n                " +
+                                      _vm._s(_vm.title) +
+                                      "\n              "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _vm.enableClose
+                                  ? _c("button", {
+                                      staticClass: "vm-btn-close",
+                                      attrs: {
+                                        type: "button",
+                                        "aria-label": "Close"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault();
+                                          return _vm.close.apply(
+                                            null,
+                                            arguments
+                                          )
+                                        }
                                       }
-                                    }
-                                  })
-                                : _vm._e()
-                            ])
-                          ]),
+                                    })
+                                  : _vm._e()
+                              ])
+                            ]
+                          }),
                           _vm._v(" "),
-                          _vm._t("content", [
-                            _c(
-                              "div",
-                              { staticClass: "vm-content" },
-                              [_vm._t("default")],
-                              2
-                            )
-                          ])
+                          _vm._t("content", function() {
+                            return [
+                              _c(
+                                "div",
+                                { staticClass: "vm-content" },
+                                [_vm._t("default")],
+                                2
+                              )
+                            ]
+                          })
                         ],
                         2
                       )
@@ -673,5 +685,5 @@ __vue_render__._withStripped = true;
     undefined
   );
 
-export default __vue_component__;
+export { __vue_component__ as default };
 //# sourceMappingURL=vue-modal.es.js.map
