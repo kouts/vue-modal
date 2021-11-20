@@ -1,3 +1,4 @@
+const path = require('path')
 const VueExamplePlugin = require('vuepress-plugin-vue-example')
 
 module.exports = {
@@ -5,29 +6,62 @@ module.exports = {
     VueExamplePlugin({
       componentsPath: '/docs/.examples/'
     })
+    // [
+    //   '@vuepress/docsearch',
+    //   {
+    //     apiKey: '1a6df20c3c6d9b729c4109ebce3e2eed',
+    //     indexName: 'next-vue-modal'
+    //   }
+    // ]
   ],
   dest: 'public',
-  // base: '/vue-modal/demo/',
-  // base: '/demo/',
   title: 'vue-modal',
-  description: 'A modal plugin for Vue',
+  description: 'A modal plugin for Vue 3',
   themeConfig: {
-    nav: [{ text: 'Github', link: 'https://github.com/kouts/vue-modal' }],
+    contributors: false,
+    repo: 'https://github.com/kouts/vue-modal/tree/next',
+    darkMode: false,
     sidebar: [
-      ['/', 'Introduction'],
-      ['/installation/', 'Installation'],
-      ['/usage/', 'Usage'],
-      ['/options/', 'Options'],
       {
-        title: 'Examples',
+        link: '/',
+        text: 'Introduction'
+      },
+      {
+        link: '/installation/',
+        text: 'Installation'
+      },
+      {
+        link: '/usage/',
+        text: 'Usage'
+      },
+      {
+        text: 'Examples',
         collapsable: true,
         children: [
-          ['/examples/basic/', 'Basic'],
-          ['/examples/drawer/', 'Sidebar / Drawer'],
-          ['/examples/animations/', 'Animations'],
-          ['/examples/prevent-body-scroll/', 'Prevent body scroll'],
-          ['/examples/prevent-close/', 'Prevent modal from closing'],
-          ['/examples/customizing/', 'Customizing']
+          {
+            link: '/examples/basic/',
+            text: 'Basic'
+          },
+          {
+            link: '/examples/drawer/',
+            text: 'Sidebar / Drawer'
+          },
+          {
+            link: '/examples/animations/',
+            text: 'Animations'
+          },
+          {
+            link: '/examples/prevent-body-scroll/',
+            text: 'Prevent body scroll'
+          },
+          {
+            link: '/examples/prevent-close/',
+            text: 'Prevent modal from closing'
+          },
+          {
+            link: '/examples/customizing/',
+            text: 'Customizing'
+          }
         ]
       }
     ]
@@ -50,13 +84,11 @@ module.exports = {
     ['link', { rel: 'manifest', href: '/favicons/manifest.json' }],
     ['meta', { name: 'msapplication-TileColor', content: '#ffffff' }],
     ['meta', { name: 'msapplication-TileImage', content: '/favicons/ms-icon-144x144.png' }],
-    ['meta', { name: 'theme-color', content: '#ffffff' }],
-    ['script', { src: 'https://polyfill.io/v3/polyfill.min.js?features=Array.from' }],
-    ['script', { src: 'https://polyfill.io/v3/polyfill.min.js?features=Promise' }],
-    ['script', { src: 'https://polyfill.io/v3/polyfill.min.js?features=NodeList.prototype.forEach' }],
-    ['script', { src: 'https://polyfill.io/v3/polyfill.min.js?features=Object.assign' }]
+    ['meta', { name: 'theme-color', content: '#ffffff' }]
   ],
-  chainWebpack: (config, isServer) => {
-    config.resolve.alias.set('vue', 'vue/dist/vue.esm.js')
+  alias: {
+    '@': path.resolve(__dirname, '../../src'),
+    '@playground': path.resolve(__dirname, '../../playground'),
+    '@root': path.resolve(__dirname, '../../')
   }
 }
