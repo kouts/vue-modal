@@ -4,6 +4,10 @@ module.exports = {
     {
       name: 'beta',
       prerelease: true
+    },
+    {
+      name: 'next',
+      channel: 'next'
     }
   ],
   plugins: [
@@ -20,7 +24,7 @@ module.exports = {
     [
       '@semantic-release/git',
       {
-        assets: ['CHANGELOG.md', 'dist/**'],
+        assets: ['CHANGELOG.md'],
         // eslint-disable-next-line no-template-curly-in-string
         message: 'chore(release): set `package.json` to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
       }

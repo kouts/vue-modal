@@ -1,8 +1,8 @@
-name: Release
+name: Release next
 
 on:
   push:
-    branches: [master, beta]
+    branches: [next]
 
 jobs:
   release:
@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Setup Node.js
+    - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: 14.x

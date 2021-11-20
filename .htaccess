@@ -1,3 +1,0 @@
-Options +FollowSymLinks
-RewriteEngine On
-RewriteRule ^vue-modal/demo/(.*)$ /demo/$1 [R=301,NC,L]
