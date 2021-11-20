@@ -1,6 +1,6 @@
 <template>
   <div v-if="mount">
-    <portal :selector="appendTo">
+    <teleport :to="appendTo">
       <transition name="vm-backdrop-transition" :enter-active-class="bgInClass" :leave-active-class="bgOutClass">
         <div
           v-show="show"
@@ -41,7 +41,13 @@
                 <h3 class="vm-title">
                   {{ title }}
                 </h3>
-                <button v-if="enableClose" type="button" class="vm-btn-close" aria-label="Close" @click.prevent="close"></button>
+                <button
+                  v-if="enableClose"
+                  type="button"
+                  class="vm-btn-close"
+                  aria-label="Close"
+                  @click.prevent="close"
+                ></button>
               </div>
             </slot>
             <slot name="content">
@@ -52,30 +58,22 @@
           </div>
         </div>
       </transition>
-    </portal>
+    </teleport>
   </div>
 </template>
 
 <script>
-import { Portal } from '@linusborg/vue-simple-portal'
-
 const TYPE_CSS = {
   type: [String, Object, Array],
   default: ''
 }
+
 const FOCUSABLE_ELEMENTS =
   'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])'
 let animatingZIndex = 0
 
 export default {
   name: 'VueModal',
-  components: {
-    Portal
-  },
-  model: {
-    prop: 'basedOn',
-    event: 'close'
-  },
   props: {
     title: {
       type: String,
@@ -105,11 +103,12 @@ export default {
       type: Boolean,
       default: true
     },
-    basedOn: {
+    modelValue: {
       type: Boolean,
       default: false
     }
   },
+  emits: ['before-open', 'opening', 'after-open', 'before-close', 'closing', 'after-close', 'update:modelValue'],
   data() {
     return {
       zIndex: 0,
@@ -127,7 +126,7 @@ export default {
   mounted() {
     this.id = 'vm-' + this._uid
     this.$watch(
-      'basedOn',
+      'modelValue',
       function (newVal) {
         if (newVal) {
           this.mount = true
@@ -143,13 +142,13 @@ export default {
       }
     )
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.elToFocus = null
   },
   methods: {
     close() {
       if (this.enableClose === true) {
-        this.$emit('close', false)
+        this.$emit('update:modelValue', false)
       }
     },
     clickOutside(e) {
