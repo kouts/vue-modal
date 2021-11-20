@@ -2,14 +2,7 @@
   <div>
     <div class="row">
       <div class="col text-center pt-2">
-        <button
-          type="button"
-          class="btn btn-primary"
-          @click="
-            showModal = true
-            enableClose = false
-          "
-        >
+        <button type="button" class="btn btn-primary" @click=";(showModal = true), (enableClose = false)">
           Open unclosable modal
         </button>
       </div>
