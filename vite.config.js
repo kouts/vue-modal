@@ -43,6 +43,12 @@ module.exports = defineConfig({
       output: {
         globals: {
           vue: 'Vue'
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === 'style.css') {
+            return 'vue-modal.css'
+          }
+          return assetInfo.name
         }
       }
     }
