@@ -7,8 +7,6 @@ app.component('Modal', VueModal)
 ```
 or locally
 ``` js
-import VueModal from '@kouts/vue-modal'
-
 export default {
   components: {
     'Modal': VueModal
