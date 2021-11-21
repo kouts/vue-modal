@@ -1,6 +1,6 @@
 {
   "name": "@kouts/vue-modal",
-  "description": "A modal window component for Vue",
+  "description": "A modal window component for Vue 3",
   "version": "0.0.0-semantic-release",
   "author": "Giannis Koutsaftakis",
   "license": "MIT",
