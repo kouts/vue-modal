@@ -1,3 +1,11 @@
+## [3.0.1](https://github.com/kouts/vue-modal/compare/v3.0.0...v3.0.1) (2021-11-21)
+
+
+### Bug Fixes
+
+* fixed id not being available ([2cc20ce](https://github.com/kouts/vue-modal/commit/2cc20ce4b776cb1b52ef33983883955ba62208d3))
+* removed unneeded container div ([e14604a](https://github.com/kouts/vue-modal/commit/e14604a86908d3c822ad3e01bd13392e3e3d4a55))
+
 # [3.0.0](https://github.com/kouts/vue-modal/compare/v2.1.1...v3.0.0) (2021-11-21)
 
 
