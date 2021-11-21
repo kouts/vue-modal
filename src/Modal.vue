@@ -124,7 +124,7 @@ export default {
     }
   },
   mounted() {
-    this.id = 'vm-' + this._uid
+    this.id = 'vm-' + this.$.uid
     this.$watch(
       'modelValue',
       function (newVal) {
