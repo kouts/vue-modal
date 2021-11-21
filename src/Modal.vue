@@ -41,7 +41,13 @@
                 <h3 class="vm-title">
                   {{ title }}
                 </h3>
-                <button v-if="enableClose" type="button" class="vm-btn-close" aria-label="Close" @click.prevent="close"></button>
+                <button
+                  v-if="enableClose"
+                  type="button"
+                  class="vm-btn-close"
+                  aria-label="Close"
+                  @click.prevent="close"
+                ></button>
               </div>
             </slot>
             <slot name="content">
