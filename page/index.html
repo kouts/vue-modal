@@ -131,17 +131,21 @@
 
     </script>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script type="text/javascript" src="../dist/vue-modal.umd.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script type="text/javascript" src="../dist/vue-modal.umd.js"></script>
     <script type="text/javascript">
-      Vue.component('Modal', VueModal);
-      new Vue({
-        el: '#app',
+      /* global Vue, VueModal */
+      
+      const app = Vue.createApp({
         template: '#app-template',
-        data: {
-          show_modal_1: false
+        data() {
+          return {
+            show_modal_1: false
+          }
         }
-      });
+      })
+      app.component('Modal', VueModal)
+      app.mount('#app')
     </script>
   </body>
 </html>
