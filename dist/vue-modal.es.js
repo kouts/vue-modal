@@ -493,7 +493,7 @@ function normalizeComponent(template, style, script, scopeId, isFunctionalTempla
 /* script */
 var __vue_script__ = script;
 /* template */
-var __vue_render__ = function() {
+var __vue_render__ = function () {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -511,8 +511,8 @@ var __vue_render__ = function() {
                   attrs: {
                     name: "vm-backdrop-transition",
                     "enter-active-class": _vm.bgInClass,
-                    "leave-active-class": _vm.bgOutClass
-                  }
+                    "leave-active-class": _vm.bgOutClass,
+                  },
                 },
                 [
                   _c("div", {
@@ -521,15 +521,13 @@ var __vue_render__ = function() {
                         name: "show",
                         rawName: "v-show",
                         value: _vm.show,
-                        expression: "show"
-                      }
-                    ],
+                        expression: "show",
+                      } ],
                     staticClass: "vm-backdrop",
                     class: _vm.bgClass,
                     style: { "z-index": _vm.zIndex - 1 },
-                    attrs: { "data-vm-backdrop-id": _vm.id }
-                  })
-                ]
+                    attrs: { "data-vm-backdrop-id": _vm.id },
+                  }) ]
               ),
               _vm._v(" "),
               _c(
@@ -538,7 +536,7 @@ var __vue_render__ = function() {
                   attrs: {
                     name: "vm-transition",
                     "enter-active-class": _vm.inClass,
-                    "leave-active-class": _vm.outClass
+                    "leave-active-class": _vm.outClass,
                   },
                   on: {
                     "before-enter": _vm.beforeOpen,
@@ -546,8 +544,8 @@ var __vue_render__ = function() {
                     "after-enter": _vm.afterOpen,
                     "before-leave": _vm.beforeClose,
                     leave: _vm.closing,
-                    "after-leave": _vm.afterClose
-                  }
+                    "after-leave": _vm.afterClose,
+                  },
                 },
                 [
                   _c(
@@ -558,31 +556,30 @@ var __vue_render__ = function() {
                           name: "show",
                           rawName: "v-show",
                           value: _vm.show,
-                          expression: "show"
-                        }
-                      ],
+                          expression: "show",
+                        } ],
                       ref: "vm-wrapper",
                       staticClass: "vm-wrapper",
                       class: _vm.wrapperClass,
                       style: {
                         "z-index": _vm.zIndex,
-                        cursor: _vm.enableClose ? "pointer" : "default"
+                        cursor: _vm.enableClose ? "pointer" : "default",
                       },
                       attrs: {
                         "data-vm-wrapper-id": _vm.id,
                         tabindex: "-1",
                         role: "dialog",
                         "aria-label": _vm.title,
-                        "aria-modal": "true"
+                        "aria-modal": "true",
                       },
                       on: {
-                        click: function($event) {
+                        click: function ($event) {
                           return _vm.clickOutside($event)
                         },
-                        keydown: function($event) {
+                        keydown: function ($event) {
                           return _vm.keydown($event)
-                        }
-                      }
+                        },
+                      },
                     },
                     [
                       _c(
@@ -592,10 +589,10 @@ var __vue_render__ = function() {
                           staticClass: "vm",
                           class: _vm.modalClass,
                           style: _vm.modalStyle,
-                          attrs: { "data-vm-id": _vm.id }
+                          attrs: { "data-vm-id": _vm.id },
                         },
                         [
-                          _vm._t("titlebar", function() {
+                          _vm._t("titlebar", function () {
                             return [
                               _c("div", { staticClass: "vm-titlebar" }, [
                                 _c("h3", { staticClass: "vm-title" }, [
@@ -603,52 +600,43 @@ var __vue_render__ = function() {
                                     "\n                " +
                                       _vm._s(_vm.title) +
                                       "\n              "
-                                  )
-                                ]),
+                                  ) ]),
                                 _vm._v(" "),
                                 _vm.enableClose
                                   ? _c("button", {
                                       staticClass: "vm-btn-close",
                                       attrs: {
                                         type: "button",
-                                        "aria-label": "Close"
+                                        "aria-label": "Close",
                                       },
                                       on: {
-                                        click: function($event) {
+                                        click: function ($event) {
                                           $event.preventDefault();
                                           return _vm.close.apply(
                                             null,
                                             arguments
                                           )
-                                        }
-                                      }
+                                        },
+                                      },
                                     })
-                                  : _vm._e()
-                              ])
-                            ]
+                                  : _vm._e() ]) ]
                           }),
                           _vm._v(" "),
-                          _vm._t("content", function() {
+                          _vm._t("content", function () {
                             return [
                               _c(
                                 "div",
                                 { staticClass: "vm-content" },
                                 [_vm._t("default")],
                                 2
-                              )
-                            ]
-                          })
-                        ],
+                              ) ]
+                          }) ],
                         2
-                      )
-                    ]
-                  )
-                ]
-              )
-            ],
+                      ) ]
+                  ) ]
+              ) ],
             1
-          )
-        ],
+          ) ],
         1
       )
     : _vm._e()

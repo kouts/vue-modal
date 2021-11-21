@@ -1,3 +1,10 @@
+## [2.1.3](https://github.com/kouts/vue-modal/compare/v2.1.2...v2.1.3) (2021-11-21)
+
+
+### Bug Fixes
+
+* release ([9e60a30](https://github.com/kouts/vue-modal/commit/9e60a30d2c655c08590319347a46db1d246bf17f))
+
 ## [2.1.2](https://github.com/kouts/vue-modal/compare/v2.1.1...v2.1.2) (2021-11-21)
 
 
