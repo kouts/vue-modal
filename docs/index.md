@@ -25,7 +25,7 @@ A customizable, stackable, and lightweight modal component for Vue.
 - Closeable by clicking on the upper right "x", the overlay or the ```esc``` key
 - **Stackable** - Multiple modal windows on top of each other
 - Ability to set initial focus on an element when the modal window opens, just set the **autofocus** attribute on an element inside the modal
-- **Focus management** trapps keyboard focus - tabbed navigation inside the modal window
+- **Focus management** traps keyboard focus - tabbed navigation inside the modal window
 - Ability to have unclosable modal windows
 - Render on demand or stay always in DOM with "live" mode
 - Modals appended to ```<body>``` by default, ability to append to a custom element

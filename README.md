@@ -1,6 +1,13 @@
 # vue-modal <a href="https://npm.im/@kouts/vue-modal"><img src="https://badgen.net/npm/v/@kouts/vue-modal"></a> ![](https://img.badgesize.io/kouts/vue-modal/master/dist/vue-modal.umd.min.js.svg) ![](https://img.badgesize.io/kouts/vue-modal/master/dist/vue-modal.umd.min.js.svg?compression=gzip)
 A customizable, stackable, and lightweight modal component for Vue.
 
+---
+
+:fire: **HEADS UP!** You're currently looking at vue-modal branch for **Vue.js 2**.  
+If you're looking for a Vue.js 3 compatible version of vue-modal, [please check out the `next` branch](https://github.com/kouts/vue-modal/tree/next).
+
+---
+
 > vue-modal is designed with web applications in mind and tries to stick as much as possible
 > to the accessibility best practices set in the [WAI-ARIA Dialog (Modal)](https://www.w3.org/TR/wai-aria-practices/#dialog_modal) section
 > of W3C.
@@ -18,7 +25,7 @@ A customizable, stackable, and lightweight modal component for Vue.
 - Closeable by clicking on the upper right "x", the overlay or the ```esc``` key
 - **Stackable** - Multiple modal windows on top of each other
 - Ability to set initial focus on an element when the modal window opens, just set the **autofocus** attribute on an element inside the modal
-- **Focus management** trapps keyboard focus - tabbed navigation inside the modal window
+- **Focus management** traps keyboard focus - tabbed navigation inside the modal window
 - Ability to have unclosable modal windows
 - Render on demand or stay always in DOM with "live" mode
 - Modals appended to ```<body>``` by default, ability to append to a custom element
