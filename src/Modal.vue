@@ -1,65 +1,57 @@
 <template>
-  <div v-if="mount">
-    <portal :selector="appendTo">
-      <transition name="vm-backdrop-transition" :enter-active-class="bgInClass" :leave-active-class="bgOutClass">
-        <div
-          v-show="show"
-          :data-vm-backdrop-id="id"
-          class="vm-backdrop"
-          :class="bgClass"
-          :style="{ 'z-index': zIndex - 1 }"
-        ></div>
-      </transition>
-      <transition
-        name="vm-transition"
-        :enter-active-class="inClass"
-        :leave-active-class="outClass"
-        @before-enter="beforeOpen"
-        @enter="opening"
-        @after-enter="afterOpen"
-        @before-leave="beforeClose"
-        @leave="closing"
-        @after-leave="afterClose"
+  <portal v-if="mount" :selector="appendTo">
+    <transition name="vm-backdrop-transition" :enter-active-class="bgInClass" :leave-active-class="bgOutClass">
+      <div
+        v-show="show"
+        :data-vm-backdrop-id="id"
+        class="vm-backdrop"
+        :class="bgClass"
+        :style="{ 'z-index': zIndex - 1 }"
+      ></div>
+    </transition>
+    <transition
+      name="vm-transition"
+      :enter-active-class="inClass"
+      :leave-active-class="outClass"
+      @before-enter="beforeOpen"
+      @enter="opening"
+      @after-enter="afterOpen"
+      @before-leave="beforeClose"
+      @leave="closing"
+      @after-leave="afterClose"
+    >
+      <div
+        v-show="show"
+        ref="vm-wrapper"
+        :data-vm-wrapper-id="id"
+        tabindex="-1"
+        class="vm-wrapper"
+        :class="wrapperClass"
+        :style="{ 'z-index': zIndex, cursor: enableClose ? 'pointer' : 'default' }"
+        role="dialog"
+        :aria-label="title"
+        aria-modal="true"
+        @click="clickOutside($event)"
+        @keydown="keydown($event)"
       >
-        <div
-          v-show="show"
-          ref="vm-wrapper"
-          :data-vm-wrapper-id="id"
-          tabindex="-1"
-          class="vm-wrapper"
-          :class="wrapperClass"
-          :style="{ 'z-index': zIndex, cursor: enableClose ? 'pointer' : 'default' }"
-          role="dialog"
-          :aria-label="title"
-          aria-modal="true"
-          @click="clickOutside($event)"
-          @keydown="keydown($event)"
-        >
-          <div ref="vm" class="vm" :data-vm-id="id" :class="modalClass" :style="modalStyle">
-            <slot name="titlebar">
-              <div class="vm-titlebar">
-                <h3 class="vm-title">
-                  {{ title }}
-                </h3>
-                <button
-                  v-if="enableClose"
-                  type="button"
-                  class="vm-btn-close"
-                  aria-label="Close"
-                  @click.prevent="close"
-                ></button>
-              </div>
-            </slot>
-            <slot name="content">
-              <div class="vm-content">
-                <slot></slot>
-              </div>
-            </slot>
-          </div>
+        <div ref="vm" class="vm" :data-vm-id="id" :class="modalClass" :style="modalStyle">
+          <slot name="titlebar">
+            <div class="vm-titlebar">
+              <h3 class="vm-title">
+                {{ title }}
+              </h3>
+              <button v-if="enableClose" type="button" class="vm-btn-close" aria-label="Close" @click.prevent="close"></button>
+            </div>
+          </slot>
+          <slot name="content">
+            <div class="vm-content">
+              <slot></slot>
+            </div>
+          </slot>
         </div>
-      </transition>
-    </portal>
-  </div>
+      </div>
+    </transition>
+  </portal>
 </template>
 
 <script>
