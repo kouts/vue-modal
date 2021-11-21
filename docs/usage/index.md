@@ -1,16 +1,19 @@
 ## Register
 Register ```vue-modal``` in your application globbaly
 ``` js
-Vue.component('Modal', VueModal)
+const app = Vue.createApp({...})
+
+app.component('Modal', VueModal)
 ```
 or locally
 ``` js
-new Vue({
-  el: '#app',
+import VueModal from '@kouts/vue-modal'
+
+export default {
   components: {
     'Modal': VueModal
   }
-})
+}
 ```
 ## Use
 ### Template
@@ -25,9 +28,9 @@ with `v-model`
 </Modal>
 ```
 or
-with `based-on` value and event
+with `modelValue` value and `update:modelValue` event
 ``` vue
-<Modal :based-on="showModal" title="My first modal" @close="showModal = false">
+<Modal :model-value="showModal" title="My first modal" @update:modelValue="showModal = false">
   <p>Modal content goes here...</p>
 </Modal>
 ```
@@ -35,13 +38,18 @@ with `based-on` value and event
 
 ### Script
 ``` js
-new Vue({
-  ...
-  data: {
-    showModal: false
+import VueModal from '@kouts/vue-modal'
+
+export default {
+  components: {
+    'Modal': VueModal
+  },  
+  data() {
+    return {
+      showModal: false
+    }
   }
-  ...
-})
+}
 ```
 ### Result
 <Example1 />

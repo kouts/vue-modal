@@ -2,9 +2,9 @@
 
 ![Vue modal](./assets/img/vue-modal-logo.png)
 
-<a href="https://npm.im/@kouts/vue-modal"><img src="https://badgen.net/npm/v/@kouts/vue-modal"></a> ![](https://img.badgesize.io/kouts/vue-modal/master/dist/vue-modal.umd.min.js.svg) ![](https://img.badgesize.io/kouts/vue-modal/master/dist/vue-modal.umd.min.js.svg?compression=gzip)
+<a href="https://npm.im/@kouts/vue-modal"><img src="https://badgen.net/npm/v/@kouts/vue-modal/next"></a> ![](https://img.badgesize.io/kouts/vue-modal/next/dist/vue-modal.umd.js.svg) ![](https://img.badgesize.io/kouts/vue-modal/next/dist/vue-modal.umd.js.svg?compression=gzip)
 
-A customizable, stackable, and lightweight modal component for Vue.
+A customizable, stackable, and lightweight modal component for Vue.js 3.
 
 > vue-modal is designed with web applications in mind and tries to stick as much as possible
 > to the accessibility best practices set in the [WAI-ARIA Dialog (Modal)](https://www.w3.org/TR/wai-aria-practices/#dialog_modal) section
@@ -32,6 +32,6 @@ A customizable, stackable, and lightweight modal component for Vue.
 
 ## Browsers support
 
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Opera |
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="Edge" />](http://godban.github.io/browsers-support-badges/)<br/>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" />](http://godban.github.io/browsers-support-badges/)<br/>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" />](http://godban.github.io/browsers-support-badges/)<br/>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" />](http://godban.github.io/browsers-support-badges/)<br/>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" />](http://godban.github.io/browsers-support-badges/)<br/>Opera |
 | --------- | --------- | --------- | --------- | --------- |
-| IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions
+| Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions

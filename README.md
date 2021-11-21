@@ -1,5 +1,5 @@
-# vue-modal <a href="https://npm.im/@kouts/vue-modal"><img src="https://badgen.net/npm/v/@kouts/vue-modal"></a> ![](https://img.badgesize.io/kouts/vue-modal/master/dist/vue-modal.umd.min.js.svg) ![](https://img.badgesize.io/kouts/vue-modal/master/dist/vue-modal.umd.min.js.svg?compression=gzip)
-A customizable, stackable, and lightweight modal component for Vue.
+# vue-modal <a href="https://npm.im/@kouts/vue-modal"><img src="https://badgen.net/npm/v/@kouts/vue-modal/next"></a> ![](https://img.badgesize.io/kouts/vue-modal/next/dist/vue-modal.umd.js.svg) ![](https://img.badgesize.io/kouts/vue-modal/next/dist/vue-modal.umd.js.svg?compression=gzip)
+A customizable, stackable, and lightweight modal component for Vue.js 3.
 
 > vue-modal is designed with web applications in mind and tries to stick as much as possible
 > to the accessibility best practices set in the [WAI-ARIA Dialog (Modal)](https://www.w3.org/TR/wai-aria-practices/#dialog_modal) section
@@ -31,7 +31,7 @@ A customizable, stackable, and lightweight modal component for Vue.
 
 
 Click here for documentation and examples
-https://vue-modal-demo.netlify.app/
+https://next--vue-modal-demo.netlify.app/
 
 # Development
 

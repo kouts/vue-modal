@@ -7,7 +7,7 @@
     </div>
 
     <ClientOnly>
-      <Modal :based-on="showModal" title="My first modal" @close="showModal = false">
+      <Modal v-model="showModal" title="My first modal">
         <p>Modal content goes here...</p>
       </Modal>
     </ClientOnly>
