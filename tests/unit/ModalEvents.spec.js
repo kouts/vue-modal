@@ -1,64 +1,43 @@
 import { mount } from '@vue/test-utils'
-import '@testing-library/jest-dom'
-import { waitNT, waitRAF, sleep } from '../utils'
+import { waitRAF, sleep } from '../utils'
 import Modal from '@/Modal.vue'
 
-describe('Modal events', () => {
-  const wrapper = mount(Modal, {
-    stubs: {
-      transition: false
+const createWrapper = () => {
+  return mount(Modal, {
+    attachTo: document.body,
+    global: {
+      stubs: {
+        transition: false
+      }
     },
     slots: {
       default: '<p>Modal content goes here...</p>'
     }
   })
+}
 
-  afterEach(() => {
-    wrapper.setProps({
-      basedOn: false
-    })
+describe('Modal events', () => {
+  beforeEach(() => {
+    document.body.innerHTML = ''
   })
 
-  it('emits a before-open event', async () => {
-    wrapper.setProps({ basedOn: true })
-    await waitNT(wrapper.vm)
-    await waitRAF()
-    expect(wrapper.emitted('before-open')).toBeTruthy()
-  })
-
-  it('emits an opening event', async () => {
-    wrapper.setProps({ basedOn: true })
-    await waitNT(wrapper.vm)
-    await waitRAF()
-    expect(wrapper.emitted('opening')).toBeTruthy()
-  })
-
-  it('emits an after-open event', async () => {
-    wrapper.setProps({ basedOn: true })
-    await waitNT(wrapper.vm)
+  it.each(['before-open', 'opening', 'after-open'])('emits a %s event when opening', async (eventName) => {
+    const wrapper = createWrapper()
+    await wrapper.setProps({ modelValue: true })
     await waitRAF()
     await sleep(200)
-    expect(wrapper.emitted('after-open')).toBeTruthy()
+    expect(wrapper.emitted()[eventName]).toBeTruthy()
+    wrapper.unmount()
   })
 
-  it('emits a before-close event', async () => {
-    wrapper.setProps({ basedOn: false })
-    await waitNT(wrapper.vm)
+  it.each(['before-close', 'closing', 'after-close'])('emits a %s event when closing', async (eventName) => {
+    const wrapper = createWrapper()
+    await wrapper.setProps({ modelValue: true })
     await waitRAF()
-    expect(wrapper.emitted('before-close')).toBeTruthy()
-  })
-
-  it('emits an closing event', async () => {
-    wrapper.setProps({ basedOn: false })
-    await waitNT(wrapper.vm)
+    await wrapper.setProps({ modelValue: false })
     await waitRAF()
-    expect(wrapper.emitted('closing')).toBeTruthy()
-  })
-
-  it('emits an after-close event', async () => {
-    wrapper.setProps({ basedOn: false })
-    await waitNT(wrapper.vm)
-    await waitRAF()
-    expect(wrapper.emitted('after-close')).toBeTruthy()
+    await sleep(200)
+    expect(wrapper.emitted()[eventName]).toBeTruthy()
+    wrapper.unmount()
   })
 })

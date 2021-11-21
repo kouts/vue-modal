@@ -1,54 +1,79 @@
 import { mount } from '@vue/test-utils'
-import '@testing-library/jest-dom'
-import { waitNT, waitRAF, sleep } from '../utils'
+import { waitRAF } from '../utils'
 import Modal from '@/Modal.vue'
 
-describe('Modal basic functionality', () => {
-  const wrapper = mount(Modal, {
-    stubs: {
-      transition: false
+const createWrapperContainer = (componentArgs) => {
+  const args = componentArgs || {}
+  args.appendTo = '#modal-host'
+  const wrapperContainer = {
+    components: {
+      Modal
     },
-    slots: {
-      default: '<p>Modal content goes here...</p>'
+    data() {
+      return {
+        showModal: false,
+        args
+      }
+    },
+    template: `
+      <div id="modal-host"></div>
+      <Modal v-model="showModal" v-bind="args"><p>Modal content goes here...</p></Modal>
+    `
+  }
+
+  return mount(wrapperContainer, {
+    attachTo: document.body,
+    global: {
+      stubs: {
+        transition: false
+      }
     }
   })
+}
 
-  afterEach(() => {
-    wrapper.setProps({
-      basedOn: false
-    })
+describe('Modal basic functionality', () => {
+  beforeEach(() => {
+    document.body.innerHTML = ''
   })
 
-  it('shows a modal', async () => {
-    wrapper.setProps({ basedOn: true })
-    // console.log(document.body.innerHTML);
-    await waitNT(wrapper.vm)
-    await waitRAF()
-    expect(document.querySelector('.vm')).toBeInstanceOf(HTMLElement)
+  it('shows the modal', async () => {
+    const wrapper = createWrapperContainer()
+
+    expect(wrapper.find('.vm').exists()).toBe(false)
+
+    await wrapper.setData({ showModal: true })
+
+    expect(wrapper.find('.vm').exists()).toBe(true)
+
+    wrapper.unmount()
   })
 
-  it('hides a modal', async () => {
-    wrapper.setProps({ basedOn: false })
-    await waitNT(wrapper.vm)
-    await waitRAF()
-    await sleep(200)
-    expect(document.querySelector('.vm')).toBeFalsy()
+  it('hides the modal', async () => {
+    const wrapper = createWrapperContainer()
+    await wrapper.setData({ modelValue: true })
+    await wrapper.setData({ modelValue: false })
+
+    expect(wrapper.find('.vm').exists()).toBe(false)
+
+    wrapper.unmount()
   })
 
   it('tests whether the backdrop and the modal have the right z-index', async () => {
-    await waitNT(wrapper.vm)
-    await waitRAF()
-    wrapper.setProps({
-      basedOn: true,
-      baseZindex: 1051
+    const wrapper = createWrapperContainer({
+      baseZindex: 1052
     })
-    // console.log(document.body.innerHTML);
-    await waitNT(wrapper.vm)
+
+    await wrapper.setData({
+      showModal: true
+    })
     await waitRAF()
-    expect(document.querySelector('.vm-backdrop')).toHaveStyle('z-index: 1050;')
-    expect(document.querySelector('.vm-wrapper')).toHaveStyle(`
-      z-index: 1051;
-      cursor: pointer;
-    `)
+
+    const backdrop = wrapper.find('.vm-backdrop')
+    const modal = wrapper.find('.vm-wrapper')
+
+    expect(backdrop.attributes().style).toEqual('z-index: 1051;')
+    expect(modal.attributes().style).toContain('z-index: 1052;')
+
+    wrapper.unmount()
   })
 })
