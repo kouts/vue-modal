@@ -1,3 +1,10 @@
+## [2.1.4](https://github.com/kouts/vue-modal/compare/v2.1.3...v2.1.4) (2021-11-21)
+
+
+### Bug Fixes
+
+* removed unneeded div ([14814e0](https://github.com/kouts/vue-modal/commit/14814e06482d754cd99e4c0743e85b94bb61387d))
+
 ## [2.1.3](https://github.com/kouts/vue-modal/compare/v2.1.2...v2.1.3) (2021-11-21)
 
 

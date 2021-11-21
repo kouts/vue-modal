@@ -499,143 +499,135 @@ var __vue_render__ = function () {
   var _c = _vm._self._c || _h;
   return _vm.mount
     ? _c(
-        "div",
+        "portal",
+        { attrs: { selector: _vm.appendTo } },
         [
           _c(
-            "portal",
-            { attrs: { selector: _vm.appendTo } },
+            "transition",
+            {
+              attrs: {
+                name: "vm-backdrop-transition",
+                "enter-active-class": _vm.bgInClass,
+                "leave-active-class": _vm.bgOutClass,
+              },
+            },
+            [
+              _c("div", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.show,
+                    expression: "show",
+                  } ],
+                staticClass: "vm-backdrop",
+                class: _vm.bgClass,
+                style: { "z-index": _vm.zIndex - 1 },
+                attrs: { "data-vm-backdrop-id": _vm.id },
+              }) ]
+          ),
+          _vm._v(" "),
+          _c(
+            "transition",
+            {
+              attrs: {
+                name: "vm-transition",
+                "enter-active-class": _vm.inClass,
+                "leave-active-class": _vm.outClass,
+              },
+              on: {
+                "before-enter": _vm.beforeOpen,
+                enter: _vm.opening,
+                "after-enter": _vm.afterOpen,
+                "before-leave": _vm.beforeClose,
+                leave: _vm.closing,
+                "after-leave": _vm.afterClose,
+              },
+            },
             [
               _c(
-                "transition",
+                "div",
                 {
-                  attrs: {
-                    name: "vm-backdrop-transition",
-                    "enter-active-class": _vm.bgInClass,
-                    "leave-active-class": _vm.bgOutClass,
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.show,
+                      expression: "show",
+                    } ],
+                  ref: "vm-wrapper",
+                  staticClass: "vm-wrapper",
+                  class: _vm.wrapperClass,
+                  style: {
+                    "z-index": _vm.zIndex,
+                    cursor: _vm.enableClose ? "pointer" : "default",
                   },
-                },
-                [
-                  _c("div", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.show,
-                        expression: "show",
-                      } ],
-                    staticClass: "vm-backdrop",
-                    class: _vm.bgClass,
-                    style: { "z-index": _vm.zIndex - 1 },
-                    attrs: { "data-vm-backdrop-id": _vm.id },
-                  }) ]
-              ),
-              _vm._v(" "),
-              _c(
-                "transition",
-                {
                   attrs: {
-                    name: "vm-transition",
-                    "enter-active-class": _vm.inClass,
-                    "leave-active-class": _vm.outClass,
+                    "data-vm-wrapper-id": _vm.id,
+                    tabindex: "-1",
+                    role: "dialog",
+                    "aria-label": _vm.title,
+                    "aria-modal": "true",
                   },
                   on: {
-                    "before-enter": _vm.beforeOpen,
-                    enter: _vm.opening,
-                    "after-enter": _vm.afterOpen,
-                    "before-leave": _vm.beforeClose,
-                    leave: _vm.closing,
-                    "after-leave": _vm.afterClose,
+                    click: function ($event) {
+                      return _vm.clickOutside($event)
+                    },
+                    keydown: function ($event) {
+                      return _vm.keydown($event)
+                    },
                   },
                 },
                 [
                   _c(
                     "div",
                     {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.show,
-                          expression: "show",
-                        } ],
-                      ref: "vm-wrapper",
-                      staticClass: "vm-wrapper",
-                      class: _vm.wrapperClass,
-                      style: {
-                        "z-index": _vm.zIndex,
-                        cursor: _vm.enableClose ? "pointer" : "default",
-                      },
-                      attrs: {
-                        "data-vm-wrapper-id": _vm.id,
-                        tabindex: "-1",
-                        role: "dialog",
-                        "aria-label": _vm.title,
-                        "aria-modal": "true",
-                      },
-                      on: {
-                        click: function ($event) {
-                          return _vm.clickOutside($event)
-                        },
-                        keydown: function ($event) {
-                          return _vm.keydown($event)
-                        },
-                      },
+                      ref: "vm",
+                      staticClass: "vm",
+                      class: _vm.modalClass,
+                      style: _vm.modalStyle,
+                      attrs: { "data-vm-id": _vm.id },
                     },
                     [
-                      _c(
-                        "div",
-                        {
-                          ref: "vm",
-                          staticClass: "vm",
-                          class: _vm.modalClass,
-                          style: _vm.modalStyle,
-                          attrs: { "data-vm-id": _vm.id },
-                        },
-                        [
-                          _vm._t("titlebar", function () {
-                            return [
-                              _c("div", { staticClass: "vm-titlebar" }, [
-                                _c("h3", { staticClass: "vm-title" }, [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(_vm.title) +
-                                      "\n              "
-                                  ) ]),
-                                _vm._v(" "),
-                                _vm.enableClose
-                                  ? _c("button", {
-                                      staticClass: "vm-btn-close",
-                                      attrs: {
-                                        type: "button",
-                                        "aria-label": "Close",
-                                      },
-                                      on: {
-                                        click: function ($event) {
-                                          $event.preventDefault();
-                                          return _vm.close.apply(
-                                            null,
-                                            arguments
-                                          )
-                                        },
-                                      },
-                                    })
-                                  : _vm._e() ]) ]
-                          }),
-                          _vm._v(" "),
-                          _vm._t("content", function () {
-                            return [
-                              _c(
-                                "div",
-                                { staticClass: "vm-content" },
-                                [_vm._t("default")],
-                                2
-                              ) ]
-                          }) ],
-                        2
-                      ) ]
+                      _vm._t("titlebar", function () {
+                        return [
+                          _c("div", { staticClass: "vm-titlebar" }, [
+                            _c("h3", { staticClass: "vm-title" }, [
+                              _vm._v(
+                                "\n              " +
+                                  _vm._s(_vm.title) +
+                                  "\n            "
+                              ) ]),
+                            _vm._v(" "),
+                            _vm.enableClose
+                              ? _c("button", {
+                                  staticClass: "vm-btn-close",
+                                  attrs: {
+                                    type: "button",
+                                    "aria-label": "Close",
+                                  },
+                                  on: {
+                                    click: function ($event) {
+                                      $event.preventDefault();
+                                      return _vm.close.apply(null, arguments)
+                                    },
+                                  },
+                                })
+                              : _vm._e() ]) ]
+                      }),
+                      _vm._v(" "),
+                      _vm._t("content", function () {
+                        return [
+                          _c(
+                            "div",
+                            { staticClass: "vm-content" },
+                            [_vm._t("default")],
+                            2
+                          ) ]
+                      }) ],
+                    2
                   ) ]
-              ) ],
-            1
+              ) ]
           ) ],
         1
       )
