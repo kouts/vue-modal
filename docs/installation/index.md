@@ -17,7 +17,7 @@ Install it via npm
 ```
 npm i @kouts/vue-modal@next --save
 ```
-Use the ```import``` to include it into your js
+Use the ```import``` statement to include it into your js
 ``` js
 import VueModal from '@kouts/vue-modal'
 import '@kouts/vue-modal/dist/vue-modal.css'
