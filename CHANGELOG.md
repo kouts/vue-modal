@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/kouts/vue-modal/compare/v2.1.1...v2.1.2) (2021-11-21)
+
+
+### Bug Fixes
+
+* added notice for vue version ([31d0e8b](https://github.com/kouts/vue-modal/commit/31d0e8bb8721596913978bdf724a60ad8668452e))
+
 ## [2.1.1](https://github.com/kouts/vue-modal/compare/v2.1.0...v2.1.1) (2021-10-25)
 
 
