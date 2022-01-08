@@ -1,3 +1,10 @@
+## [3.0.2](https://github.com/kouts/vue-modal/compare/v3.0.1...v3.0.2) (2022-01-08)
+
+
+### Bug Fixes
+
+* added dist to the release assets of the project's git repository ([2ad5765](https://github.com/kouts/vue-modal/commit/2ad57651db8725792c0168fc05db9288657aedbd))
+
 ## [3.0.1](https://github.com/kouts/vue-modal/compare/v3.0.0...v3.0.1) (2021-11-21)
 
 
