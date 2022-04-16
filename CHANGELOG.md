@@ -1,3 +1,10 @@
+## [2.1.5](https://github.com/kouts/vue-modal/compare/v2.1.4...v2.1.5) (2022-04-16)
+
+
+### Bug Fixes
+
+* updated npm packages ([bdbfa70](https://github.com/kouts/vue-modal/commit/bdbfa7071f5c78b2fdf8d85fd5651f23968fb4a9))
+
 ## [2.1.4](https://github.com/kouts/vue-modal/compare/v2.1.3...v2.1.4) (2021-11-21)
 
 
