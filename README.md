@@ -1,4 +1,4 @@
-# vue-modal <a href="https://npm.im/@kouts/vue-modal"><img src="https://badgen.net/npm/v/@kouts/vue-modal"></a> ![](https://img.badgesize.io/kouts/vue-modal/master/dist/vue-modal.umd.min.js.svg) ![](https://img.badgesize.io/kouts/vue-modal/master/dist/vue-modal.umd.min.js.svg?compression=gzip)
+# vue-modal <a href="https://npm.im/@kouts/vue-modal"><img src="https://badgen.net/npm/v/@kouts/vue-modal"></a> ![](https://img.badgesize.io/kouts/vue-modal/master/dist/vue-modal.umd.min.js.svg) ![](https://img.badgesize.io/kouts/vue-modal/master/dist/vue-modal.umd.min.js.svg?compression=gzip) ![](coverage/badge.svg)
 A customizable, stackable, and lightweight modal component for Vue.
 
 ---
