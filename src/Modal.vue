@@ -156,10 +156,10 @@ export default {
       }
     },
     keydown(e) {
-      if (e.which === 27) {
+      if (e.which === 27 || e.keyCode === 27) {
         this.close()
       }
-      if (e.which === 9) {
+      if (e.which === 9 || e.keyCode === 9) {
         // Get only visible elements
         const all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll(FOCUSABLE_ELEMENTS)).filter(function (el) {
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length)
