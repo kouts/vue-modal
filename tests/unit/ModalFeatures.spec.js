@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils'
-import '@testing-library/jest-dom'
 import { waitNT, sleep } from '../utils'
 import Modal from '@/Modal.vue'
 
@@ -13,46 +12,48 @@ const PortalStub = {
 const ModalParent = {
   template: `
   <div>
-    <button type="button" class="open-modal-1" @click="propsModal1.show = true">Open modal 1</button>
-    <Modal wrapperClass="modal-1" v-model="propsModal1.show" :title="title" :live="live">
+    <button type="button" class="open-modal-1" @click="showModal1 = true">Open modal 1</button>
+    <Modal wrapperClass="modal-1" v-model="showModal1" :title="title" :live="live">
       <div>
         <input v-if="showInput" type="text" value="" autofocus class="text-input" />
-        <button type="button" class="open-modal-2" @click="propsModal2.show = true">Open modal 2</button>
+        <button type="button" class="open-modal-2" @click="showModal2 = true">Open modal 2</button>
         <a href="#">Link</a>
         <input type="checkbox" value="" class="checkbox-input" />
       </div>
     </Modal>
 
-    <Modal title="modal-2" wrapperClass="modal-2" v-model="propsModal2.show"><div>Modal content 2</div></Modal>
+    <Modal title="modal-2" wrapperClass="modal-2" v-model="showModal2"><div>Modal content 2</div></Modal>
     <div class="modal-anchor"></div>
   </div>
   `,
-  props: ['propsModal1', 'propsModal2', 'showInput', 'live', 'title']
+  components: {
+    Modal
+  },
+  props: {
+    showInput: {
+      type: Boolean,
+      default: true
+    }
+  }
 }
 
-const createModalsWrapper = (props) => {
+const createModalsWrapper = (data) => {
   return mount(ModalParent, {
     attachTo: document.body,
-    components: {
-      Modal
-    },
     stubs: {
       transition: false,
       portal: PortalStub
     },
-    propsData: {
-      ...{
-        showInput: true,
-        live: false,
-        title: 'Test title',
-        propsModal1: {
-          show: false
+    data() {
+      return {
+        ...{
+          live: false,
+          title: 'Test title',
+          showModal1: false,
+          showModal2: false
         },
-        propsModal2: {
-          show: false
-        }
-      },
-      ...props
+        ...data
+      }
     }
   })
 }
