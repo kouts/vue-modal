@@ -1,7 +1,9 @@
 ## v-model
-Pass a Boolean value to the ```v-model``` directive to open and close the modal window.
+
+Pass a Boolean value to the `v-model` directive to open and close the modal window.
 
 ## Props
+
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -95,19 +97,29 @@ Pass a Boolean value to the ```v-model``` directive to open and close the modal 
       <td>Opens and closes the modal window, this is used by <code>v-model</code> internally.</td>
       <td>Boolean</td>
       <td>false</td>
-    </tr>    
+    </tr>
+    <tr>
+      <td>closeLabel</td>
+      <td>The aria-label attribute of the close button</td>
+      <td>String</td>
+      <td><em>Close</em></td>
+    </tr>        
   </tbody>
 </table>
 
 ## Slots
+
 ### default
+
 The default slot to use for the content of the modal.
 
 ### titlebar
+
 The slot to use for overriding the titlebar of the modal
 
 Default value:
-``` vue
+
+```vue
 <div class="vm-titlebar">
   <h3 class="vm-title">
     {{ title }}
@@ -122,16 +134,19 @@ Default value:
 ```
 
 ### content
+
 The slot to use for overriding the content of the modal
 
 Default value:
-``` vue
+
+```vue
 <div class="vm-content">
   <slot></slot>
 </div>
 ```
 
 ## Events
+
 <table class="table table-bordered">
   <thead>
     <tr>

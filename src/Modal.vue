@@ -31,20 +31,28 @@
         role="dialog"
         :aria-label="title"
         aria-modal="true"
+        :aria-describedby="`vm-content-${id}`"
+        :aria-labelledby="`vm-title-${id}`"
         @click="clickOutside($event)"
         @keydown="keydown($event)"
       >
         <div ref="vm" class="vm" :data-vm-id="id" :class="modalClass" :style="modalStyle">
           <slot name="titlebar">
             <div class="vm-titlebar">
-              <h3 class="vm-title">
+              <h3 :id="`vm-title-${id}`" class="vm-title">
                 {{ title }}
               </h3>
-              <button v-if="enableClose" type="button" class="vm-btn-close" aria-label="Close" @click.prevent="close"></button>
+              <button
+                v-if="enableClose"
+                type="button"
+                class="vm-btn-close"
+                :aria-label="closeLabel"
+                @click.prevent="close"
+              ></button>
             </div>
           </slot>
           <slot name="content">
-            <div class="vm-content">
+            <div :id="`vm-content-${id}`" class="vm-content">
               <slot></slot>
             </div>
           </slot>
@@ -106,6 +114,10 @@ export default {
     basedOn: {
       type: Boolean,
       default: false
+    },
+    closeLabel: {
+      type: String,
+      default: 'Close'
     }
   },
   data() {
