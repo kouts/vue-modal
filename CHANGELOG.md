@@ -1,3 +1,12 @@
+## [2.1.6](https://github.com/kouts/vue-modal/compare/v2.1.5...v2.1.6) (2022-04-18)
+
+
+### Bug Fixes
+
+* added aria attributes ([a10e17b](https://github.com/kouts/vue-modal/commit/a10e17b4d15168f6782f473b239a7e0c107eca25))
+* added keyCode for keydown event ([ec6a76c](https://github.com/kouts/vue-modal/commit/ec6a76ca74fd31ee80926714cf54f54fb4e1d305))
+* fixed aria attributes values ([16698dc](https://github.com/kouts/vue-modal/commit/16698dc0546f52a21a291374aec151ab34a2579d))
+
 ## [2.1.5](https://github.com/kouts/vue-modal/compare/v2.1.4...v2.1.5) (2022-04-16)
 
 

@@ -258,6 +258,10 @@ var script = {
     basedOn: {
       type: Boolean,
       default: false
+    },
+    closeLabel: {
+      type: String,
+      default: 'Close'
     }
   },
   data: function data() {
@@ -310,10 +314,10 @@ var script = {
       }
     },
     keydown: function keydown(e) {
-      if (e.which === 27) {
+      if (e.which === 27 || e.keyCode === 27) {
         this.close();
       }
-      if (e.which === 9) {
+      if (e.which === 9 || e.keyCode === 9) {
         // Get only visible elements
         var all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll(FOCUSABLE_ELEMENTS)).filter(function (el) {
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length)
@@ -568,6 +572,8 @@ var __vue_render__ = function () {
                     role: "dialog",
                     "aria-label": _vm.title,
                     "aria-modal": "true",
+                    "aria-describedby": _vm.id + "-content",
+                    "aria-labelledby": _vm.id + "-title",
                   },
                   on: {
                     click: function ($event) {
@@ -592,19 +598,26 @@ var __vue_render__ = function () {
                       _vm._t("titlebar", function () {
                         return [
                           _c("div", { staticClass: "vm-titlebar" }, [
-                            _c("h3", { staticClass: "vm-title" }, [
-                              _vm._v(
-                                "\n              " +
-                                  _vm._s(_vm.title) +
-                                  "\n            "
-                              ) ]),
+                            _c(
+                              "h3",
+                              {
+                                staticClass: "vm-title",
+                                attrs: { id: _vm.id + "-title" },
+                              },
+                              [
+                                _vm._v(
+                                  "\n              " +
+                                    _vm._s(_vm.title) +
+                                    "\n            "
+                                ) ]
+                            ),
                             _vm._v(" "),
                             _vm.enableClose
                               ? _c("button", {
                                   staticClass: "vm-btn-close",
                                   attrs: {
                                     type: "button",
-                                    "aria-label": "Close",
+                                    "aria-label": _vm.closeLabel,
                                   },
                                   on: {
                                     click: function ($event) {
@@ -620,7 +633,10 @@ var __vue_render__ = function () {
                         return [
                           _c(
                             "div",
-                            { staticClass: "vm-content" },
+                            {
+                              staticClass: "vm-content",
+                              attrs: { id: _vm.id + "-content" },
+                            },
                             [_vm._t("default")],
                             2
                           ) ]
