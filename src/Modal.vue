@@ -31,15 +31,15 @@
         role="dialog"
         :aria-label="title"
         aria-modal="true"
-        :aria-describedby="`vm-content-${id}`"
-        :aria-labelledby="`vm-title-${id}`"
+        :aria-describedby="`${id}-content`"
+        :aria-labelledby="`${id}-title`"
         @click="clickOutside($event)"
         @keydown="keydown($event)"
       >
         <div ref="vm" class="vm" :data-vm-id="id" :class="modalClass" :style="modalStyle">
           <slot name="titlebar">
             <div class="vm-titlebar">
-              <h3 :id="`vm-title-${id}`" class="vm-title">
+              <h3 :id="`${id}-title`" class="vm-title">
                 {{ title }}
               </h3>
               <button
@@ -52,7 +52,7 @@
             </div>
           </slot>
           <slot name="content">
-            <div :id="`vm-content-${id}`" class="vm-content">
+            <div :id="`${id}-content`" class="vm-content">
               <slot></slot>
             </div>
           </slot>
