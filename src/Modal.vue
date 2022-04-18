@@ -31,20 +31,28 @@
         role="dialog"
         :aria-label="title"
         aria-modal="true"
+        :aria-describedby="`${id}-content`"
+        :aria-labelledby="`${id}-title`"
         @click="clickOutside($event)"
         @keydown="keydown($event)"
       >
         <div ref="vm" class="vm" :data-vm-id="id" :class="modalClass" :style="modalStyle">
           <slot name="titlebar">
             <div class="vm-titlebar">
-              <h3 class="vm-title">
+              <h3 :id="`${id}-title`" class="vm-title">
                 {{ title }}
               </h3>
-              <button v-if="enableClose" type="button" class="vm-btn-close" aria-label="Close" @click.prevent="close"></button>
+              <button
+                v-if="enableClose"
+                type="button"
+                class="vm-btn-close"
+                :aria-label="closeLabel"
+                @click.prevent="close"
+              ></button>
             </div>
           </slot>
           <slot name="content">
-            <div class="vm-content">
+            <div :id="`${id}-content`" class="vm-content">
               <slot></slot>
             </div>
           </slot>
@@ -106,6 +114,10 @@ export default {
     basedOn: {
       type: Boolean,
       default: false
+    },
+    closeLabel: {
+      type: String,
+      default: 'Close'
     }
   },
   data() {
@@ -156,10 +168,10 @@ export default {
       }
     },
     keydown(e) {
-      if (e.which === 27) {
+      if (e.which === 27 || e.keyCode === 27) {
         this.close()
       }
-      if (e.which === 9) {
+      if (e.which === 9 || e.keyCode === 9) {
         // Get only visible elements
         const all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll(FOCUSABLE_ELEMENTS)).filter(function (el) {
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length)
