@@ -1,10 +1,11 @@
 import { openBlock, createBlock, Teleport, createVNode, Transition, withCtx, withDirectives, createElementVNode, normalizeClass, normalizeStyle, vShow, renderSlot, toDisplayString, createElementBlock, withModifiers, createCommentVNode } from "vue";
 var Modal_vue_vue_type_style_index_0_lang = "";
 var _export_sfc = (sfc, props) => {
+  const target = sfc.__vccOpts || sfc;
   for (const [key, val] of props) {
-    sfc[key] = val;
+    target[key] = val;
   }
-  return sfc;
+  return target;
 };
 const TYPE_CSS = {
   type: [String, Object, Array],
@@ -46,6 +47,10 @@ const _sfc_main = {
     modelValue: {
       type: Boolean,
       default: false
+    },
+    closeLabel: {
+      type: String,
+      default: "Close"
     }
   },
   emits: ["before-open", "opening", "after-open", "before-close", "closing", "after-close", "update:modelValue"],
@@ -93,10 +98,10 @@ const _sfc_main = {
       }
     },
     keydown(e) {
-      if (e.which === 27) {
+      if (e.which === 27 || e.keyCode === 27) {
         this.close();
       }
-      if (e.which === 9) {
+      if (e.which === 9 || e.keyCode === 9) {
         const all = [].slice.call(this.$refs["vm-wrapper"].querySelectorAll(FOCUSABLE_ELEMENTS)).filter(function(el) {
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
         });
@@ -188,11 +193,12 @@ const _sfc_main = {
   }
 };
 const _hoisted_1 = ["data-vm-backdrop-id"];
-const _hoisted_2 = ["data-vm-wrapper-id", "aria-label"];
+const _hoisted_2 = ["data-vm-wrapper-id", "aria-label", "aria-describedby", "aria-labelledby"];
 const _hoisted_3 = ["data-vm-id"];
 const _hoisted_4 = { class: "vm-titlebar" };
-const _hoisted_5 = { class: "vm-title" };
-const _hoisted_6 = { class: "vm-content" };
+const _hoisted_5 = ["id"];
+const _hoisted_6 = ["aria-label"];
+const _hoisted_7 = ["id"];
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return $data.mount ? (openBlock(), createBlock(Teleport, {
     key: 0,
@@ -235,6 +241,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           role: "dialog",
           "aria-label": $props.title,
           "aria-modal": "true",
+          "aria-describedby": `${$data.id}-content`,
+          "aria-labelledby": `${$data.id}-title`,
           onClick: _cache[1] || (_cache[1] = ($event) => $options.clickOutside($event)),
           onKeydown: _cache[2] || (_cache[2] = ($event) => $options.keydown($event))
         }, [
@@ -246,20 +254,26 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           }, [
             renderSlot(_ctx.$slots, "titlebar", {}, () => [
               createElementVNode("div", _hoisted_4, [
-                createElementVNode("h3", _hoisted_5, toDisplayString($props.title), 1),
+                createElementVNode("h3", {
+                  id: `${$data.id}-title`,
+                  class: "vm-title"
+                }, toDisplayString($props.title), 9, _hoisted_5),
                 $props.enableClose ? (openBlock(), createElementBlock("button", {
                   key: 0,
                   type: "button",
                   class: "vm-btn-close",
-                  "aria-label": "Close",
+                  "aria-label": $props.closeLabel,
                   onClick: _cache[0] || (_cache[0] = withModifiers((...args) => $options.close && $options.close(...args), ["prevent"]))
-                })) : createCommentVNode("", true)
+                }, null, 8, _hoisted_6)) : createCommentVNode("", true)
               ])
             ]),
             renderSlot(_ctx.$slots, "content", {}, () => [
-              createElementVNode("div", _hoisted_6, [
+              createElementVNode("div", {
+                id: `${$data.id}-content`,
+                class: "vm-content"
+              }, [
                 renderSlot(_ctx.$slots, "default")
-              ])
+              ], 8, _hoisted_7)
             ])
           ], 14, _hoisted_3)
         ], 46, _hoisted_2), [

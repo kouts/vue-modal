@@ -1,3 +1,12 @@
+## [3.0.3](https://github.com/kouts/vue-modal/compare/v3.0.2...v3.0.3) (2022-04-18)
+
+
+### Bug Fixes
+
+* added aria attributes ([50a52a0](https://github.com/kouts/vue-modal/commit/50a52a0146082502eb88d534ab2ee46ac2b889f8))
+* added keyCode for keydown event ([084ec52](https://github.com/kouts/vue-modal/commit/084ec525fbb0a437412c00df7868b3e8cbf90c65))
+* added prop for close button label ([cd8a0c8](https://github.com/kouts/vue-modal/commit/cd8a0c802df7e219504fbbeeb923d7ece045d949))
+
 ## [3.0.2](https://github.com/kouts/vue-modal/compare/v3.0.1...v3.0.2) (2022-01-08)
 
 
