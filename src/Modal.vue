@@ -31,20 +31,22 @@
         role="dialog"
         :aria-label="title"
         aria-modal="true"
+        :aria-describedby="`${id}-content`"
+        :aria-labelledby="`${id}-title`"
         @click="clickOutside($event)"
         @keydown="keydown($event)"
       >
         <div ref="vm" class="vm" :data-vm-id="id" :class="modalClass" :style="modalStyle">
           <slot name="titlebar">
             <div class="vm-titlebar">
-              <h3 class="vm-title">
+              <h3 :id="`${id}-title`" class="vm-title">
                 {{ title }}
               </h3>
               <button v-if="enableClose" type="button" class="vm-btn-close" aria-label="Close" @click.prevent="close"></button>
             </div>
           </slot>
           <slot name="content">
-            <div class="vm-content">
+            <div :id="`${id}-content`" class="vm-content">
               <slot></slot>
             </div>
           </slot>
