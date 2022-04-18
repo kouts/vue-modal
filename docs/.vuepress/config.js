@@ -35,6 +35,10 @@ module.exports = {
         text: 'Usage'
       },
       {
+        link: '/options/',
+        text: 'Options'
+      },
+      {
         text: 'Examples',
         collapsable: true,
         children: [
