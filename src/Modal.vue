@@ -42,7 +42,13 @@
               <h3 :id="`${id}-title`" class="vm-title">
                 {{ title }}
               </h3>
-              <button v-if="enableClose" type="button" class="vm-btn-close" aria-label="Close" @click.prevent="close"></button>
+              <button
+                v-if="enableClose"
+                type="button"
+                class="vm-btn-close"
+                :aria-label="closeLabel"
+                @click.prevent="close"
+              ></button>
             </div>
           </slot>
           <slot name="content">
@@ -100,6 +106,10 @@ export default {
     modelValue: {
       type: Boolean,
       default: false
+    },
+    closeLabel: {
+      type: String,
+      default: 'Close'
     }
   },
   emits: ['before-open', 'opening', 'after-open', 'before-close', 'closing', 'after-close', 'update:modelValue'],
