@@ -1,3 +1,10 @@
+## [2.1.7](https://github.com/kouts/vue-modal/compare/v2.1.6...v2.1.7) (2022-04-18)
+
+
+### Bug Fixes
+
+* fixed features test setup ([e8af5e0](https://github.com/kouts/vue-modal/commit/e8af5e0f2602c54b4e3449d1727acf6ae49af745))
+
 ## [2.1.6](https://github.com/kouts/vue-modal/compare/v2.1.5...v2.1.6) (2022-04-18)
 
 
