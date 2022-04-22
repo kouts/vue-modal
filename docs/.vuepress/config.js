@@ -5,14 +5,15 @@ module.exports = {
   plugins: [
     VueExamplePlugin({
       componentsPath: '/docs/.examples/'
-    })
-    // [
-    //   '@vuepress/docsearch',
-    //   {
-    //     apiKey: '1a6df20c3c6d9b729c4109ebce3e2eed',
-    //     indexName: 'next-vue-modal'
-    //   }
-    // ]
+    }),
+    [
+      '@vuepress/docsearch',
+      {
+        apiKey: 'd60d712a6a23ccd79dd8e12f14015e49',
+        indexName: 'vue-modal',
+        appId: 'G4DW29QPYK'
+      }
+    ]
   ],
   dest: 'public',
   title: 'vue-modal',
