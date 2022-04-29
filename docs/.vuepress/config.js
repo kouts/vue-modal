@@ -9,7 +9,7 @@ module.exports = {
     [
       '@vuepress/docsearch',
       {
-        apiKey: 'd60d712a6a23ccd79dd8e12f14015e49',
+        apiKey: 'b1beebce60b696f3ab59d523bdc04b94',
         indexName: 'vue-modal',
         appId: 'G4DW29QPYK'
       }
