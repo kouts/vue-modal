@@ -1,11 +1,11 @@
-import { writeFileSync } from 'fs'
-import { renderSync } from 'node-sass'
-import vue from 'rollup-plugin-vue'
+import buble from '@rollup/plugin-buble'
+import commonjs from 'rollup-plugin-commonjs'
 import css from 'rollup-plugin-css-only'
 import resolve from 'rollup-plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
-import buble from '@rollup/plugin-buble'
+import vue from 'rollup-plugin-vue'
+import { renderSync } from 'node-sass'
 import { terser } from 'rollup-plugin-terser'
+import { writeFileSync } from 'fs'
 
 export default {
   input: './src/Modal.vue',
@@ -37,6 +37,7 @@ export default {
           data: styles,
           outputStyle: 'compressed'
         })
+
         writeFileSync('dist/vue-modal.css', res.css)
       }
     }),
