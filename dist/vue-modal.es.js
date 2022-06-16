@@ -322,6 +322,7 @@ var script = {
         var all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll(FOCUSABLE_ELEMENTS)).filter(function (el) {
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length)
         });
+
         if (e.shiftKey) {
           if (e.target === all[0] || e.target === this.$refs['vm-wrapper']) {
             e.preventDefault();
@@ -345,10 +346,12 @@ var script = {
     },
     handleFocus: function handleFocus(wrapper) {
       var autofocus = wrapper.querySelector('[autofocus]');
+
       if (autofocus) {
         autofocus.focus();
       } else {
         var focusable = wrapper.querySelectorAll(FOCUSABLE_ELEMENTS);
+
         focusable.length ? focusable[0].focus() : wrapper.focus();
       }
     },
@@ -356,6 +359,7 @@ var script = {
       // console.log('beforeOpen');
       this.elToFocus = document.activeElement;
       var lastZindex = this.getTopZindex();
+
       if (animatingZIndex) {
         this.zIndex = animatingZIndex + 2;
       } else {
@@ -392,10 +396,13 @@ var script = {
       this.$nextTick(function () {
         window.requestAnimationFrame(function () {
           var lastZindex = this$1$1.getTopZindex();
+
           if (lastZindex > 0) {
             var all = this$1$1.getAllVisibleWrappers();
+
             for (var i = 0; i < all.length; i++) {
               var wrapper = all[i];
+
               if (parseInt(wrapper.style.zIndex) === lastZindex) {
                 if (wrapper.contains(this$1$1.elToFocus)) {
                   this$1$1.elToFocus.focus();

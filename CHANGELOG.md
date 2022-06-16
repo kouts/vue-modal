@@ -1,3 +1,11 @@
+## [2.1.8](https://github.com/kouts/vue-modal/compare/v2.1.7...v2.1.8) (2022-06-16)
+
+
+### Bug Fixes
+
+* lint files ([8b88d24](https://github.com/kouts/vue-modal/commit/8b88d2402ae568748425603d86ec62715974112e))
+* updated eslint config and npm packages ([5de7129](https://github.com/kouts/vue-modal/commit/5de71294680d9fbcd93ccae50e8bb7095244b19b))
+
 ## [2.1.7](https://github.com/kouts/vue-modal/compare/v2.1.6...v2.1.7) (2022-04-18)
 
 
