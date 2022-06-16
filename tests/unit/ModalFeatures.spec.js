@@ -1,6 +1,6 @@
-import { mount } from '@vue/test-utils'
-import { waitNT, sleep } from '../utils'
 import Modal from '@/Modal.vue'
+import { mount } from '@vue/test-utils'
+import { sleep, waitNT } from '../utils'
 
 const originalOffsetHeight = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetHeight')
 const originalOffsetWidth = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetWidth')
@@ -60,6 +60,7 @@ const createModalsWrapper = (data) => {
 
 beforeAll(() => {
   const style = document.createElement('style')
+
   style.innerHTML = `
   .vm-fadeIn, .vm-fadeOut {
     animation-duration: 1ms;
@@ -91,6 +92,7 @@ describe('Modal features', () => {
     await sleep(100)
 
     const vmWrapper = wrapper.find('.vm-wrapper')
+
     expect(vmWrapper.element.getAttribute('aria-label')).toBe('Test title')
     wrapper.destroy()
   })
@@ -103,6 +105,7 @@ describe('Modal features', () => {
     await sleep(100)
 
     const textInput = wrapper.find('.modal-1 .text-input')
+
     expect(document.activeElement).toEqual(textInput.element)
     wrapper.destroy()
   })
@@ -123,6 +126,7 @@ describe('Modal features', () => {
     await sleep(100)
 
     const textInput = wrapper.find('.modal-1 .text-input')
+
     expect(document.activeElement).toEqual(textInput.element)
     wrapper.destroy()
   })
@@ -145,6 +149,7 @@ describe('Modal features', () => {
     await sleep(100)
 
     const closeBtn = wrapper.find('.modal-1 button.vm-btn-close')
+
     expect(document.activeElement).toEqual(closeBtn.element)
     wrapper.destroy()
   })
@@ -159,6 +164,7 @@ describe('Modal features', () => {
     await wrapper.find('.modal-1').trigger('keydown', { keyCode: 9 })
 
     const textInput = wrapper.find('.modal-1 .text-input')
+
     expect(document.activeElement).toBe(textInput.element)
     wrapper.destroy()
   })
@@ -176,6 +182,7 @@ describe('Modal features', () => {
     })
 
     const checkboxInput = wrapper.find('.modal-1 .checkbox-input')
+
     expect(document.activeElement).toBe(checkboxInput.element)
     wrapper.destroy()
   })
@@ -243,6 +250,7 @@ describe('Modal features', () => {
     await wrapper.find('.modal-1 .checkbox-input').trigger('keydown', { keyCode: 9 })
 
     const closeBtn = wrapper.find('.modal-1 button.vm-btn-close')
+
     expect(document.activeElement).toEqual(closeBtn.element)
     wrapper.destroy()
   })

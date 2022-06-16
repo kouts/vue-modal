@@ -1,7 +1,7 @@
-import { mount } from '@vue/test-utils'
-import '@testing-library/jest-dom'
-import { waitNT, waitRAF, sleep } from '../utils'
 import Modal from '@/Modal.vue'
+import { mount } from '@vue/test-utils'
+import { sleep, waitNT, waitRAF } from '../utils'
+import '@testing-library/jest-dom'
 
 describe('Modal events', () => {
   const wrapper = mount(Modal, {
