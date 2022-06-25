@@ -1,9 +1,10 @@
+import Modal from '@/Modal.vue'
 import { mount } from '@vue/test-utils'
 import { waitRAF } from '../utils'
-import Modal from '@/Modal.vue'
 
 const createWrapperContainer = (componentArgs) => {
   const args = componentArgs || {}
+
   args.appendTo = '#modal-host'
   const wrapperContainer = {
     components: {
@@ -50,6 +51,7 @@ describe('Modal basic functionality', () => {
 
   it('hides the modal', async () => {
     const wrapper = createWrapperContainer()
+
     await wrapper.setData({ modelValue: true })
     await wrapper.setData({ modelValue: false })
 

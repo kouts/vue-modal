@@ -1,6 +1,6 @@
-import Modal from '@/Modal.vue'
 import Example1 from './components/Example1.vue'
 import Intro from './components/Intro.vue'
+import Modal from '@/Modal.vue'
 import './styles/styles.scss'
 
 import { defineClientAppEnhance } from '@vuepress/client'

@@ -1,6 +1,6 @@
-import { mount } from '@vue/test-utils'
-import { waitRAF, sleep } from '../utils'
 import Modal from '@/Modal.vue'
+import { mount } from '@vue/test-utils'
+import { sleep, waitRAF } from '../utils'
 
 const createWrapper = () => {
   return mount(Modal, {
@@ -23,6 +23,7 @@ describe('Modal events', () => {
 
   it.each(['before-open', 'opening', 'after-open'])('emits a %s event when opening', async (eventName) => {
     const wrapper = createWrapper()
+
     await wrapper.setProps({ modelValue: true })
     await waitRAF()
     await sleep(200)
@@ -32,6 +33,7 @@ describe('Modal events', () => {
 
   it.each(['before-close', 'closing', 'after-close'])('emits a %s event when closing', async (eventName) => {
     const wrapper = createWrapper()
+
     await wrapper.setProps({ modelValue: true })
     await waitRAF()
     await wrapper.setProps({ modelValue: false })

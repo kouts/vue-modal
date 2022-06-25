@@ -169,6 +169,7 @@ export default {
         const all = [].slice.call(this.$refs['vm-wrapper'].querySelectorAll(FOCUSABLE_ELEMENTS)).filter(function (el) {
           return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length)
         })
+
         if (e.shiftKey) {
           if (e.target === all[0] || e.target === this.$refs['vm-wrapper']) {
             e.preventDefault()
@@ -192,10 +193,12 @@ export default {
     },
     handleFocus(wrapper) {
       const autofocus = wrapper.querySelector('[autofocus]')
+
       if (autofocus) {
         autofocus.focus()
       } else {
         const focusable = wrapper.querySelectorAll(FOCUSABLE_ELEMENTS)
+
         focusable.length ? focusable[0].focus() : wrapper.focus()
       }
     },
@@ -203,6 +206,7 @@ export default {
       // console.log('beforeOpen');
       this.elToFocus = document.activeElement
       const lastZindex = this.getTopZindex()
+
       if (animatingZIndex) {
         this.zIndex = animatingZIndex + 2
       } else {
@@ -237,10 +241,13 @@ export default {
       this.$nextTick(() => {
         window.requestAnimationFrame(() => {
           const lastZindex = this.getTopZindex()
+
           if (lastZindex > 0) {
             const all = this.getAllVisibleWrappers()
+
             for (let i = 0; i < all.length; i++) {
               const wrapper = all[i]
+
               if (parseInt(wrapper.style.zIndex) === lastZindex) {
                 if (wrapper.contains(this.elToFocus)) {
                   this.elToFocus.focus()

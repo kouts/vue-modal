@@ -1,6 +1,6 @@
-import { mount } from '@vue/test-utils'
-import { waitNT, sleep } from '../utils'
 import Modal from '@/Modal.vue'
+import { mount } from '@vue/test-utils'
+import { sleep, waitNT } from '../utils'
 
 const originalOffsetHeight = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetHeight')
 const originalOffsetWidth = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetWidth')
@@ -61,6 +61,7 @@ const createModalsWrapper = (data) => {
 
 beforeAll(() => {
   const style = document.createElement('style')
+
   style.innerHTML = `
   .vm-fadeIn, .vm-fadeOut {
     animation-duration: 1ms;
@@ -72,6 +73,7 @@ beforeAll(() => {
 describe('Modal features', () => {
   beforeEach(() => {
     const el = document.createElement('div')
+
     el.id = 'modal-host'
     document.body.appendChild(el)
   })
@@ -111,6 +113,7 @@ describe('Modal features', () => {
     await sleep(100)
 
     const textInput = wrapper.getComponent('.modal-1').find('.modal-1 .text-input')
+
     expect(document.activeElement).toEqual(textInput.element)
     wrapper.unmount()
   })
@@ -123,16 +126,19 @@ describe('Modal features', () => {
     await sleep(300)
 
     const modal1 = wrapper.getComponent('.modal-1')
+
     await modal1.find('button.open-modal-2').trigger('click')
 
     await sleep(300)
 
     const modal2 = wrapper.getComponent('.modal-2')
+
     await modal2.find('.modal-2 button.vm-btn-close').trigger('click')
 
     await sleep(300)
 
     const textInput = modal1.find('.modal-1 .text-input')
+
     expect(document.activeElement).toEqual(textInput.element)
     wrapper.unmount()
   })
@@ -145,6 +151,7 @@ describe('Modal features', () => {
     await sleep(100)
 
     const modal1 = wrapper.getComponent('.modal-1')
+
     await modal1.find('button.open-modal-2').trigger('click')
 
     await sleep(100)
@@ -152,11 +159,13 @@ describe('Modal features', () => {
     wrapper.setProps({ showInput: false })
 
     const modal2 = wrapper.getComponent('.modal-2')
+
     await modal2.find('.modal-2 button.vm-btn-close').trigger('click')
 
     await sleep(100)
 
     const closeBtn = modal1.find('.modal-1 button.vm-btn-close')
+
     expect(document.activeElement).toEqual(closeBtn.element)
     wrapper.unmount()
   })
@@ -169,9 +178,11 @@ describe('Modal features', () => {
     await sleep(100)
 
     const modal1 = wrapper.getComponent('.modal-1')
+
     await modal1.trigger('keydown', { keyCode: 9 })
 
     const textInput = modal1.find('.modal-1 .text-input')
+
     expect(document.activeElement).toBe(textInput.element)
     wrapper.unmount()
   })
@@ -184,12 +195,14 @@ describe('Modal features', () => {
     await sleep(100)
 
     const modal1 = wrapper.getComponent('.modal-1')
+
     await modal1.trigger('keydown', {
       keyCode: 9,
       shiftKey: true
     })
 
     const checkboxInput = modal1.find('.modal-1 .checkbox-input')
+
     expect(document.activeElement).toBe(checkboxInput.element)
     wrapper.unmount()
   })
@@ -202,6 +215,7 @@ describe('Modal features', () => {
     await sleep(100)
 
     const modal1 = wrapper.getComponent('.modal-1')
+
     await modal1.trigger('keydown', { keyCode: 27 })
 
     await sleep(100)
@@ -218,6 +232,7 @@ describe('Modal features', () => {
     await sleep(100)
 
     const modal1 = wrapper.getComponent('.modal-1')
+
     await modal1.trigger('click')
 
     await sleep(100)
@@ -239,6 +254,7 @@ describe('Modal features', () => {
 
     const modal1 = wrapper.getComponent('.modal-1')
     const modal1Backdrop = wrapper.getComponent('.vm-backdrop')
+
     await modal1.find('.vm-btn-close').trigger('click')
 
     await sleep(100)
@@ -259,9 +275,11 @@ describe('Modal features', () => {
     await sleep(100)
 
     const modal1 = wrapper.getComponent('.modal-1')
+
     await modal1.find('.modal-1 .checkbox-input').trigger('keydown', { keyCode: 9 })
 
     const closeBtn = modal1.find('.modal-1 button.vm-btn-close')
+
     expect(document.activeElement).toEqual(closeBtn.element)
     wrapper.unmount()
   })
@@ -274,6 +292,7 @@ describe('Modal features', () => {
     await sleep(100)
 
     const modal1 = wrapper.getComponent('.modal-1')
+
     await modal1.find('.modal-1 button.vm-btn-close').trigger('click')
 
     await sleep(100)
@@ -290,6 +309,7 @@ describe('Modal features', () => {
     await sleep(100)
 
     const modal1 = wrapper.getComponent('.modal-1')
+
     await modal1.find('button.open-modal-2').trigger('click')
 
     await sleep(100)
