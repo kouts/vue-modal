@@ -1,5 +1,5 @@
-import { minifyHtml, injectHtml } from 'vite-plugin-html'
 import vue from '@vitejs/plugin-vue'
+import { injectHtml, minifyHtml } from 'vite-plugin-html'
 const path = require('path')
 const { defineConfig } = require('vite')
 
@@ -48,6 +48,7 @@ module.exports = defineConfig({
           if (assetInfo.name === 'style.css') {
             return 'vue-modal.css'
           }
+
           return assetInfo.name
         }
       }
