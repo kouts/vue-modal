@@ -11,13 +11,12 @@ module.exports = {
 
           return contentWithoutStyleBlocks.match(/[A-Za-z0-9-_/:]*[A-Za-z0-9-_/]+/g) || []
         },
-        whitelist: [],
-        whitelistPatterns: [
+        safelist: [
           /-(leave|enter|appear)(|-(to|from|active))$/,
           /^(?!(|.*?:)cursor-move).+-move$/,
           /^router-link(|-exact)-active$/,
           /data-v-.*/,
-          /vm-.*/
+          /^vm(-.*)?$/
         ]
       })
   ]
