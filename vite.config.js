@@ -1,29 +1,31 @@
 import vue from '@vitejs/plugin-vue'
-import { injectHtml, minifyHtml } from 'vite-plugin-html'
-const path = require('path')
-const { defineConfig } = require('vite')
+import { createHtmlPlugin } from 'vite-plugin-html'
+import { defineConfig } from 'vite'
+import { resolve } from 'path'
 
 module.exports = defineConfig({
   plugins: [
     vue(),
-    minifyHtml(),
-    injectHtml({
-      injectData: {
-        title: 'vue-modal playground',
-        description: 'Playground for vue-modal Vue.js 3'
+    createHtmlPlugin({
+      minify: true,
+      inject: {
+        data: {
+          title: 'vue-modal playground',
+          description: 'Playground for vue-modal Vue.js 3'
+        }
       }
     })
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-      '@playground': path.resolve(__dirname, './playground'),
-      '@root': path.resolve(__dirname, './'),
+      '@': resolve(__dirname, './src'),
+      '@playground': resolve(__dirname, './playground'),
+      '@root': resolve(__dirname, './'),
       '~bootstrap': 'bootstrap'
     }
   },
   rollupInputOptions: {
-    input: path.resolve(__dirname, '/playground/main.js') // custom main
+    input: resolve(__dirname, '/playground/main.js') // custom main
   },
   css: {
     preprocessorOptions: {
@@ -34,7 +36,7 @@ module.exports = defineConfig({
   },
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/Modal.vue'),
+      entry: resolve(__dirname, 'src/Modal.vue'),
       name: 'VueModal',
       fileName: (format) => `vue-modal.${format}.js`
     },

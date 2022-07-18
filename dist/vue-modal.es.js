@@ -1,19 +1,15 @@
-import { openBlock, createBlock, Teleport, createVNode, Transition, withCtx, withDirectives, createElementVNode, normalizeClass, normalizeStyle, vShow, renderSlot, toDisplayString, createElementBlock, withModifiers, createCommentVNode } from "vue";
-var Modal_vue_vue_type_style_index_0_lang = /* @__PURE__ */ (() => '.vm-backdrop{position:fixed;top:0;right:0;bottom:0;left:0;background-color:#00000080}.vm-wrapper{position:fixed;top:0;right:0;bottom:0;left:0;overflow-x:hidden;overflow-y:auto;outline:0}.vm{position:relative;margin:0 auto;width:calc(100% - 20px);min-width:110px;max-width:500px;background-color:#fff;top:30px;cursor:default;box-shadow:0 5px 15px #00000080}.vm-titlebar{padding:10px 15px;overflow:auto;border-bottom:1px solid #e5e5e5}.vm-title{margin-top:2px;margin-bottom:0;display:inline-block;font-size:18px;font-weight:400}.vm-btn-close{color:#ccc;padding:0;cursor:pointer;background:0 0;border:0;float:right;font-size:24px;line-height:1em}.vm-btn-close:before{content:"\\d7";font-family:Arial}.vm-btn-close:hover,.vm-btn-close:focus,.vm-btn-close:focus:hover{color:#bbb;border-color:transparent;background-color:transparent}.vm-content{padding:10px 15px 15px}.vm-content .full-hr{width:auto;border:0;border-top:1px solid #e5e5e5;margin:15px -14px}.vm-fadeIn{-webkit-animation-name:vm-fadeIn;animation-name:vm-fadeIn}@keyframes vm-fadeIn{0%{opacity:0}to{opacity:1}}.vm-fadeOut{-webkit-animation-name:vm-fadeOut;animation-name:vm-fadeOut}@keyframes vm-fadeOut{0%{opacity:1}to{opacity:0}}.vm-fadeIn,.vm-fadeOut{-webkit-animation-duration:.25s;animation-duration:.25s;-webkit-animation-fill-mode:both;animation-fill-mode:both}\n')();
-var _export_sfc = (sfc, props) => {
-  const target = sfc.__vccOpts || sfc;
-  for (const [key, val] of props) {
-    target[key] = val;
-  }
-  return target;
-};
-const TYPE_CSS = {
+import { openBlock as h, createBlock as x, Teleport as w, createVNode as m, Transition as b, withCtx as v, withDirectives as p, createElementVNode as o, normalizeClass as c, normalizeStyle as f, vShow as g, renderSlot as u, toDisplayString as _, createElementBlock as k, withModifiers as I, createCommentVNode as y } from "vue";
+const S = (e, s) => {
+  const t = e.__vccOpts || e;
+  for (const [n, l] of s)
+    t[n] = l;
+  return t;
+}, a = {
   type: [String, Object, Array],
   default: ""
-};
-const FOCUSABLE_ELEMENTS = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
-let animatingZIndex = 0;
-const _sfc_main = {
+}, C = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+let d = 0;
+const T = {
   name: "VueModal",
   props: {
     title: {
@@ -24,29 +20,29 @@ const _sfc_main = {
       type: Number,
       default: 1051
     },
-    bgClass: TYPE_CSS,
-    wrapperClass: TYPE_CSS,
-    modalClass: TYPE_CSS,
-    modalStyle: TYPE_CSS,
-    inClass: Object.assign({}, TYPE_CSS, { default: "vm-fadeIn" }),
-    outClass: Object.assign({}, TYPE_CSS, { default: "vm-fadeOut" }),
-    bgInClass: Object.assign({}, TYPE_CSS, { default: "vm-fadeIn" }),
-    bgOutClass: Object.assign({}, TYPE_CSS, { default: "vm-fadeOut" }),
+    bgClass: a,
+    wrapperClass: a,
+    modalClass: a,
+    modalStyle: a,
+    inClass: Object.assign({}, a, { default: "vm-fadeIn" }),
+    outClass: Object.assign({}, a, { default: "vm-fadeOut" }),
+    bgInClass: Object.assign({}, a, { default: "vm-fadeIn" }),
+    bgOutClass: Object.assign({}, a, { default: "vm-fadeOut" }),
     appendTo: {
       type: String,
       default: "body"
     },
     live: {
       type: Boolean,
-      default: false
+      default: !1
     },
     enableClose: {
       type: Boolean,
-      default: true
+      default: !0
     },
     modelValue: {
       type: Boolean,
-      default: false
+      default: !1
     },
     closeLabel: {
       type: String,
@@ -58,29 +54,21 @@ const _sfc_main = {
     return {
       zIndex: 0,
       id: null,
-      show: false,
-      mount: false,
+      show: !1,
+      mount: !1,
       elToFocus: null
     };
   },
   created() {
-    if (this.live) {
-      this.mount = true;
-    }
+    this.live && (this.mount = !0);
   },
   mounted() {
-    this.id = "vm-" + this.$.uid;
-    this.$watch("modelValue", function(newVal) {
-      if (newVal) {
-        this.mount = true;
-        this.$nextTick(() => {
-          this.show = true;
-        });
-      } else {
-        this.show = false;
-      }
+    this.id = "vm-" + this.$.uid, this.$watch("modelValue", function(e) {
+      e ? (this.mount = !0, this.$nextTick(() => {
+        this.show = !0;
+      })) : this.show = !1;
     }, {
-      immediate: true
+      immediate: !0
     });
   },
   beforeUnmount() {
@@ -88,70 +76,44 @@ const _sfc_main = {
   },
   methods: {
     close() {
-      if (this.enableClose === true) {
-        this.$emit("update:modelValue", false);
-      }
+      this.enableClose === !0 && this.$emit("update:modelValue", !1);
     },
     clickOutside(e) {
-      if (e.target === this.$refs["vm-wrapper"]) {
-        this.close();
-      }
+      e.target === this.$refs["vm-wrapper"] && this.close();
     },
     keydown(e) {
-      if (e.which === 27 || e.keyCode === 27) {
-        this.close();
-      }
-      if (e.which === 9 || e.keyCode === 9) {
-        const all = [].slice.call(this.$refs["vm-wrapper"].querySelectorAll(FOCUSABLE_ELEMENTS)).filter(function(el) {
-          return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+      if ((e.which === 27 || e.keyCode === 27) && this.close(), e.which === 9 || e.keyCode === 9) {
+        const s = [].slice.call(this.$refs["vm-wrapper"].querySelectorAll(C)).filter(function(t) {
+          return !!(t.offsetWidth || t.offsetHeight || t.getClientRects().length);
         });
-        if (e.shiftKey) {
-          if (e.target === all[0] || e.target === this.$refs["vm-wrapper"]) {
-            e.preventDefault();
-            all[all.length - 1].focus();
-          }
-        } else {
-          if (e.target === all[all.length - 1]) {
-            e.preventDefault();
-            all[0].focus();
-          }
-        }
+        e.shiftKey ? (e.target === s[0] || e.target === this.$refs["vm-wrapper"]) && (e.preventDefault(), s[s.length - 1].focus()) : e.target === s[s.length - 1] && (e.preventDefault(), s[0].focus());
       }
     },
     getAllVisibleWrappers() {
-      return [].slice.call(document.querySelectorAll("[data-vm-wrapper-id]")).filter((w) => w.display !== "none");
+      return [].slice.call(document.querySelectorAll("[data-vm-wrapper-id]")).filter((e) => e.display !== "none");
     },
     getTopZindex() {
-      return this.getAllVisibleWrappers().reduce((acc, curr) => {
-        return parseInt(curr.style.zIndex) > acc ? parseInt(curr.style.zIndex) : acc;
-      }, 0);
+      return this.getAllVisibleWrappers().reduce((e, s) => parseInt(s.style.zIndex) > e ? parseInt(s.style.zIndex) : e, 0);
     },
-    handleFocus(wrapper) {
-      const autofocus = wrapper.querySelector("[autofocus]");
-      if (autofocus) {
-        autofocus.focus();
-      } else {
-        const focusable = wrapper.querySelectorAll(FOCUSABLE_ELEMENTS);
-        focusable.length ? focusable[0].focus() : wrapper.focus();
+    handleFocus(e) {
+      const s = e.querySelector("[autofocus]");
+      if (s)
+        s.focus();
+      else {
+        const t = e.querySelectorAll(C);
+        t.length ? t[0].focus() : e.focus();
       }
     },
     beforeOpen() {
       this.elToFocus = document.activeElement;
-      const lastZindex = this.getTopZindex();
-      if (animatingZIndex) {
-        this.zIndex = animatingZIndex + 2;
-      } else {
-        this.zIndex = lastZindex === 0 ? this.baseZindex : lastZindex + 2;
-      }
-      animatingZIndex = this.zIndex;
-      this.$emit("before-open");
+      const e = this.getTopZindex();
+      d ? this.zIndex = d + 2 : this.zIndex = e === 0 ? this.baseZindex : e + 2, d = this.zIndex, this.$emit("before-open");
     },
     opening() {
       this.$emit("opening");
     },
     afterOpen() {
-      this.handleFocus(this.$refs["vm-wrapper"]);
-      this.$emit("after-open");
+      this.handleFocus(this.$refs["vm-wrapper"]), this.$emit("after-open");
     },
     beforeClose() {
       this.$emit("before-close");
@@ -160,129 +122,112 @@ const _sfc_main = {
       this.$emit("closing");
     },
     afterClose() {
-      this.zIndex = 0;
-      if (!this.live) {
-        this.mount = false;
-      }
-      this.$nextTick(() => {
+      this.zIndex = 0, this.live || (this.mount = !1), this.$nextTick(() => {
         window.requestAnimationFrame(() => {
-          const lastZindex = this.getTopZindex();
-          if (lastZindex > 0) {
-            const all = this.getAllVisibleWrappers();
-            for (let i = 0; i < all.length; i++) {
-              const wrapper = all[i];
-              if (parseInt(wrapper.style.zIndex) === lastZindex) {
-                if (wrapper.contains(this.elToFocus)) {
-                  this.elToFocus.focus();
-                } else {
-                  this.handleFocus(wrapper);
-                }
+          const e = this.getTopZindex();
+          if (e > 0) {
+            const s = this.getAllVisibleWrappers();
+            for (let t = 0; t < s.length; t++) {
+              const n = s[t];
+              if (parseInt(n.style.zIndex) === e) {
+                n.contains(this.elToFocus) ? this.elToFocus.focus() : this.handleFocus(n);
                 break;
               }
             }
-          } else {
-            if (document.body.contains(this.elToFocus)) {
-              this.elToFocus.focus();
-            }
-          }
-          animatingZIndex = 0;
-          this.$emit("after-close");
+          } else
+            document.body.contains(this.elToFocus) && this.elToFocus.focus();
+          d = 0, this.$emit("after-close");
         });
       });
     }
   }
-};
-const _hoisted_1 = ["data-vm-backdrop-id"];
-const _hoisted_2 = ["data-vm-wrapper-id", "aria-label", "aria-describedby", "aria-labelledby"];
-const _hoisted_3 = ["data-vm-id"];
-const _hoisted_4 = { class: "vm-titlebar" };
-const _hoisted_5 = ["id"];
-const _hoisted_6 = ["aria-label"];
-const _hoisted_7 = ["id"];
-function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return $data.mount ? (openBlock(), createBlock(Teleport, {
+}, O = ["data-vm-backdrop-id"], z = ["data-vm-wrapper-id", "aria-label", "aria-describedby", "aria-labelledby"], E = ["data-vm-id"], A = { class: "vm-titlebar" }, F = ["id"], B = ["aria-label"], V = ["id"];
+function L(e, s, t, n, l, i) {
+  return l.mount ? (h(), x(w, {
     key: 0,
-    to: $props.appendTo
+    to: t.appendTo
   }, [
-    createVNode(Transition, {
+    m(b, {
       name: "vm-backdrop-transition",
-      "enter-active-class": $props.bgInClass,
-      "leave-active-class": $props.bgOutClass
+      "enter-active-class": t.bgInClass,
+      "leave-active-class": t.bgOutClass
     }, {
-      default: withCtx(() => [
-        withDirectives(createElementVNode("div", {
-          "data-vm-backdrop-id": $data.id,
-          class: normalizeClass(["vm-backdrop", $props.bgClass]),
-          style: normalizeStyle({ "z-index": $data.zIndex - 1 })
-        }, null, 14, _hoisted_1), [
-          [vShow, $data.show]
+      default: v(() => [
+        p(o("div", {
+          "data-vm-backdrop-id": l.id,
+          class: c(["vm-backdrop", t.bgClass]),
+          style: f({ "z-index": l.zIndex - 1 })
+        }, null, 14, O), [
+          [g, l.show]
         ])
       ]),
       _: 1
     }, 8, ["enter-active-class", "leave-active-class"]),
-    createVNode(Transition, {
+    m(b, {
       name: "vm-transition",
-      "enter-active-class": $props.inClass,
-      "leave-active-class": $props.outClass,
-      onBeforeEnter: $options.beforeOpen,
-      onEnter: $options.opening,
-      onAfterEnter: $options.afterOpen,
-      onBeforeLeave: $options.beforeClose,
-      onLeave: $options.closing,
-      onAfterLeave: $options.afterClose
+      "enter-active-class": t.inClass,
+      "leave-active-class": t.outClass,
+      onBeforeEnter: i.beforeOpen,
+      onEnter: i.opening,
+      onAfterEnter: i.afterOpen,
+      onBeforeLeave: i.beforeClose,
+      onLeave: i.closing,
+      onAfterLeave: i.afterClose
     }, {
-      default: withCtx(() => [
-        withDirectives(createElementVNode("div", {
+      default: v(() => [
+        p(o("div", {
           ref: "vm-wrapper",
-          "data-vm-wrapper-id": $data.id,
+          "data-vm-wrapper-id": l.id,
           tabindex: "-1",
-          class: normalizeClass(["vm-wrapper", $props.wrapperClass]),
-          style: normalizeStyle({ "z-index": $data.zIndex, cursor: $props.enableClose ? "pointer" : "default" }),
+          class: c(["vm-wrapper", t.wrapperClass]),
+          style: f({ "z-index": l.zIndex, cursor: t.enableClose ? "pointer" : "default" }),
           role: "dialog",
-          "aria-label": $props.title,
+          "aria-label": t.title,
           "aria-modal": "true",
-          "aria-describedby": `${$data.id}-content`,
-          "aria-labelledby": `${$data.id}-title`,
-          onClick: _cache[1] || (_cache[1] = ($event) => $options.clickOutside($event)),
-          onKeydown: _cache[2] || (_cache[2] = ($event) => $options.keydown($event))
+          "aria-describedby": `${l.id}-content`,
+          "aria-labelledby": `${l.id}-title`,
+          onClick: s[1] || (s[1] = (r) => i.clickOutside(r)),
+          onKeydown: s[2] || (s[2] = (r) => i.keydown(r))
         }, [
-          createElementVNode("div", {
+          o("div", {
             ref: "vm",
-            class: normalizeClass(["vm", $props.modalClass]),
-            "data-vm-id": $data.id,
-            style: normalizeStyle($props.modalStyle)
+            class: c(["vm", t.modalClass]),
+            "data-vm-id": l.id,
+            style: f(t.modalStyle)
           }, [
-            renderSlot(_ctx.$slots, "titlebar", {}, () => [
-              createElementVNode("div", _hoisted_4, [
-                createElementVNode("h3", {
-                  id: `${$data.id}-title`,
+            u(e.$slots, "titlebar", {}, () => [
+              o("div", A, [
+                o("h3", {
+                  id: `${l.id}-title`,
                   class: "vm-title"
-                }, toDisplayString($props.title), 9, _hoisted_5),
-                $props.enableClose ? (openBlock(), createElementBlock("button", {
+                }, _(t.title), 9, F),
+                t.enableClose ? (h(), k("button", {
                   key: 0,
                   type: "button",
                   class: "vm-btn-close",
-                  "aria-label": $props.closeLabel,
-                  onClick: _cache[0] || (_cache[0] = withModifiers((...args) => $options.close && $options.close(...args), ["prevent"]))
-                }, null, 8, _hoisted_6)) : createCommentVNode("", true)
+                  "aria-label": t.closeLabel,
+                  onClick: s[0] || (s[0] = I((...r) => i.close && i.close(...r), ["prevent"]))
+                }, null, 8, B)) : y("", !0)
               ])
             ]),
-            renderSlot(_ctx.$slots, "content", {}, () => [
-              createElementVNode("div", {
-                id: `${$data.id}-content`,
+            u(e.$slots, "content", {}, () => [
+              o("div", {
+                id: `${l.id}-content`,
                 class: "vm-content"
               }, [
-                renderSlot(_ctx.$slots, "default")
-              ], 8, _hoisted_7)
+                u(e.$slots, "default")
+              ], 8, V)
             ])
-          ], 14, _hoisted_3)
-        ], 46, _hoisted_2), [
-          [vShow, $data.show]
+          ], 14, E)
+        ], 46, z), [
+          [g, l.show]
         ])
       ]),
       _: 3
     }, 8, ["enter-active-class", "leave-active-class", "onBeforeEnter", "onEnter", "onAfterEnter", "onBeforeLeave", "onLeave", "onAfterLeave"])
-  ], 8, ["to"])) : createCommentVNode("", true);
+  ], 8, ["to"])) : y("", !0);
 }
-var Modal = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render]]);
-export { Modal as default };
+const j = /* @__PURE__ */ S(T, [["render", L]]);
+export {
+  j as default
+};
