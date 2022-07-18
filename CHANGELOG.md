@@ -1,3 +1,11 @@
+## [3.0.5](https://github.com/kouts/vue-modal/compare/v3.0.4...v3.0.5) (2022-07-18)
+
+
+### Bug Fixes
+
+* fixed vuepress build ([a80f404](https://github.com/kouts/vue-modal/commit/a80f40457bdf263c270fb256347171ae698de462))
+* updated npm packages ([4dc896c](https://github.com/kouts/vue-modal/commit/4dc896c8ef6627055826cf723b9d3d1716f0ef4a))
+
 ## [3.0.4](https://github.com/kouts/vue-modal/compare/v3.0.3...v3.0.4) (2022-06-25)
 
 
