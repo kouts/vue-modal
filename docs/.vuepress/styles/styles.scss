@@ -27,7 +27,7 @@ $link-hover-color: lighten($link-color, 15%) !default;
 @import '~bootstrap/scss/_button-group';
 @import '~bootstrap/scss/_input-group';
 */
-@import '~bootstrap/scss/_custom-forms';
+@import 'bootstrap-custom-forms';
 /*
 @import '~bootstrap/scss/_nav';
 @import '~bootstrap/scss/_navbar';
@@ -104,4 +104,13 @@ h1#vue-modal + p + p {
   padding-bottom: 0.75rem;
   background-color: rgba(86, 61, 124, 0.15);
   border: 1px solid rgba(86, 61, 124, 0.2);
+}
+
+/* Fix navbar links */
+.theme-container .navbar a:hover {
+  text-decoration: none;
+}
+
+.theme-container .navbar .navbar-items a:hover {
+  border-bottom: none;
 }

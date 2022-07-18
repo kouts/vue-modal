@@ -1,27 +1,27 @@
 const path = require('path')
 const VueExamplePlugin = require('vuepress-plugin-vue-example')
+const { defaultTheme } = require('vuepress-webpack')
+const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
 
 module.exports = {
   plugins: [
     VueExamplePlugin({
       componentsPath: '/docs/.examples/'
     }),
-    [
-      '@vuepress/docsearch',
-      {
-        apiKey: 'b1beebce60b696f3ab59d523bdc04b94',
-        indexName: 'vue-modal',
-        appId: 'G4DW29QPYK'
-      }
-    ]
+    docsearchPlugin({
+      apiKey: 'b1beebce60b696f3ab59d523bdc04b94',
+      indexName: 'next-vue-dataset',
+      appId: 'G4DW29QPYK'
+    })
   ],
   dest: 'public',
   title: 'vue-modal',
   description: 'A modal plugin for Vue 3',
-  themeConfig: {
+  theme: defaultTheme({
     contributors: false,
     repo: 'https://github.com/kouts/vue-modal/tree/next',
-    darkMode: false,
+    colorMode: 'light',
+    colorModeSwitch: false,
     sidebar: [
       {
         link: '/',
@@ -70,7 +70,7 @@ module.exports = {
         ]
       }
     ]
-  },
+  }),
   head: [
     ['link', { rel: 'shortcut icon', href: '/favicons/favicon.ico' }],
     ['link', { rel: 'apple-touch-icon', sizes: '57x57', href: '/favicons/apple-icon-57x57.png' }],

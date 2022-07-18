@@ -3,7 +3,7 @@ module.exports = {
   coveragePathIgnorePatterns: ['/node_modules/', '/tests/'],
   coverageReporters: ['text', 'json-summary'],
   transform: {
-    '^.+\\.vue$': 'vue-jest'
+    '^.+\\.vue$': '@vue/vue3-jest'
   },
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
