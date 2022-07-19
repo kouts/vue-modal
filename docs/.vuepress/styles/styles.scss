@@ -114,3 +114,8 @@ h1#vue-modal + p + p {
 .theme-container .navbar .navbar-items a:hover {
   border-bottom: none;
 }
+
+/* Fix code blocks */
+code {
+  font-family: inherit;
+}
