@@ -1,3 +1,10 @@
+## [3.0.6](https://github.com/kouts/vue-modal/compare/v3.0.5...v3.0.6) (2022-07-19)
+
+
+### Bug Fixes
+
+* fixed docs site ([295f7e5](https://github.com/kouts/vue-modal/commit/295f7e575e9fb09690111fb680ffa89db2cc75bc))
+
 ## [3.0.5](https://github.com/kouts/vue-modal/compare/v3.0.4...v3.0.5) (2022-07-18)
 
 
