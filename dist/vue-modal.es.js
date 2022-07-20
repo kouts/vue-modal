@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue, { resolveComponent, openBlock, createBlock, withCtx, createVNode, Transition, withDirectives, createElementVNode, normalizeClass, normalizeStyle, vShow, renderSlot, toDisplayString, createElementBlock, withModifiers, createCommentVNode } from 'vue';
 
 // This alphabet uses a-z A-Z 0-9 _- symbols.
 // Symbols are generated for smaller size.
@@ -43,8 +43,6 @@ var nonSecure = function (size) {
   return id
 };
 
-var id = nonSecure;
-
 function _typeof(obj) {
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function (obj) {
@@ -60,7 +58,7 @@ function _typeof(obj) {
 }
 
 var config = {
-  selector: "vue-portal-target-".concat(id())
+  selector: "vue-portal-target-".concat(nonSecure())
 };
 var setSelector = function setSelector(selector) {
   return config.selector = selector;
@@ -206,8 +204,6 @@ if (typeof window !== 'undefined' && window.Vue && window.Vue === Vue) {
   // plugin was inlcuded directly in a browser
   Vue.use(install);
 }
-
-//
 
 var TYPE_CSS = {
   type: [String, Object, Array],
@@ -426,267 +422,118 @@ var script = {
   }
 };
 
-function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
-    if (typeof shadowMode !== 'boolean') {
-        createInjectorSSR = createInjector;
-        createInjector = shadowMode;
-        shadowMode = false;
-    }
-    // Vue.extend constructor export interop.
-    var options = typeof script === 'function' ? script.options : script;
-    // render functions
-    if (template && template.render) {
-        options.render = template.render;
-        options.staticRenderFns = template.staticRenderFns;
-        options._compiled = true;
-        // functional template
-        if (isFunctionalTemplate) {
-            options.functional = true;
-        }
-    }
-    // scopedId
-    if (scopeId) {
-        options._scopeId = scopeId;
-    }
-    var hook;
-    if (moduleIdentifier) {
-        // server build
-        hook = function (context) {
-            // 2.3 injection
-            context =
-                context || // cached call
-                    (this.$vnode && this.$vnode.ssrContext) || // stateful
-                    (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext); // functional
-            // 2.2 with runInNewContext: true
-            if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-                context = __VUE_SSR_CONTEXT__;
-            }
-            // inject component styles
-            if (style) {
-                style.call(this, createInjectorSSR(context));
-            }
-            // register component module identifier for async chunk inference
-            if (context && context._registeredComponents) {
-                context._registeredComponents.add(moduleIdentifier);
-            }
-        };
-        // used by ssr in case component is cached and beforeCreate
-        // never gets called
-        options._ssrRegister = hook;
-    }
-    else if (style) {
-        hook = shadowMode
-            ? function (context) {
-                style.call(this, createInjectorShadow(context, this.$root.$options.shadowRoot));
-            }
-            : function (context) {
-                style.call(this, createInjector(context));
-            };
-    }
-    if (hook) {
-        if (options.functional) {
-            // register for functional component in vue file
-            var originalRender = options.render;
-            options.render = function renderWithStyleInjection(h, context) {
-                hook.call(context);
-                return originalRender(h, context);
-            };
-        }
-        else {
-            // inject component registration as beforeCreate hook
-            var existing = options.beforeCreate;
-            options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
-        }
-    }
-    return script;
+var _hoisted_1 = ["data-vm-backdrop-id"];
+var _hoisted_2 = ["data-vm-wrapper-id", "aria-label", "aria-describedby", "aria-labelledby"];
+var _hoisted_3 = ["data-vm-id"];
+var _hoisted_4 = { class: "vm-titlebar" };
+var _hoisted_5 = ["id"];
+var _hoisted_6 = ["aria-label"];
+var _hoisted_7 = ["id"];
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_portal = resolveComponent("portal");
+
+  return ($data.mount)
+    ? (openBlock(), createBlock(_component_portal, {
+        key: 0,
+        selector: $props.appendTo
+      }, {
+        default: withCtx(function () { return [
+          createVNode(Transition, {
+            name: "vm-backdrop-transition",
+            "enter-active-class": $props.bgInClass,
+            "leave-active-class": $props.bgOutClass,
+            persisted: ""
+          }, {
+            default: withCtx(function () { return [
+              withDirectives(createElementVNode("div", {
+                "data-vm-backdrop-id": $data.id,
+                class: normalizeClass(["vm-backdrop", $props.bgClass]),
+                style: normalizeStyle({ 'z-index': $data.zIndex - 1 })
+              }, null, 14 /* CLASS, STYLE, PROPS */, _hoisted_1), [
+                [vShow, $data.show]
+              ])
+            ]; }),
+            _: 1 /* STABLE */
+          }, 8 /* PROPS */, ["enter-active-class", "leave-active-class"]),
+          createVNode(Transition, {
+            name: "vm-transition",
+            "enter-active-class": $props.inClass,
+            "leave-active-class": $props.outClass,
+            onBeforeEnter: $options.beforeOpen,
+            onEnter: $options.opening,
+            onAfterEnter: $options.afterOpen,
+            onBeforeLeave: $options.beforeClose,
+            onLeave: $options.closing,
+            onAfterLeave: $options.afterClose,
+            persisted: ""
+          }, {
+            default: withCtx(function () { return [
+              withDirectives(createElementVNode("div", {
+                ref: "vm-wrapper",
+                "data-vm-wrapper-id": $data.id,
+                tabindex: "-1",
+                class: normalizeClass(["vm-wrapper", $props.wrapperClass]),
+                style: normalizeStyle({ 'z-index': $data.zIndex, cursor: $props.enableClose ? 'pointer' : 'default' }),
+                role: "dialog",
+                "aria-label": $props.title,
+                "aria-modal": "true",
+                "aria-describedby": (($data.id) + "-content"),
+                "aria-labelledby": (($data.id) + "-title"),
+                onClick: _cache[1] || (_cache[1] = function ($event) { return ($options.clickOutside($event)); }),
+                onKeydown: _cache[2] || (_cache[2] = function ($event) { return ($options.keydown($event)); })
+              }, [
+                createElementVNode("div", {
+                  ref: "vm",
+                  class: normalizeClass(["vm", $props.modalClass]),
+                  "data-vm-id": $data.id,
+                  style: normalizeStyle($props.modalStyle)
+                }, [
+                  renderSlot(_ctx.$slots, "titlebar", {}, function () { return [
+                    createElementVNode("div", _hoisted_4, [
+                      createElementVNode("h3", {
+                        id: (($data.id) + "-title"),
+                        class: "vm-title"
+                      }, toDisplayString($props.title), 9 /* TEXT, PROPS */, _hoisted_5),
+                      ($props.enableClose)
+                        ? (openBlock(), createElementBlock("button", {
+                            key: 0,
+                            type: "button",
+                            class: "vm-btn-close",
+                            "aria-label": $props.closeLabel,
+                            onClick: _cache[0] || (_cache[0] = withModifiers(function () {
+                              var args = [], len = arguments.length;
+                              while ( len-- ) args[ len ] = arguments[ len ];
+
+                              return ($options.close && $options.close.apply($options, args));
+                    }, ["prevent"]))
+                          }, null, 8 /* PROPS */, _hoisted_6))
+                        : createCommentVNode("v-if", true)
+                    ])
+                  ]; }),
+                  renderSlot(_ctx.$slots, "content", {}, function () { return [
+                    createElementVNode("div", {
+                      id: (($data.id) + "-content"),
+                      class: "vm-content"
+                    }, [
+                      renderSlot(_ctx.$slots, "default")
+                    ], 8 /* PROPS */, _hoisted_7)
+                  ]; })
+                ], 14 /* CLASS, STYLE, PROPS */, _hoisted_3)
+              ], 46 /* CLASS, STYLE, PROPS, HYDRATE_EVENTS */, _hoisted_2), [
+                [vShow, $data.show]
+              ])
+            ]; }),
+            _: 3 /* FORWARDED */
+          }, 8 /* PROPS */, ["enter-active-class", "leave-active-class", "onBeforeEnter", "onEnter", "onAfterEnter", "onBeforeLeave", "onLeave", "onAfterLeave"])
+        ]; }),
+        _: 3 /* FORWARDED */
+      }, 8 /* PROPS */, ["selector"]))
+    : createCommentVNode("v-if", true)
 }
 
-/* script */
-var __vue_script__ = script;
-/* template */
-var __vue_render__ = function () {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _vm.mount
-    ? _c(
-        "portal",
-        { attrs: { selector: _vm.appendTo } },
-        [
-          _c(
-            "transition",
-            {
-              attrs: {
-                name: "vm-backdrop-transition",
-                "enter-active-class": _vm.bgInClass,
-                "leave-active-class": _vm.bgOutClass,
-              },
-            },
-            [
-              _c("div", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.show,
-                    expression: "show",
-                  } ],
-                staticClass: "vm-backdrop",
-                class: _vm.bgClass,
-                style: { "z-index": _vm.zIndex - 1 },
-                attrs: { "data-vm-backdrop-id": _vm.id },
-              }) ]
-          ),
-          _vm._v(" "),
-          _c(
-            "transition",
-            {
-              attrs: {
-                name: "vm-transition",
-                "enter-active-class": _vm.inClass,
-                "leave-active-class": _vm.outClass,
-              },
-              on: {
-                "before-enter": _vm.beforeOpen,
-                enter: _vm.opening,
-                "after-enter": _vm.afterOpen,
-                "before-leave": _vm.beforeClose,
-                leave: _vm.closing,
-                "after-leave": _vm.afterClose,
-              },
-            },
-            [
-              _c(
-                "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.show,
-                      expression: "show",
-                    } ],
-                  ref: "vm-wrapper",
-                  staticClass: "vm-wrapper",
-                  class: _vm.wrapperClass,
-                  style: {
-                    "z-index": _vm.zIndex,
-                    cursor: _vm.enableClose ? "pointer" : "default",
-                  },
-                  attrs: {
-                    "data-vm-wrapper-id": _vm.id,
-                    tabindex: "-1",
-                    role: "dialog",
-                    "aria-label": _vm.title,
-                    "aria-modal": "true",
-                    "aria-describedby": _vm.id + "-content",
-                    "aria-labelledby": _vm.id + "-title",
-                  },
-                  on: {
-                    click: function ($event) {
-                      return _vm.clickOutside($event)
-                    },
-                    keydown: function ($event) {
-                      return _vm.keydown($event)
-                    },
-                  },
-                },
-                [
-                  _c(
-                    "div",
-                    {
-                      ref: "vm",
-                      staticClass: "vm",
-                      class: _vm.modalClass,
-                      style: _vm.modalStyle,
-                      attrs: { "data-vm-id": _vm.id },
-                    },
-                    [
-                      _vm._t("titlebar", function () {
-                        return [
-                          _c("div", { staticClass: "vm-titlebar" }, [
-                            _c(
-                              "h3",
-                              {
-                                staticClass: "vm-title",
-                                attrs: { id: _vm.id + "-title" },
-                              },
-                              [
-                                _vm._v(
-                                  "\n              " +
-                                    _vm._s(_vm.title) +
-                                    "\n            "
-                                ) ]
-                            ),
-                            _vm._v(" "),
-                            _vm.enableClose
-                              ? _c("button", {
-                                  staticClass: "vm-btn-close",
-                                  attrs: {
-                                    type: "button",
-                                    "aria-label": _vm.closeLabel,
-                                  },
-                                  on: {
-                                    click: function ($event) {
-                                      $event.preventDefault();
-                                      return _vm.close.apply(null, arguments)
-                                    },
-                                  },
-                                })
-                              : _vm._e() ]) ]
-                      }),
-                      _vm._v(" "),
-                      _vm._t("content", function () {
-                        return [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "vm-content",
-                              attrs: { id: _vm.id + "-content" },
-                            },
-                            [_vm._t("default")],
-                            2
-                          ) ]
-                      }) ],
-                    2
-                  ) ]
-              ) ]
-          ) ],
-        1
-      )
-    : _vm._e()
-};
-var __vue_staticRenderFns__ = [];
-__vue_render__._withStripped = true;
+script.render = render;
+script.__file = "src/Modal.vue";
 
-  /* style */
-  var __vue_inject_styles__ = undefined;
-  /* scoped */
-  var __vue_scope_id__ = undefined;
-  /* module identifier */
-  var __vue_module_identifier__ = undefined;
-  /* functional template */
-  var __vue_is_functional_template__ = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-  /* style inject shadow dom */
-  
-
-  
-  var __vue_component__ = /*#__PURE__*/normalizeComponent(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
-    false,
-    undefined,
-    undefined,
-    undefined
-  );
-
-export { __vue_component__ as default };
+export { script as default };
 //# sourceMappingURL=vue-modal.es.js.map
