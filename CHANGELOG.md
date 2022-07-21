@@ -1,3 +1,14 @@
+## [2.1.9](https://github.com/kouts/vue-modal/compare/v2.1.8...v2.1.9) (2022-07-21)
+
+
+### Bug Fixes
+
+* fixed docs build and umd test ([440e868](https://github.com/kouts/vue-modal/commit/440e86800ab4853182ddf75b7a08d0939263c3de))
+* simplified rollup build ([13176ed](https://github.com/kouts/vue-modal/commit/13176eda175ab135081a08c4c7c1e77eb2617e27))
+* updated npm packages ([f3f8311](https://github.com/kouts/vue-modal/commit/f3f83115927d0ca1b1ad59e102fac3e03cd88295))
+* updated package-lock and release action ([d026533](https://github.com/kouts/vue-modal/commit/d02653375440e5962dc4a18eaec2976aba2ef8be))
+* updated release action ([7274f25](https://github.com/kouts/vue-modal/commit/7274f25cb9f0664e59c8410a34e62f7dc64a3c2c))
+
 ## [2.1.8](https://github.com/kouts/vue-modal/compare/v2.1.7...v2.1.8) (2022-06-16)
 
 
