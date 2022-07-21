@@ -16,6 +16,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
+      - name: npm 8
+        run: npm i -g npm@8.14.0 --registry=https://registry.npmjs.org
       - name: Install dependencies
         run: npx ci
       - name: Install semantic-release extra plugins
