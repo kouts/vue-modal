@@ -2,8 +2,8 @@ import buble from '@rollup/plugin-buble'
 import commonjs from '@rollup/plugin-commonjs'
 import css from 'rollup-plugin-css-only'
 import vue from 'rollup-plugin-vue'
+import { minify } from 'csso'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
-import { renderSync } from 'node-sass'
 import { terser } from 'rollup-plugin-terser'
 import { writeFileSync } from 'fs'
 
@@ -14,13 +14,10 @@ const createPlugins = () => [
   }),
   commonjs(),
   css({
-    output: function (styles, styleNodes) {
-      const res = renderSync({
-        data: styles,
-        outputStyle: 'compressed'
-      })
+    output(styles, styleNodes) {
+      const minifiedCss = minify(styles).css
 
-      writeFileSync('dist/vue-modal.css', res.css)
+      writeFileSync('dist/vue-modal.css', minifiedCss)
     }
   }),
   buble()

@@ -7,8 +7,6 @@ module.exports = {
     })
   ],
   dest: 'public',
-  // base: '/vue-modal/demo/',
-  // base: '/demo/',
   title: 'vue-modal',
   description: 'A modal plugin for Vue',
   themeConfig: {
@@ -55,8 +53,5 @@ module.exports = {
     ['script', { src: 'https://polyfill.io/v3/polyfill.min.js?features=Promise' }],
     ['script', { src: 'https://polyfill.io/v3/polyfill.min.js?features=NodeList.prototype.forEach' }],
     ['script', { src: 'https://polyfill.io/v3/polyfill.min.js?features=Object.assign' }]
-  ],
-  chainWebpack: (config, isServer) => {
-    config.resolve.alias.set('vue', 'vue/dist/vue.esm.js')
-  }
+  ]
 }
