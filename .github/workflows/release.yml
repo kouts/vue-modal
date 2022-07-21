@@ -38,9 +38,6 @@ jobs:
       - name: Run tests 🧪
         run: npm run test:unit-coverage --if-present
 
-      - name: Run typechecking ✅
-        run: yarn typecheck
-
       - name: Build
         run: npm run build
 
