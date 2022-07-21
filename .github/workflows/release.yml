@@ -27,7 +27,7 @@ jobs:
           check-latest: true
 
       - name: Install dependencies 📦
-        run: run: npx ci
+        run: npx ci
 
       - name: Install semantic-release extra plugins 📦
         run: npm install --save-dev @semantic-release/changelog @semantic-release/git
