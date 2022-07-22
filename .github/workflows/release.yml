@@ -2,8 +2,7 @@ name: release-master
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
 
 jobs:
   ci:
@@ -12,16 +11,16 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [16.16.0]
+        node: [16]
 
     steps:
       - name: Checkout 🛎
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
 
       - name: Setup node env 🏗
-        uses: actions/setup-node@v2.5.1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
           check-latest: true
