@@ -22,3 +22,4 @@ yarn-error.log*
 
 # Do not ignore
 !/docs/.vuepress/public/
+!/playground/public/
