@@ -14,6 +14,7 @@
   "main": "dist/vue-modal.umd.min.js",
   "module": "dist/vue-modal.es.js",
   "scripts": {
+    "playground": "vue-cli-service serve",
     "test:unit": "vue-cli-service test:unit",
     "test:unit-coverage": "vue-cli-service test:unit --coverage && make-coverage-badge",
     "watch": "vuepress dev docs",
