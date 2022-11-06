@@ -1,8 +1,5 @@
 ## NPM packages version information
 
-- `"vue": "^2.6.14"`  
-  Needed for IE11 compatibility
-
 - `@linusborg/vue-simple-portal 0.1.4 → 0.1.5`  
   `vue-simple-portal 0.1.5` drops compatibility for IE11
 
@@ -10,9 +7,6 @@
   `@vue/cli-plugin-unit-jest ^4.5.19 → ^5.0.8`  
   `@vue/cli-service ^4.5.19 → ^5.0.8`  
    Webpack 4 is needed for Vuepress 1 compatibility
-
-- `"sass": "^1.56.0",`  
-  Needed for Webpack 4 / Vuepress 1 compatibility
 
 - `@vue/test-utils ^1.3.3 → ^2.2.1`  
   Needed for Webpack 4 / Vuepress 1 compatibility
