@@ -1,3 +1,10 @@
+## [3.0.8](https://github.com/kouts/vue-modal/compare/v3.0.7...v3.0.8) (2022-11-06)
+
+
+### Bug Fixes
+
+* updated eslint config and npm packages ([ecf0500](https://github.com/kouts/vue-modal/commit/ecf050066186b4df53830086701b110e9f7a7a33))
+
 ## [3.0.7](https://github.com/kouts/vue-modal/compare/v3.0.6...v3.0.7) (2022-07-23)
 
 

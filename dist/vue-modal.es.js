@@ -63,13 +63,17 @@ const T = {
     this.live && (this.mount = !0);
   },
   mounted() {
-    this.id = "vm-" + this.$.uid, this.$watch("modelValue", function(e) {
-      e ? (this.mount = !0, this.$nextTick(() => {
-        this.show = !0;
-      })) : this.show = !1;
-    }, {
-      immediate: !0
-    });
+    this.id = "vm-" + this.$.uid, this.$watch(
+      "modelValue",
+      function(e) {
+        e ? (this.mount = !0, this.$nextTick(() => {
+          this.show = !0;
+        })) : this.show = !1;
+      },
+      {
+        immediate: !0
+      }
+    );
   },
   beforeUnmount() {
     this.elToFocus = null;
