@@ -1,10 +1,10 @@
 import buble from '@rollup/plugin-buble'
 import commonjs from '@rollup/plugin-commonjs'
 import css from 'rollup-plugin-css-only'
+import terser from '@rollup/plugin-terser'
 import vue from 'rollup-plugin-vue'
 import { minify } from 'csso'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
-import { terser } from 'rollup-plugin-terser'
 import { writeFileSync } from 'fs'
 
 const createPlugins = () => [

@@ -43,6 +43,8 @@ var nonSecure = function (size) {
   return id
 };
 
+var id = nonSecure;
+
 function _typeof(obj) {
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function (obj) {
@@ -58,7 +60,7 @@ function _typeof(obj) {
 }
 
 var config = {
-  selector: "vue-portal-target-".concat(nonSecure())
+  selector: "vue-portal-target-".concat(id())
 };
 var setSelector = function setSelector(selector) {
   return config.selector = selector;
