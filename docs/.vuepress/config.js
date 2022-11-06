@@ -9,8 +9,8 @@ module.exports = {
       componentsPath: '/docs/.examples/'
     }),
     docsearchPlugin({
-      apiKey: 'b1beebce60b696f3ab59d523bdc04b94',
-      indexName: 'next-vue-dataset',
+      apiKey: 'cf43591b3240a37c852e5fc1ead88efb',
+      indexName: 'vue-modal',
       appId: 'G4DW29QPYK'
     })
   ],
