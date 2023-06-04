@@ -1,11 +1,14 @@
-const path = require('path')
-const VueExamplePlugin = require('vuepress-plugin-vue-example')
-const { defaultTheme } = require('vuepress-webpack')
-const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
+import * as path from 'path'
+import * as url from 'url'
+import { defaultTheme, defineUserConfig } from 'vuepress-webpack'
+import { docsearchPlugin } from '@vuepress/plugin-docsearch'
+import { vueExamplePlugin } from 'vuepress-plugin-vue-example'
 
-module.exports = {
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
+
+export default defineUserConfig({
   plugins: [
-    VueExamplePlugin({
+    vueExamplePlugin({
       componentsPath: '/docs/.examples/'
     }),
     docsearchPlugin({
@@ -96,4 +99,4 @@ module.exports = {
     '@playground': path.resolve(__dirname, '../../playground'),
     '@root': path.resolve(__dirname, '../../')
   }
-}
+})
