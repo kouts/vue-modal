@@ -1,6 +1,6 @@
 import App from './App.vue'
 import Default from './layouts/default/Default.vue'
-import Modal, { modalPlugin } from '@/index'
+import { Modal, modalPlugin } from '@/index'
 import { createApp } from 'vue'
 import { router } from './router'
 import { store } from './store'

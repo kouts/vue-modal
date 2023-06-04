@@ -37,14 +37,13 @@ module.exports = defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/Modal.vue'),
+      entry: resolve(__dirname, 'src/index.js'),
       name: 'VueModal',
       fileName: (format) => `vue-modal.${format}.js`
     },
     rollupOptions: {
       external: ['vue'],
       output: {
-        preserveModules: true,
         globals: {
           vue: 'Vue'
         },
