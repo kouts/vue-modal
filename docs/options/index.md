@@ -4,16 +4,19 @@ Pass a `Boolean` value to the `v-model` directive to show and hide the modal win
 
 ## Plugin API
 
-The Plugin API can be called within any component through:
+In order to use the Plugin API you need to import and register the `modalPlugin`.  
+The Plugin API exposes `show`/`hide` functions that can be called within any component to show and hide the modal window with the given name.
+
+The functions are available through:
 
 - `useModal` in Composition API
 - `this.$modal` in Options API
 
-and exposes 3 functions:
+### Functions
 
-- **`show(name)`** - Shows the modal with the given name
-- **`hide(name)`** - Hides the modal with the given name
-- **`hideAll()`** - Hides all modals
+**`show(name)`** - Shows the modal with the given name  
+**`hide(name)`** - Hides the modal with the given name  
+**`hideAll()`** - Hides all modals
 
 ## Props
 

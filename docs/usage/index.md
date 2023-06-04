@@ -11,7 +11,7 @@ To control the visibility of the modal with `v-model`, you need to pass a `Boole
 
 ```vue
 <template>
-  <!-- Setting `showModal` to true, displays the modal -->
+  <!-- Set the `showModal` to true to display the modal -->
   <button type="button" @click="showModal = true">Open a modal</button>
 
   <Modal v-model="showModal" title="My first modal">
@@ -19,24 +19,16 @@ To control the visibility of the modal with `v-model`, you need to pass a `Boole
   </Modal>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue'
 // You can skip the import if you've registered the component globally
 import { Modal } from '@kouts/vue-modal'
 
-export default {
-  components: {
-    Modal
-  },
-  data() {
-    return {
-      showModal: false
-    }
-  }
-}
+const showModal = ref(false)
 </script>
 ```
 
-**Example:**
+**Result:**
 
 <Example1 />
 
@@ -54,7 +46,7 @@ const app = Vue.createApp({...})
 app.use(modalPlugin)
 ```
 
-To control the visibility of the modal with the mane `prop` you use the and `show`/`hide` functions.
+To control the visibility of the modal with the name `prop` you use the and `show`/`hide` functions.
 
 **Composition API**
 
