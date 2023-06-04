@@ -1,17 +1,21 @@
-import { openBlock as h, createBlock as x, Teleport as w, createVNode as m, Transition as b, withCtx as v, withDirectives as p, createElementVNode as o, normalizeClass as c, normalizeStyle as f, vShow as g, renderSlot as u, toDisplayString as _, createElementBlock as k, withModifiers as I, createCommentVNode as y } from "vue";
-const S = (e, s) => {
+import { openBlock as m, createBlock as x, Teleport as _, createVNode as b, Transition as v, withCtx as g, withDirectives as p, createElementVNode as n, normalizeClass as u, normalizeStyle as f, vShow as y, renderSlot as h, toDisplayString as k, createElementBlock as S, withModifiers as T, createCommentVNode as C, reactive as I } from "vue";
+const O = (e, s) => {
   const t = e.__vccOpts || e;
-  for (const [n, l] of s)
-    t[n] = l;
+  for (const [i, l] of s)
+    t[i] = l;
   return t;
-}, a = {
+}, o = {
   type: [String, Object, Array],
   default: ""
-}, C = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+}, w = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 let d = 0;
-const T = {
+const A = {
   name: "VueModal",
   props: {
+    name: {
+      type: String,
+      default: ""
+    },
     title: {
       type: String,
       default: ""
@@ -20,14 +24,14 @@ const T = {
       type: Number,
       default: 1051
     },
-    bgClass: a,
-    wrapperClass: a,
-    modalClass: a,
-    modalStyle: a,
-    inClass: Object.assign({}, a, { default: "vm-fadeIn" }),
-    outClass: Object.assign({}, a, { default: "vm-fadeOut" }),
-    bgInClass: Object.assign({}, a, { default: "vm-fadeIn" }),
-    bgOutClass: Object.assign({}, a, { default: "vm-fadeOut" }),
+    bgClass: o,
+    wrapperClass: o,
+    modalClass: o,
+    modalStyle: o,
+    inClass: Object.assign({}, o, { default: "vm-fadeIn" }),
+    outClass: Object.assign({}, o, { default: "vm-fadeOut" }),
+    bgInClass: Object.assign({}, o, { default: "vm-fadeIn" }),
+    bgOutClass: Object.assign({}, o, { default: "vm-fadeOut" }),
     appendTo: {
       type: String,
       default: "body"
@@ -63,9 +67,9 @@ const T = {
     this.live && (this.mount = !0);
   },
   mounted() {
-    this.id = "vm-" + this.$.uid, this.$watch(
+    this.id = "vm-" + this.$.uid, this.name || this.$watch(
       "modelValue",
-      function(e) {
+      (e) => {
         e ? (this.mount = !0, this.$nextTick(() => {
           this.show = !0;
         })) : this.show = !1;
@@ -73,21 +77,31 @@ const T = {
       {
         immediate: !0
       }
+    ), this.name && this.$modal && this.$watch(
+      "$modal.state.modals",
+      (e) => {
+        e[this.name] ? (this.mount = !0, this.$nextTick(() => {
+          this.show = !0;
+        })) : this.show = !1;
+      },
+      {
+        deep: !0
+      }
     );
   },
   beforeUnmount() {
-    this.elToFocus = null;
+    this.elToFocus = null, this.name && this.$modal.hide(this.name);
   },
   methods: {
     close() {
-      this.enableClose === !0 && this.$emit("update:modelValue", !1);
+      this.enableClose === !0 && (this.$emit("update:modelValue", !1), this.name && this.$modal.hide(this.name));
     },
     clickOutside(e) {
       e.target === this.$refs["vm-wrapper"] && this.close();
     },
     keydown(e) {
       if ((e.which === 27 || e.keyCode === 27) && this.close(), e.which === 9 || e.keyCode === 9) {
-        const s = [].slice.call(this.$refs["vm-wrapper"].querySelectorAll(C)).filter(function(t) {
+        const s = [].slice.call(this.$refs["vm-wrapper"].querySelectorAll(w)).filter(function(t) {
           return !!(t.offsetWidth || t.offsetHeight || t.getClientRects().length);
         });
         e.shiftKey ? (e.target === s[0] || e.target === this.$refs["vm-wrapper"]) && (e.preventDefault(), s[s.length - 1].focus()) : e.target === s[s.length - 1] && (e.preventDefault(), s[0].focus());
@@ -104,7 +118,7 @@ const T = {
       if (s)
         s.focus();
       else {
-        const t = e.querySelectorAll(C);
+        const t = e.querySelectorAll(w);
         t.length ? t[0].focus() : e.focus();
       }
     },
@@ -132,9 +146,9 @@ const T = {
           if (e > 0) {
             const s = this.getAllVisibleWrappers();
             for (let t = 0; t < s.length; t++) {
-              const n = s[t];
-              if (parseInt(n.style.zIndex) === e) {
-                n.contains(this.elToFocus) ? this.elToFocus.focus() : this.handleFocus(n);
+              const i = s[t];
+              if (parseInt(i.style.zIndex) === e) {
+                i.contains(this.elToFocus) ? this.elToFocus.focus() : this.handleFocus(i);
                 break;
               }
             }
@@ -145,93 +159,112 @@ const T = {
       });
     }
   }
-}, O = ["data-vm-backdrop-id"], z = ["data-vm-wrapper-id", "aria-label", "aria-describedby", "aria-labelledby"], E = ["data-vm-id"], A = { class: "vm-titlebar" }, F = ["id"], B = ["aria-label"], V = ["id"];
-function L(e, s, t, n, l, i) {
-  return l.mount ? (h(), x(w, {
+}, E = ["data-vm-backdrop-id"], z = ["data-vm-wrapper-id", "aria-label", "aria-describedby", "aria-labelledby"], F = ["data-vm-id"], B = { class: "vm-titlebar" }, V = ["id"], L = ["aria-label"], Z = ["id"];
+function j(e, s, t, i, l, a) {
+  return l.mount ? (m(), x(_, {
     key: 0,
     to: t.appendTo
   }, [
-    m(b, {
+    b(v, {
       name: "vm-backdrop-transition",
       "enter-active-class": t.bgInClass,
       "leave-active-class": t.bgOutClass
     }, {
-      default: v(() => [
-        p(o("div", {
+      default: g(() => [
+        p(n("div", {
           "data-vm-backdrop-id": l.id,
-          class: c(["vm-backdrop", t.bgClass]),
+          class: u(["vm-backdrop", t.bgClass]),
           style: f({ "z-index": l.zIndex - 1 })
-        }, null, 14, O), [
-          [g, l.show]
+        }, null, 14, E), [
+          [y, l.show]
         ])
       ]),
       _: 1
     }, 8, ["enter-active-class", "leave-active-class"]),
-    m(b, {
+    b(v, {
       name: "vm-transition",
       "enter-active-class": t.inClass,
       "leave-active-class": t.outClass,
-      onBeforeEnter: i.beforeOpen,
-      onEnter: i.opening,
-      onAfterEnter: i.afterOpen,
-      onBeforeLeave: i.beforeClose,
-      onLeave: i.closing,
-      onAfterLeave: i.afterClose
+      onBeforeEnter: a.beforeOpen,
+      onEnter: a.opening,
+      onAfterEnter: a.afterOpen,
+      onBeforeLeave: a.beforeClose,
+      onLeave: a.closing,
+      onAfterLeave: a.afterClose
     }, {
-      default: v(() => [
-        p(o("div", {
+      default: g(() => [
+        p(n("div", {
           ref: "vm-wrapper",
           "data-vm-wrapper-id": l.id,
           tabindex: "-1",
-          class: c(["vm-wrapper", t.wrapperClass]),
+          class: u(["vm-wrapper", t.wrapperClass]),
           style: f({ "z-index": l.zIndex, cursor: t.enableClose ? "pointer" : "default" }),
           role: "dialog",
           "aria-label": t.title,
           "aria-modal": "true",
           "aria-describedby": `${l.id}-content`,
           "aria-labelledby": `${l.id}-title`,
-          onClick: s[1] || (s[1] = (r) => i.clickOutside(r)),
-          onKeydown: s[2] || (s[2] = (r) => i.keydown(r))
+          onClick: s[1] || (s[1] = (r) => a.clickOutside(r)),
+          onKeydown: s[2] || (s[2] = (r) => a.keydown(r))
         }, [
-          o("div", {
+          n("div", {
             ref: "vm",
-            class: c(["vm", t.modalClass]),
+            class: u(["vm", t.modalClass]),
             "data-vm-id": l.id,
             style: f(t.modalStyle)
           }, [
-            u(e.$slots, "titlebar", {}, () => [
-              o("div", A, [
-                o("h3", {
+            h(e.$slots, "titlebar", {}, () => [
+              n("div", B, [
+                n("h3", {
                   id: `${l.id}-title`,
                   class: "vm-title"
-                }, _(t.title), 9, F),
-                t.enableClose ? (h(), k("button", {
+                }, k(t.title), 9, V),
+                t.enableClose ? (m(), S("button", {
                   key: 0,
                   type: "button",
                   class: "vm-btn-close",
                   "aria-label": t.closeLabel,
-                  onClick: s[0] || (s[0] = I((...r) => i.close && i.close(...r), ["prevent"]))
-                }, null, 8, B)) : y("", !0)
+                  onClick: s[0] || (s[0] = T((...r) => a.close && a.close(...r), ["prevent"]))
+                }, null, 8, L)) : C("", !0)
               ])
             ]),
-            u(e.$slots, "content", {}, () => [
-              o("div", {
+            h(e.$slots, "content", {}, () => [
+              n("div", {
                 id: `${l.id}-content`,
                 class: "vm-content"
               }, [
-                u(e.$slots, "default")
-              ], 8, V)
+                h(e.$slots, "default")
+              ], 8, Z)
             ])
-          ], 14, E)
+          ], 14, F)
         ], 46, z), [
-          [g, l.show]
+          [y, l.show]
         ])
       ]),
       _: 3
     }, 8, ["enter-active-class", "leave-active-class", "onBeforeEnter", "onEnter", "onAfterEnter", "onBeforeLeave", "onLeave", "onAfterLeave"])
-  ], 8, ["to"])) : y("", !0);
+  ], 8, ["to"])) : C("", !0);
 }
-const j = /* @__PURE__ */ S(T, [["render", L]]);
+const N = /* @__PURE__ */ O(A, [["render", j]]), c = I({
+  modals: {}
+}), M = () => {
+  const e = (i) => {
+    c.modals[i] = !0;
+  }, s = (i) => {
+    delete c.modals[i];
+  };
+  return { state: c, show: e, hide: s, hideAll: () => {
+    Object.keys(c.modals).forEach((i) => {
+      s(i);
+    });
+  } };
+}, D = {
+  install(e) {
+    e.config.globalProperties.$modal = M();
+  }
+};
 export {
-  j as default
+  N as Modal,
+  D as modalPlugin,
+  M as useModal
 };
