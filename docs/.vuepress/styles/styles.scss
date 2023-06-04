@@ -6,7 +6,6 @@ $link-hover-color: lighten($link-color, 15%) !default;
 @import '~bootstrap/scss/_functions';
 @import '~bootstrap/scss/_variables';
 
-
 @import '~bootstrap/scss/_mixins';
 @import '~bootstrap/scss/_root';
 @import '~bootstrap/scss/_reboot';
@@ -27,7 +26,7 @@ $link-hover-color: lighten($link-color, 15%) !default;
 @import '~bootstrap/scss/_button-group';
 @import '~bootstrap/scss/_input-group';
 */
-@import '~bootstrap/scss/_bootstrap-custom-forms';
+@import '~bootstrap/scss/_custom-forms';
 /*
 @import '~bootstrap/scss/_nav';
 @import '~bootstrap/scss/_navbar';
@@ -56,11 +55,68 @@ $link-hover-color: lighten($link-color, 15%) !default;
 */
 
 /* Max-widths */
-.mw1 {max-width: 35px !important;} .mw2 {max-width: 90px !important;} .mw3 {max-width: 145px !important;} .mw4 {max-width: 200px !important;} .mw5 {max-width: 255px !important;} .mw6 {max-width: 310px !important;} .mw7 {max-width: 365px !important;} .mw8 {max-width: 420px !important;} .mw9 {max-width: 475px !important;} .mw10 {max-width: 530px !important;} .mw11 {max-width: 585px !important;} .mw12 {max-width: 640px !important;} .mw13 {max-width: 695px !important;} .mw14 {max-width: 750px !important;} .mw15 {max-width: 805px !important;} .mw16 {max-width: 860px !important;} .mw17 {max-width: 915px !important;} .mw18 {max-width: 970px !important;}
-blockquote p {color: #777;}
+.mw1 {
+  max-width: 35px !important;
+}
+.mw2 {
+  max-width: 90px !important;
+}
+.mw3 {
+  max-width: 145px !important;
+}
+.mw4 {
+  max-width: 200px !important;
+}
+.mw5 {
+  max-width: 255px !important;
+}
+.mw6 {
+  max-width: 310px !important;
+}
+.mw7 {
+  max-width: 365px !important;
+}
+.mw8 {
+  max-width: 420px !important;
+}
+.mw9 {
+  max-width: 475px !important;
+}
+.mw10 {
+  max-width: 530px !important;
+}
+.mw11 {
+  max-width: 585px !important;
+}
+.mw12 {
+  max-width: 640px !important;
+}
+.mw13 {
+  max-width: 695px !important;
+}
+.mw14 {
+  max-width: 750px !important;
+}
+.mw15 {
+  max-width: 805px !important;
+}
+.mw16 {
+  max-width: 860px !important;
+}
+.mw17 {
+  max-width: 915px !important;
+}
+.mw18 {
+  max-width: 970px !important;
+}
+blockquote p {
+  color: #777;
+}
 
 /* Center title, logo and subtitle */
-h1#vue-modal, h1#vue-modal + p,  h1#vue-modal + p + p {
+h1#vue-modal,
+h1#vue-modal + p,
+h1#vue-modal + p + p {
   text-align: center;
 }
 h1#vue-modal + p + p {
@@ -89,7 +145,7 @@ h1#vue-modal + p + p {
   padding: 0.25rem 0.5rem;
   margin: 0;
   font-size: 0.85em;
-  background-color: rgba(27,31,35,0.05);
+  background-color: rgba(27, 31, 35, 0.05);
   border-radius: 3px;
 }
 
