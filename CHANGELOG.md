@@ -1,3 +1,10 @@
+## [3.0.9](https://github.com/kouts/vue-modal/compare/v3.0.8...v3.0.9) (2023-06-04)
+
+
+### Bug Fixes
+
+* updated npm packages ([76a48da](https://github.com/kouts/vue-modal/commit/76a48da55d0a7115230da608ceaebcd090807588))
+
 ## [3.0.8](https://github.com/kouts/vue-modal/compare/v3.0.7...v3.0.8) (2022-11-06)
 
 
