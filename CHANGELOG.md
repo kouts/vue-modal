@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/kouts/vue-modal/compare/v4.0.0...v4.0.1) (2023-06-04)
+
+
+### Bug Fixes
+
+* updated docs for v4 ([d0f2047](https://github.com/kouts/vue-modal/commit/d0f2047687acb79c161eeb4c41b4f1b85aca98a9))
+
 # [4.0.0](https://github.com/kouts/vue-modal/compare/v3.0.9...v4.0.0) (2023-06-04)
 
 
