@@ -75,6 +75,10 @@ let animatingZIndex = 0
 export default {
   name: 'VueModal',
   props: {
+    name: {
+      type: String,
+      default: ''
+    },
     title: {
       type: String,
       default: ''
@@ -129,30 +133,56 @@ export default {
   },
   mounted() {
     this.id = 'vm-' + this.$.uid
-    this.$watch(
-      'modelValue',
-      function (newVal) {
-        if (newVal) {
-          this.mount = true
-          this.$nextTick(() => {
-            this.show = true
-          })
-        } else {
-          this.show = false
+
+    // Handle v-model modal
+    if (!this.name) {
+      this.$watch(
+        'modelValue',
+        (newVal) => {
+          if (newVal) {
+            this.mount = true
+            this.$nextTick(() => {
+              this.show = true
+            })
+          } else {
+            this.show = false
+          }
+        },
+        {
+          immediate: true
         }
-      },
-      {
-        immediate: true
-      }
-    )
+      )
+    }
+
+    // Handle named modal
+    if (this.name && this.$modal) {
+      this.$watch(
+        '$modal.state.modals',
+        (newVal) => {
+          if (newVal[this.name]) {
+            this.mount = true
+            this.$nextTick(() => {
+              this.show = true
+            })
+          } else {
+            this.show = false
+          }
+        },
+        {
+          deep: true
+        }
+      )
+    }
   },
   beforeUnmount() {
     this.elToFocus = null
+    this.name && this.$modal.hide(this.name)
   },
   methods: {
     close() {
       if (this.enableClose === true) {
         this.$emit('update:modelValue', false)
+        this.name && this.$modal.hide(this.name)
       }
     },
     clickOutside(e) {

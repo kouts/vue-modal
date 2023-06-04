@@ -44,6 +44,7 @@ module.exports = defineConfig({
     rollupOptions: {
       external: ['vue'],
       output: {
+        preserveModules: true,
         globals: {
           vue: 'Vue'
         },

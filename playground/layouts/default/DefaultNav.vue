@@ -21,6 +21,9 @@
           <li class="nav-item">
             <router-link to="/example2" class="nav-link" @click="collapseNavbar">Example2</router-link>
           </li>
+          <li class="nav-item">
+            <router-link to="/named-example" class="nav-link" @click="collapseNavbar">Named example</router-link>
+          </li>
         </ul>
       </div>
     </div>

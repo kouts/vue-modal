@@ -21,6 +21,14 @@ const routes = [
     meta: {
       layout: 'default'
     }
+  },
+  {
+    path: '/named-example',
+    name: 'NamedExample',
+    component: () => import(/* webpackChunkName: "named-example" */ '../views/NamedExample.vue'),
+    meta: {
+      layout: 'default'
+    }
   }
 ]
 const router = createRouter({
