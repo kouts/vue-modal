@@ -175,3 +175,9 @@ h1#vue-modal + p + p {
 code {
   font-family: inherit;
 }
+
+/* Fix h2 spacing */
+.theme-container .theme-default-content:not(.custom) h2 {
+  margin-bottom: 1.3rem;
+  padding-bottom: 1.3rem;
+}

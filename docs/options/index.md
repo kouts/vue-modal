@@ -1,6 +1,19 @@
 ## v-model
 
-Pass a Boolean value to the `v-model` directive to open and close the modal window.
+Pass a `Boolean` value to the `v-model` directive to show and hide the modal window.
+
+## Plugin API
+
+The Plugin API can be called within any component through:
+
+- `useModal` in Composition API
+- `this.$modal` in Options API
+
+and exposes 3 functions:
+
+- **`show(name)`** - Shows the modal with the given name
+- **`hide(name)`** - Hides the modal with the given name
+- **`hideAll()`** - Hides all modals
 
 ## Props
 
@@ -14,6 +27,12 @@ Pass a Boolean value to the `v-model` directive to open and close the modal wind
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td>name</td>
+      <td>The name of the modal to use with the show / hide functions.</td>
+      <td>String</td>
+      <td><em>Empty</em></td>
+    </tr>  
     <tr>
       <td>title</td>
       <td>The title of the modal element</td>
@@ -93,7 +112,7 @@ Pass a Boolean value to the `v-model` directive to open and close the modal wind
       <td>true</td>
     </tr>    
     <tr>
-      <td>basedOn</td>
+      <td>modelValue</td>
       <td>Opens and closes the modal window, this is used by <code>v-model</code> internally.</td>
       <td>Boolean</td>
       <td>false</td>

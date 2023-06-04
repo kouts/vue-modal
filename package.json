@@ -14,7 +14,6 @@
   "main": "./dist/vue-modal.umd.js",
   "module": "./dist/vue-modal.es.js",
   "unpkg": "dist/vue-modal.umd.js",
-  "sideEffects": false,
   "scripts": {
     "dev": "vite",
     "serve": "vite preview",
