@@ -1,3 +1,20 @@
+# [4.0.0](https://github.com/kouts/vue-modal/compare/v3.0.9...v4.0.0) (2023-06-04)
+
+
+### Bug Fixes
+
+* fixed exports ([be66ba1](https://github.com/kouts/vue-modal/commit/be66ba1a6e1310be3fd82370d17fa329d394cd49))
+
+
+### Features
+
+* added named modal feature ([be5d19d](https://github.com/kouts/vue-modal/commit/be5d19dfe9e43f0b9857132b4740f43b02b3df4a))
+
+
+### BREAKING CHANGES
+
+* Changed import method
+
 ## [3.0.9](https://github.com/kouts/vue-modal/compare/v3.0.8...v3.0.9) (2023-06-04)
 
 
