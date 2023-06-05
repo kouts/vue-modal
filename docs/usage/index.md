@@ -46,7 +46,7 @@ const app = Vue.createApp({...})
 app.use(modalPlugin)
 ```
 
-To control the visibility of the modal with the name `prop` you use the and `show`/`hide` functions.
+To control the visibility of the modal with the name `prop` you use the `show`/`hide` functions.
 
 **Composition API**
 

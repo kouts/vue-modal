@@ -1,14 +1,14 @@
-import { openBlock as m, createBlock as x, Teleport as _, createVNode as b, Transition as v, withCtx as g, withDirectives as p, createElementVNode as n, normalizeClass as u, normalizeStyle as f, vShow as y, renderSlot as h, toDisplayString as k, createElementBlock as S, withModifiers as T, createCommentVNode as C, reactive as I } from "vue";
-const O = (e, s) => {
-  const t = e.__vccOpts || e;
-  for (const [i, l] of s)
-    t[i] = l;
-  return t;
+import { openBlock as h, createBlock as x, Teleport as _, createVNode as b, Transition as v, withCtx as g, withDirectives as p, createElementVNode as n, normalizeClass as u, normalizeStyle as f, vShow as y, renderSlot as m, toDisplayString as k, createElementBlock as S, withModifiers as T, createCommentVNode as C, reactive as I } from "vue";
+const O = (e, t) => {
+  const s = e.__vccOpts || e;
+  for (const [i, l] of t)
+    s[i] = l;
+  return s;
 }, o = {
   type: [String, Object, Array],
   default: ""
 }, w = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
-let d = 0;
+let r = 0;
 const A = {
   name: "VueModal",
   props: {
@@ -53,7 +53,7 @@ const A = {
       default: "Close"
     }
   },
-  emits: ["before-open", "opening", "after-open", "before-close", "closing", "after-close", "update:modelValue"],
+  emits: ["before-open", "opening", "opened", "before-close", "closing", "closed", "update:modelValue"],
   data() {
     return {
       zIndex: 0,
@@ -67,25 +67,17 @@ const A = {
     this.live && (this.mount = !0);
   },
   mounted() {
-    this.id = "vm-" + this.$.uid, this.name || this.$watch(
-      "modelValue",
-      (e) => {
-        e ? (this.mount = !0, this.$nextTick(() => {
+    this.id = "vm-" + this.$.uid;
+    const e = this.name ? `$modal.state.modals.${this.name}` : "modelValue";
+    this.$watch(
+      e,
+      (t) => {
+        t ? (this.mount = !0, this.$nextTick(() => {
           this.show = !0;
         })) : this.show = !1;
       },
       {
         immediate: !0
-      }
-    ), this.name && this.$modal && this.$watch(
-      "$modal.state.modals",
-      (e) => {
-        e[this.name] ? (this.mount = !0, this.$nextTick(() => {
-          this.show = !0;
-        })) : this.show = !1;
-      },
-      {
-        deep: !0
       }
     );
   },
@@ -101,37 +93,37 @@ const A = {
     },
     keydown(e) {
       if ((e.which === 27 || e.keyCode === 27) && this.close(), e.which === 9 || e.keyCode === 9) {
-        const s = [].slice.call(this.$refs["vm-wrapper"].querySelectorAll(w)).filter(function(t) {
-          return !!(t.offsetWidth || t.offsetHeight || t.getClientRects().length);
+        const t = [].slice.call(this.$refs["vm-wrapper"].querySelectorAll(w)).filter(function(s) {
+          return !!(s.offsetWidth || s.offsetHeight || s.getClientRects().length);
         });
-        e.shiftKey ? (e.target === s[0] || e.target === this.$refs["vm-wrapper"]) && (e.preventDefault(), s[s.length - 1].focus()) : e.target === s[s.length - 1] && (e.preventDefault(), s[0].focus());
+        e.shiftKey ? (e.target === t[0] || e.target === this.$refs["vm-wrapper"]) && (e.preventDefault(), t[t.length - 1].focus()) : e.target === t[t.length - 1] && (e.preventDefault(), t[0].focus());
       }
     },
     getAllVisibleWrappers() {
       return [].slice.call(document.querySelectorAll("[data-vm-wrapper-id]")).filter((e) => e.display !== "none");
     },
     getTopZindex() {
-      return this.getAllVisibleWrappers().reduce((e, s) => parseInt(s.style.zIndex) > e ? parseInt(s.style.zIndex) : e, 0);
+      return this.getAllVisibleWrappers().reduce((e, t) => parseInt(t.style.zIndex) > e ? parseInt(t.style.zIndex) : e, 0);
     },
     handleFocus(e) {
-      const s = e.querySelector("[autofocus]");
-      if (s)
-        s.focus();
+      const t = e.querySelector("[autofocus]");
+      if (t)
+        t.focus();
       else {
-        const t = e.querySelectorAll(w);
-        t.length ? t[0].focus() : e.focus();
+        const s = e.querySelectorAll(w);
+        s.length ? s[0].focus() : e.focus();
       }
     },
     beforeOpen() {
       this.elToFocus = document.activeElement;
       const e = this.getTopZindex();
-      d ? this.zIndex = d + 2 : this.zIndex = e === 0 ? this.baseZindex : e + 2, d = this.zIndex, this.$emit("before-open");
+      r ? this.zIndex = r + 2 : this.zIndex = e === 0 ? this.baseZindex : e + 2, r = this.zIndex, this.$emit("before-open");
     },
     opening() {
       this.$emit("opening");
     },
-    afterOpen() {
-      this.handleFocus(this.$refs["vm-wrapper"]), this.$emit("after-open");
+    opened() {
+      this.handleFocus(this.$refs["vm-wrapper"]), this.$emit("opened");
     },
     beforeClose() {
       this.$emit("before-close");
@@ -139,14 +131,14 @@ const A = {
     closing() {
       this.$emit("closing");
     },
-    afterClose() {
+    closed() {
       this.zIndex = 0, this.live || (this.mount = !1), this.$nextTick(() => {
         window.requestAnimationFrame(() => {
           const e = this.getTopZindex();
           if (e > 0) {
-            const s = this.getAllVisibleWrappers();
-            for (let t = 0; t < s.length; t++) {
-              const i = s[t];
+            const t = this.getAllVisibleWrappers();
+            for (let s = 0; s < t.length; s++) {
+              const i = t[s];
               if (parseInt(i.style.zIndex) === e) {
                 i.contains(this.elToFocus) ? this.elToFocus.focus() : this.handleFocus(i);
                 break;
@@ -154,26 +146,26 @@ const A = {
             }
           } else
             document.body.contains(this.elToFocus) && this.elToFocus.focus();
-          d = 0, this.$emit("after-close");
+          r = 0, this.$emit("closed");
         });
       });
     }
   }
 }, E = ["data-vm-backdrop-id"], z = ["data-vm-wrapper-id", "aria-label", "aria-describedby", "aria-labelledby"], F = ["data-vm-id"], B = { class: "vm-titlebar" }, V = ["id"], L = ["aria-label"], Z = ["id"];
-function j(e, s, t, i, l, a) {
-  return l.mount ? (m(), x(_, {
+function j(e, t, s, i, l, a) {
+  return l.mount ? (h(), x(_, {
     key: 0,
-    to: t.appendTo
+    to: s.appendTo
   }, [
     b(v, {
       name: "vm-backdrop-transition",
-      "enter-active-class": t.bgInClass,
-      "leave-active-class": t.bgOutClass
+      "enter-active-class": s.bgInClass,
+      "leave-active-class": s.bgOutClass
     }, {
       default: g(() => [
         p(n("div", {
           "data-vm-backdrop-id": l.id,
-          class: u(["vm-backdrop", t.bgClass]),
+          class: u(["vm-backdrop", s.bgClass]),
           style: f({ "z-index": l.zIndex - 1 })
         }, null, 14, E), [
           [y, l.show]
@@ -183,57 +175,57 @@ function j(e, s, t, i, l, a) {
     }, 8, ["enter-active-class", "leave-active-class"]),
     b(v, {
       name: "vm-transition",
-      "enter-active-class": t.inClass,
-      "leave-active-class": t.outClass,
+      "enter-active-class": s.inClass,
+      "leave-active-class": s.outClass,
       onBeforeEnter: a.beforeOpen,
       onEnter: a.opening,
-      onAfterEnter: a.afterOpen,
+      onAfterEnter: a.opened,
       onBeforeLeave: a.beforeClose,
       onLeave: a.closing,
-      onAfterLeave: a.afterClose
+      onAfterLeave: a.closed
     }, {
       default: g(() => [
         p(n("div", {
           ref: "vm-wrapper",
           "data-vm-wrapper-id": l.id,
           tabindex: "-1",
-          class: u(["vm-wrapper", t.wrapperClass]),
-          style: f({ "z-index": l.zIndex, cursor: t.enableClose ? "pointer" : "default" }),
+          class: u(["vm-wrapper", s.wrapperClass]),
+          style: f({ "z-index": l.zIndex, cursor: s.enableClose ? "pointer" : "default" }),
           role: "dialog",
-          "aria-label": t.title,
+          "aria-label": s.title,
           "aria-modal": "true",
           "aria-describedby": `${l.id}-content`,
           "aria-labelledby": `${l.id}-title`,
-          onClick: s[1] || (s[1] = (r) => a.clickOutside(r)),
-          onKeydown: s[2] || (s[2] = (r) => a.keydown(r))
+          onClick: t[1] || (t[1] = (d) => a.clickOutside(d)),
+          onKeydown: t[2] || (t[2] = (d) => a.keydown(d))
         }, [
           n("div", {
             ref: "vm",
-            class: u(["vm", t.modalClass]),
+            class: u(["vm", s.modalClass]),
             "data-vm-id": l.id,
-            style: f(t.modalStyle)
+            style: f(s.modalStyle)
           }, [
-            h(e.$slots, "titlebar", {}, () => [
+            m(e.$slots, "titlebar", {}, () => [
               n("div", B, [
                 n("h3", {
                   id: `${l.id}-title`,
                   class: "vm-title"
-                }, k(t.title), 9, V),
-                t.enableClose ? (m(), S("button", {
+                }, k(s.title), 9, V),
+                s.enableClose ? (h(), S("button", {
                   key: 0,
                   type: "button",
                   class: "vm-btn-close",
-                  "aria-label": t.closeLabel,
-                  onClick: s[0] || (s[0] = T((...r) => a.close && a.close(...r), ["prevent"]))
+                  "aria-label": s.closeLabel,
+                  onClick: t[0] || (t[0] = T((...d) => a.close && a.close(...d), ["prevent"]))
                 }, null, 8, L)) : C("", !0)
               ])
             ]),
-            h(e.$slots, "content", {}, () => [
+            m(e.$slots, "content", {}, () => [
               n("div", {
                 id: `${l.id}-content`,
                 class: "vm-content"
               }, [
-                h(e.$slots, "default")
+                m(e.$slots, "default")
               ], 8, Z)
             ])
           ], 14, F)
@@ -250,21 +242,21 @@ const N = /* @__PURE__ */ O(A, [["render", j]]), c = I({
 }), M = () => {
   const e = (i) => {
     c.modals[i] = !0;
-  }, s = (i) => {
+  }, t = (i) => {
     delete c.modals[i];
   };
-  return { state: c, show: e, hide: s, hideAll: () => {
+  return { state: c, show: e, hide: t, hideAll: () => {
     Object.keys(c.modals).forEach((i) => {
-      s(i);
+      t(i);
     });
   } };
-}, D = {
+}, W = {
   install(e) {
     e.config.globalProperties.$modal = M();
   }
 };
 export {
   N as Modal,
-  D as modalPlugin,
+  W as modalPlugin,
   M as useModal
 };
