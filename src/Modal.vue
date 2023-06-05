@@ -15,10 +15,10 @@
       :leave-active-class="outClass"
       @before-enter="beforeOpen"
       @enter="opening"
-      @after-enter="afterOpen"
+      @after-enter="opened"
       @before-leave="beforeClose"
       @leave="closing"
-      @after-leave="afterClose"
+      @after-leave="closed"
     >
       <div
         v-show="show"
@@ -116,7 +116,7 @@ export default {
       default: 'Close'
     }
   },
-  emits: ['before-open', 'opening', 'after-open', 'before-close', 'closing', 'after-close', 'update:modelValue'],
+  emits: ['before-open', 'opening', 'opened', 'before-close', 'closing', 'closed', 'update:modelValue'],
   data() {
     return {
       zIndex: 0,
@@ -227,10 +227,10 @@ export default {
       // console.log('opening');
       this.$emit('opening')
     },
-    afterOpen() {
-      // console.log('afterOpen');
+    opened() {
+      // console.log('opened');
       this.handleFocus(this.$refs['vm-wrapper'])
-      this.$emit('after-open')
+      this.$emit('opened')
     },
     beforeClose() {
       // console.log('beforeClose');
@@ -240,8 +240,8 @@ export default {
       // console.log('closing');
       this.$emit('closing')
     },
-    afterClose() {
-      // console.log('afterClose');
+    closed() {
+      // console.log('closed');
       this.zIndex = 0
       if (!this.live) {
         this.mount = false
@@ -272,7 +272,7 @@ export default {
             }
           }
           animatingZIndex = 0
-          this.$emit('after-close')
+          this.$emit('closed')
         })
       })
     }

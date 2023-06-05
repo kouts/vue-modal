@@ -4,8 +4,8 @@ Pass a `Boolean` value to the `v-model` directive to show and hide the modal win
 
 ## Plugin API
 
-In order to use the Plugin API you need to import and register the `modalPlugin`.  
-The Plugin API exposes `show`/`hide` functions that can be called within any component to show and hide the modal window with the given name.
+The Plugin API exposes `show`/`hide` functions that can be called within any component to show and hide the modal window with the given name.  
+In order to use the Plugin API you need to import and register the `modalPlugin`.
 
 The functions are available through:
 
@@ -14,9 +14,9 @@ The functions are available through:
 
 ### Functions
 
-**`show(name)`** - Shows the modal with the given name  
-**`hide(name)`** - Hides the modal with the given name  
-**`hideAll()`** - Hides all modals
+**`show(name: string): void`** : Shows the modal with the given `name` prop  
+**`hide(name: string): void`** : Hides the modal with the given `name` prop  
+**`hideAll(): void`** - Hides all modals
 
 ## Props
 
@@ -178,32 +178,32 @@ Default value:
   </thead>
   <tbody>
     <tr>
-      <td>close</td>
-      <td>Event that fires when dialog closes</td>
+      <td>update:modelValue</td>
+      <td>Event that is emitted when the component’s model changes</td>
     </tr>
     <tr>
       <td>before-open</td>
-      <td>Event that fires before the modal opening transition starts</td>
+      <td>Event that is emitted before the modal opening transition starts</td>
     </tr>
     <tr>
       <td>opening</td>
-      <td>Event that fires while the modal opening transition is in progress</td>
+      <td>Event that is emitted while the modal opening transition is in progress</td>
     </tr>
     <tr>
-      <td>after-open</td>
-      <td>Event that fires when the modal opening transition is finished</td>
+      <td>opened</td>
+      <td>Event that is emitted when the modal is visible and the opening transition ended</td>
     </tr>
     <tr>
       <td>before-close</td>
-      <td>Event that fires before the modal closing transition starts</td>
+      <td>Event that is emitted before the modal closing transition starts</td>
     </tr>
     <tr>
       <td>closing</td>
-      <td>Event that fires while the modal closing transition is in progress</td>
+      <td>Event that is emitted while the modal closing transition is in progress</td>
     </tr>
     <tr>
-      <td>after-close</td>
-      <td>Event that fires when the modal closing transition is finished</td>
+      <td>closed</td>
+      <td>Event that is emitted when the modal is no longer visible and the closing transition ended</td>
     </tr>    
   </tbody>
 </table>

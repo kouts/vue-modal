@@ -21,7 +21,7 @@ describe('Modal events', () => {
     document.body.innerHTML = ''
   })
 
-  it.each(['before-open', 'opening', 'after-open'])('emits a %s event when opening', async (eventName) => {
+  it.each(['before-open', 'opening', 'opened'])('emits a %s event when opening', async (eventName) => {
     const wrapper = createWrapper()
 
     await wrapper.setProps({ modelValue: true })
@@ -31,7 +31,7 @@ describe('Modal events', () => {
     wrapper.unmount()
   })
 
-  it.each(['before-close', 'closing', 'after-close'])('emits a %s event when closing', async (eventName) => {
+  it.each(['before-close', 'closing', 'closed'])('emits a %s event when closing', async (eventName) => {
     const wrapper = createWrapper()
 
     await wrapper.setProps({ modelValue: true })

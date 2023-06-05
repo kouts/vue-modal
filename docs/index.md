@@ -21,7 +21,7 @@ A customizable, stackable, and lightweight modal component for Vue.js 3.
 - Includes sensible default styling but it's also highly customizable via user CSS classes and styles
 - Override modal title and content via slots
 - Modal intro and outro effects using CSS animation classes
-- Exposes Component events - before-open, opening, after-open, before-close, closing, after-close, update:modelValue (close)
+- Exposes Component events - before-open, opening, opened, before-close, closing, closed, update:modelValue (close)
 - Scrollable when it's contents exceed screen height
 - Closeable by clicking on the upper right "x", the overlay or the `esc` key
 - **Stackable** - Multiple modal windows on top of each other
