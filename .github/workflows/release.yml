@@ -29,7 +29,7 @@ jobs:
         run: npm install
 
       - name: Install semantic-release extra plugins 📦
-        run: npm install --save-dev @semantic-release/changelog@19.0.5 @semantic-release/git@19.0.5
+        run: npm install --save-dev @semantic-release/changelog @semantic-release/git
 
       - name: Run linter 👀
         run: npm run lint-fix
