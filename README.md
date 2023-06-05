@@ -20,8 +20,8 @@ If you're looking for a Vue.js 3 compatible version of vue-modal, [please check 
 - Includes sensible default styling but it's also highly customizable via user CSS classes and styles
 - Override modal title and content via slots
 - Modal intro and outro effects using CSS animation classes
-- Exposes Component events - close, before-open, opening, after-open, before-close, closing, after-close
-- Scrollable when it's contents exceed screen height
+- Exposes Component events - `close`, `before-open`, `opening`, `after-open`, `before-close`, `closing`, `after-close`
+- Scrollable when its contents exceed screen height
 - Closeable by clicking on the upper right "x", the overlay or the ```esc``` key
 - **Stackable** - Multiple modal windows on top of each other
 - Ability to set initial focus on an element when the modal window opens, just set the **autofocus** attribute on an element inside the modal
