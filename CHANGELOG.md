@@ -1,3 +1,15 @@
+# [4.1.0](https://github.com/kouts/vue-modal/compare/v4.0.1...v4.1.0) (2023-06-05)
+
+
+### Bug Fixes
+
+* simplified watcher ([cdcf2e5](https://github.com/kouts/vue-modal/commit/cdcf2e517c5434105ad727bf5f3b16b8f8c49b83))
+
+
+### Features
+
+* renamed after-open and after-close events ([cb87674](https://github.com/kouts/vue-modal/commit/cb87674c909faa5b2e975d3b9a073d5f95510093))
+
 ## [4.0.1](https://github.com/kouts/vue-modal/compare/v4.0.0...v4.0.1) (2023-06-04)
 
 
