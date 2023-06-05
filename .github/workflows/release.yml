@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [18]
+        node: [16]
 
     steps:
       - name: Checkout 🛎
@@ -29,7 +29,7 @@ jobs:
         run: npm install
 
       - name: Install semantic-release extra plugins 📦
-        run: npm install --save-dev @semantic-release/changelog @semantic-release/git
+        run: npm install --save-dev @semantic-release/changelog@19.0.5 @semantic-release/git@19.0.5
 
       - name: Run linter 👀
         run: npm run lint-fix
@@ -44,4 +44,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
+        run: npx semantic-release@19.0.5
