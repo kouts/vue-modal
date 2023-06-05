@@ -11,9 +11,11 @@ and insert them in your page.
 <link rel="stylesheet" href="vue-modal.css" />
 ```
 
+The `vue-modal` component and functions are now globally available via the `VueModal` object.
+
 ## Module System
 
-Install it via npm
+Install it via `npm`
 
 ```
 npm i @kouts/vue-modal@next --save
