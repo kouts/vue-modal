@@ -1,3 +1,15 @@
+# [5.0.0](https://github.com/kouts/vue-modal/compare/v4.1.0...v5.0.0) (2023-06-05)
+
+
+### Bug Fixes
+
+* added 5.0 release ([fe11d8a](https://github.com/kouts/vue-modal/commit/fe11d8a083fbdc29a94a7db978ff3fc8fc33c4d6))
+
+
+### BREAKING CHANGES
+
+* renamed event names
+
 # [4.1.0](https://github.com/kouts/vue-modal/compare/v4.0.1...v4.1.0) (2023-06-05)
 
 
