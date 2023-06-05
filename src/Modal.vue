@@ -133,46 +133,24 @@ export default {
   },
   mounted() {
     this.id = 'vm-' + this.$.uid
+    const valueToWatch = !this.name ? 'modelValue' : `$modal.state.modals.${this.name}`
 
-    // Handle v-model modal
-    if (!this.name) {
-      this.$watch(
-        'modelValue',
-        (newVal) => {
-          if (newVal) {
-            this.mount = true
-            this.$nextTick(() => {
-              this.show = true
-            })
-          } else {
-            this.show = false
-          }
-        },
-        {
-          immediate: true
+    this.$watch(
+      valueToWatch,
+      (newVal) => {
+        if (newVal) {
+          this.mount = true
+          this.$nextTick(() => {
+            this.show = true
+          })
+        } else {
+          this.show = false
         }
-      )
-    }
-
-    // Handle named modal
-    if (this.name && this.$modal) {
-      this.$watch(
-        '$modal.state.modals',
-        (newVal) => {
-          if (newVal[this.name]) {
-            this.mount = true
-            this.$nextTick(() => {
-              this.show = true
-            })
-          } else {
-            this.show = false
-          }
-        },
-        {
-          deep: true
-        }
-      )
-    }
+      },
+      {
+        immediate: true
+      }
+    )
   },
   beforeUnmount() {
     this.elToFocus = null
