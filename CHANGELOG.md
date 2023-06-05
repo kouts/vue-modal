@@ -1,3 +1,10 @@
+## [2.1.12](https://github.com/kouts/vue-modal/compare/v2.1.11...v2.1.12) (2023-06-05)
+
+
+### Bug Fixes
+
+* updated packages ([abbeba6](https://github.com/kouts/vue-modal/commit/abbeba675acd87e0a3c9f40301869f1103d72060))
+
 ## [2.1.11](https://github.com/kouts/vue-modal/compare/v2.1.10...v2.1.11) (2022-11-06)
 
 
