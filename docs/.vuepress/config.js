@@ -1,8 +1,10 @@
 import * as path from 'path'
 import * as url from 'url'
-import { defaultTheme, defineUserConfig } from 'vuepress-webpack'
+import { defaultTheme } from '@vuepress/theme-default'
+import { defineUserConfig } from 'vuepress'
 import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 import { vueExamplePlugin } from 'vuepress-plugin-vue-example'
+import { webpackBundler } from '@vuepress/bundler-webpack'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
@@ -12,7 +14,7 @@ export default defineUserConfig({
       componentsPath: '/docs/.examples/'
     }),
     docsearchPlugin({
-      apiKey: 'cf43591b3240a37c852e5fc1ead88efb',
+      apiKey: 'b1beebce60b696f3ab59d523bdc04b94',
       indexName: 'vue-modal',
       appId: 'G4DW29QPYK'
     })
@@ -20,6 +22,10 @@ export default defineUserConfig({
   dest: 'public',
   title: 'vue-modal',
   description: 'A modal plugin for Vue 3',
+  bundler: webpackBundler({
+    postcss: {},
+    vue: {}
+  }),
   theme: defaultTheme({
     contributors: false,
     repo: 'https://github.com/kouts/vue-modal/tree/next',
