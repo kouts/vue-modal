@@ -1,3 +1,10 @@
+## [5.0.1](https://github.com/kouts/vue-modal/compare/v5.0.0...v5.0.1) (2024-05-12)
+
+
+### Bug Fixes
+
+* switched to pnpm, updated npm packages ([5268e93](https://github.com/kouts/vue-modal/commit/5268e934d6ef918eca26e9b00982c1914895b42f))
+
 # [5.0.0](https://github.com/kouts/vue-modal/compare/v4.1.0...v5.0.0) (2023-06-05)
 
 

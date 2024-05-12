@@ -1,4 +1,4 @@
-import { openBlock as h, createBlock as x, Teleport as _, createVNode as b, Transition as v, withCtx as g, withDirectives as p, createElementVNode as n, normalizeClass as u, normalizeStyle as f, vShow as y, renderSlot as m, toDisplayString as k, createElementBlock as S, withModifiers as T, createCommentVNode as C, reactive as I } from "vue";
+import { openBlock as h, createBlock as x, Teleport as k, createVNode as b, Transition as v, withCtx as g, withDirectives as p, createElementVNode as n, normalizeClass as u, normalizeStyle as f, vShow as y, renderSlot as m, toDisplayString as S, createElementBlock as T, withModifiers as _, createCommentVNode as C, reactive as I } from "vue";
 const O = (e, t) => {
   const s = e.__vccOpts || e;
   for (const [i, l] of t)
@@ -153,7 +153,7 @@ const A = {
   }
 }, E = ["data-vm-backdrop-id"], z = ["data-vm-wrapper-id", "aria-label", "aria-describedby", "aria-labelledby"], F = ["data-vm-id"], B = { class: "vm-titlebar" }, V = ["id"], L = ["aria-label"], Z = ["id"];
 function j(e, t, s, i, l, a) {
-  return l.mount ? (h(), x(_, {
+  return l.mount ? (h(), x(k, {
     key: 0,
     to: s.appendTo
   }, [
@@ -210,13 +210,13 @@ function j(e, t, s, i, l, a) {
                 n("h3", {
                   id: `${l.id}-title`,
                   class: "vm-title"
-                }, k(s.title), 9, V),
-                s.enableClose ? (h(), S("button", {
+                }, S(s.title), 9, V),
+                s.enableClose ? (h(), T("button", {
                   key: 0,
                   type: "button",
                   class: "vm-btn-close",
                   "aria-label": s.closeLabel,
-                  onClick: t[0] || (t[0] = T((...d) => a.close && a.close(...d), ["prevent"]))
+                  onClick: t[0] || (t[0] = _((...d) => a.close && a.close(...d), ["prevent"]))
                 }, null, 8, L)) : C("", !0)
               ])
             ]),
@@ -239,7 +239,7 @@ function j(e, t, s, i, l, a) {
 }
 const N = /* @__PURE__ */ O(A, [["render", j]]), c = I({
   modals: {}
-}), M = () => {
+}), q = () => {
   const e = (i) => {
     c.modals[i] = !0;
   }, t = (i) => {
@@ -252,11 +252,11 @@ const N = /* @__PURE__ */ O(A, [["render", j]]), c = I({
   } };
 }, W = {
   install(e) {
-    e.config.globalProperties.$modal = M();
+    e.config.globalProperties.$modal = q();
   }
 };
 export {
   N as Modal,
   W as modalPlugin,
-  M as useModal
+  q as useModal
 };
