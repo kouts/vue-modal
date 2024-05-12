@@ -3,7 +3,7 @@ import { createHtmlPlugin } from 'vite-plugin-html'
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
 
-module.exports = defineConfig({
+export default defineConfig({
   publicDir: 'public-vite',
   plugins: [
     vue(),
