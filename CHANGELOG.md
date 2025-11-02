@@ -1,3 +1,11 @@
+## [2.1.13](https://github.com/kouts/vue-modal/compare/v2.1.12...v2.1.13) (2025-11-02)
+
+
+### Bug Fixes
+
+* updated lint config, lint files ([0e5d5cf](https://github.com/kouts/vue-modal/commit/0e5d5cfa85746cdc2da35da50be48b247308793f))
+* updated node ([b9f1109](https://github.com/kouts/vue-modal/commit/b9f110932132b684a3f6a700f2bc05fb8c3aab38))
+
 ## [2.1.12](https://github.com/kouts/vue-modal/compare/v2.1.11...v2.1.12) (2023-06-05)
 
 
