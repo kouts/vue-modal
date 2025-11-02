@@ -1,7 +1,7 @@
 import Default from '@playground/layouts/default/Default.vue'
-import Example1 from '../views/Example1.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Example1 from '../views/Example1.vue'
 
 Vue.component('LayoutDefault', Default)
 
@@ -13,8 +13,8 @@ const routes = [
     name: 'Example1',
     component: Example1,
     meta: {
-      layout: 'default'
-    }
+      layout: 'default',
+    },
   },
   {
     path: '/example2',
@@ -24,14 +24,14 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "example2" */ '../views/Example2.vue'),
     meta: {
-      layout: 'default'
-    }
-  }
+      layout: 'default',
+    },
+  },
 ]
 
 const router = new VueRouter({
   linkActiveClass: 'active',
-  routes
+  routes,
 })
 
 export default router

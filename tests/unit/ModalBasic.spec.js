@@ -1,21 +1,21 @@
-import Modal from '@/Modal.vue'
-import { mount } from '@vue/test-utils'
-import { sleep, waitNT, waitRAF } from '../utils'
 import '@testing-library/jest-dom'
+import { mount } from '@vue/test-utils'
+import Modal from '@/Modal.vue'
+import { sleep, waitNT, waitRAF } from '../utils'
 
 describe('Modal basic functionality', () => {
   const wrapper = mount(Modal, {
     stubs: {
-      transition: false
+      transition: false,
     },
     slots: {
-      default: '<p>Modal content goes here...</p>'
-    }
+      default: '<p>Modal content goes here...</p>',
+    },
   })
 
   afterEach(() => {
     wrapper.setProps({
-      basedOn: false
+      basedOn: false,
     })
   })
 
@@ -40,7 +40,7 @@ describe('Modal basic functionality', () => {
     await waitRAF()
     wrapper.setProps({
       basedOn: true,
-      baseZindex: 1051
+      baseZindex: 1051,
     })
     // console.log(document.body.innerHTML);
     await waitNT(wrapper.vm)

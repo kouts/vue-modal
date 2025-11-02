@@ -3,8 +3,8 @@ const VueExamplePlugin = require('vuepress-plugin-vue-example')
 module.exports = {
   plugins: [
     VueExamplePlugin({
-      componentsPath: '/docs/.examples/'
-    })
+      componentsPath: '/docs/.examples/',
+    }),
   ],
   configureWebpack: {
     module: {
@@ -16,14 +16,14 @@ module.exports = {
               loader: 'sass-loader',
               options: {
                 sassOptions: {
-                  silenceDeprecations: ['legacy-js-api', 'import', 'global-builtin', 'color-functions', 'abs-percent']
-                }
-              }
-            }
-          ]
-        }
-      ]
-    }
+                  silenceDeprecations: ['legacy-js-api', 'import', 'global-builtin', 'color-functions', 'abs-percent'],
+                },
+              },
+            },
+          ],
+        },
+      ],
+    },
   },
   dest: 'public',
   title: 'vue-modal',
@@ -44,10 +44,10 @@ module.exports = {
           ['/examples/animations/', 'Animations'],
           ['/examples/prevent-body-scroll/', 'Prevent body scroll'],
           ['/examples/prevent-close/', 'Prevent modal from closing'],
-          ['/examples/customizing/', 'Customizing']
-        ]
-      }
-    ]
+          ['/examples/customizing/', 'Customizing'],
+        ],
+      },
+    ],
   },
   head: [
     ['link', { rel: 'shortcut icon', href: '/favicons/favicon.ico' }],
@@ -71,6 +71,6 @@ module.exports = {
     ['script', { src: 'https://polyfill.io/v3/polyfill.min.js?features=Array.from' }],
     ['script', { src: 'https://polyfill.io/v3/polyfill.min.js?features=Promise' }],
     ['script', { src: 'https://polyfill.io/v3/polyfill.min.js?features=NodeList.prototype.forEach' }],
-    ['script', { src: 'https://polyfill.io/v3/polyfill.min.js?features=Object.assign' }]
-  ]
+    ['script', { src: 'https://polyfill.io/v3/polyfill.min.js?features=Object.assign' }],
+  ],
 }

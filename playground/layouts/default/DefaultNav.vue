@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <div class="container">
-      <router-link to="/" class="navbar-brand" @click.native="collapseNavbar">Playground</router-link>
+      <RouterLink to="/" class="navbar-brand" @click.native="collapseNavbar">Playground</RouterLink>
       <button
         :class="['navbar-toggler', !navbarExpanded && 'collapsed']"
         type="button"
@@ -16,12 +16,12 @@
       <div id="navbarDefault" :class="['collapse navbar-collapse', navbarExpanded && 'show']">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <router-link to="/" exact exact-active-class="active" class="nav-link" @click.native="collapseNavbar">
+            <RouterLink to="/" exact exact-active-class="active" class="nav-link" @click.native="collapseNavbar">
               Example1
-            </router-link>
+            </RouterLink>
           </li>
           <li class="nav-item">
-            <router-link to="/example2" class="nav-link" @click.native="collapseNavbar">Example2</router-link>
+            <RouterLink to="/example2" class="nav-link" @click.native="collapseNavbar">Example2</RouterLink>
           </li>
         </ul>
       </div>
@@ -33,7 +33,7 @@
 export default {
   data() {
     return {
-      navbarExpanded: false
+      navbarExpanded: false,
     }
   },
   methods: {
@@ -42,7 +42,7 @@ export default {
     },
     collapseNavbar() {
       this.navbarExpanded = false
-    }
-  }
+    },
+  },
 }
 </script>

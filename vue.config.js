@@ -13,17 +13,17 @@ module.exports = {
           @import "@playground/scss/variables.scss";
         `,
         sassOptions: {
-          silenceDeprecations: ['legacy-js-api', 'import', 'global-builtin', 'color-functions', 'abs-percent']
-        }
-      }
-    }
+          silenceDeprecations: ['legacy-js-api', 'import', 'global-builtin', 'color-functions', 'abs-percent'],
+        },
+      },
+    },
   },
   configureWebpack: {
     resolve: {
       alias: {
-        '@playground': playgroundPath
-      }
-    }
+        '@playground': playgroundPath,
+      },
+    },
   },
   chainWebpack: (config) => {
     // Clear the existing entry point
@@ -39,5 +39,5 @@ module.exports = {
 
       return args
     })
-  }
+  },
 }

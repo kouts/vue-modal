@@ -62,23 +62,23 @@ export default {
       modalClasses: [
         {
           value: 'modal-sm',
-          text: 'Small'
+          text: 'Small',
         },
         {
           value: '',
-          text: 'Medium'
+          text: 'Medium',
         },
         {
           value: 'modal-lg',
-          text: 'Large'
+          text: 'Large',
         },
         {
           value: 'modal-xl',
-          text: 'Extra large'
-        }
-      ]
+          text: 'Extra large',
+        },
+      ],
     }
-  }
+  },
 }
 </script>
 

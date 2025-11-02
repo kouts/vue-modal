@@ -45,8 +45,8 @@ export default {
   data: function () {
     return {
       showModal: false,
-      enableClose: false
+      enableClose: false,
     }
-  }
+  },
 }
 </script>

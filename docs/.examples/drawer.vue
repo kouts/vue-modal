@@ -67,9 +67,9 @@
 export default {
   data() {
     return {
-      showDrawer: false
+      showDrawer: false,
     }
-  }
+  },
 }
 </script>
 
