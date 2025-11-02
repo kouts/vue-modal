@@ -1,3 +1,11 @@
+## [5.0.2](https://github.com/kouts/vue-modal/compare/v5.0.1...v5.0.2) (2025-11-02)
+
+
+### Bug Fixes
+
+* added packageManager field ([6098b90](https://github.com/kouts/vue-modal/commit/6098b90707730733aaa716f5c798922bfd35e9f3))
+* updated npm packages, lint files ([4c04f45](https://github.com/kouts/vue-modal/commit/4c04f45cf279b62b61cbc9cb2fa91a07267adda1))
+
 ## [5.0.1](https://github.com/kouts/vue-modal/compare/v5.0.0...v5.0.1) (2024-05-12)
 
 
