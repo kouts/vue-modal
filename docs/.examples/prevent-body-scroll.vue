@@ -23,7 +23,7 @@ import bodyScroll from 'body-scroll-freezer'
 export default {
   data: function () {
     return {
-      showModal: false
+      showModal: false,
     }
   },
   mounted() {
@@ -35,7 +35,7 @@ export default {
     },
     beforeClose() {
       bodyScroll.unfreeze()
-    }
-  }
+    },
+  },
 }
 </script>

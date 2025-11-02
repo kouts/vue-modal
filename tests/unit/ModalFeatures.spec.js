@@ -1,5 +1,5 @@
-import Modal from '@/Modal.vue'
 import { mount } from '@vue/test-utils'
+import Modal from '@/Modal.vue'
 import { sleep, waitNT } from '../utils'
 
 const originalOffsetHeight = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetHeight')
@@ -23,27 +23,27 @@ const ModalParent = {
   `,
   components: {
     Modal1: Modal,
-    Modal2: Modal
+    Modal2: Modal,
   },
   props: {
     showInput: {
       type: Boolean,
-      default: true
-    }
-  }
+      default: true,
+    },
+  },
 }
 
 const createModalsWrapper = (data) => {
   return mount(ModalParent, {
     components: {
       Modal1: Modal,
-      Modal2: Modal
+      Modal2: Modal,
     },
     attachTo: '#modal-host',
     global: {
       stubs: {
-        transition: false
-      }
+        transition: false,
+      },
     },
     data() {
       return {
@@ -51,11 +51,11 @@ const createModalsWrapper = (data) => {
           live: false,
           title: 'Test title',
           showModal1: false,
-          showModal2: false
+          showModal2: false,
         },
-        ...data
+        ...data,
       }
-    }
+    },
   })
 }
 
@@ -198,7 +198,7 @@ describe('Modal features', () => {
 
     await modal1.trigger('keydown', {
       keyCode: 9,
-      shiftKey: true
+      shiftKey: true,
     })
 
     const checkboxInput = modal1.find('.modal-1 .checkbox-input')
@@ -243,7 +243,7 @@ describe('Modal features', () => {
 
   it('stays in DOM with live mode', async () => {
     const wrapper = createModalsWrapper({
-      live: true
+      live: true,
     })
 
     await waitNT(wrapper.vm)
