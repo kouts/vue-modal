@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col">
         <button type="button" class="btn btn-primary" @click="showfirstModal = true">Open a modal</button>
-        <button type="button" class="btn btn-primary ml-2" @click=";(showfirstModal = true), (showSecondModal = true)">
+        <button type="button" class="btn btn-primary ml-2" @click=";((showfirstModal = true), (showSecondModal = true))">
           Show all modals
         </button>
       </div>
@@ -90,9 +90,9 @@ export default {
   data() {
     return {
       showfirstModal: false,
-      showSecondModal: false
+      showSecondModal: false,
     }
-  }
+  },
 }
 </script>
 

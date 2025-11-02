@@ -1,5 +1,5 @@
-import Modal from '@/Modal.vue'
 import { mount } from '@vue/test-utils'
+import Modal from '@/Modal.vue'
 import { waitRAF } from '../utils'
 
 const createWrapperContainer = (componentArgs) => {
@@ -8,27 +8,27 @@ const createWrapperContainer = (componentArgs) => {
   args.appendTo = '#modal-host'
   const wrapperContainer = {
     components: {
-      Modal
+      Modal,
     },
     data() {
       return {
         showModal: false,
-        args
+        args,
       }
     },
     template: `
       <div id="modal-host"></div>
       <Modal v-model="showModal" v-bind="args"><p>Modal content goes here...</p></Modal>
-    `
+    `,
   }
 
   return mount(wrapperContainer, {
     attachTo: document.body,
     global: {
       stubs: {
-        transition: false
-      }
-    }
+        transition: false,
+      },
+    },
   })
 }
 
@@ -62,11 +62,11 @@ describe('Modal basic functionality', () => {
 
   it('tests whether the backdrop and the modal have the right z-index', async () => {
     const wrapper = createWrapperContainer({
-      baseZindex: 1052
+      baseZindex: 1052,
     })
 
     await wrapper.setData({
-      showModal: true
+      showModal: true,
     })
     await waitRAF()
 

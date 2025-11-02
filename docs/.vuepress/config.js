@@ -1,30 +1,30 @@
+import { webpackBundler } from '@vuepress/bundler-webpack'
+import { docsearchPlugin } from '@vuepress/plugin-docsearch'
+import { defaultTheme } from '@vuepress/theme-default'
 import * as path from 'path'
 import * as url from 'url'
-import { defaultTheme } from '@vuepress/theme-default'
 import { defineUserConfig } from 'vuepress'
-import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 import { vueExamplePlugin } from 'vuepress-plugin-vue-example'
-import { webpackBundler } from '@vuepress/bundler-webpack'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 export default defineUserConfig({
   plugins: [
     vueExamplePlugin({
-      componentsPath: '/docs/.examples/'
+      componentsPath: '/docs/.examples/',
     }),
     docsearchPlugin({
       apiKey: 'b1beebce60b696f3ab59d523bdc04b94',
       indexName: 'vue-modal',
-      appId: 'G4DW29QPYK'
-    })
+      appId: 'G4DW29QPYK',
+    }),
   ],
   dest: 'public',
   title: 'vue-modal',
   description: 'A modal plugin for Vue 3',
   bundler: webpackBundler({
     postcss: {},
-    vue: {}
+    vue: {},
   }),
   theme: defaultTheme({
     contributors: false,
@@ -34,19 +34,19 @@ export default defineUserConfig({
     sidebar: [
       {
         link: '/',
-        text: 'Introduction'
+        text: 'Introduction',
       },
       {
         link: '/installation/',
-        text: 'Installation'
+        text: 'Installation',
       },
       {
         link: '/usage/',
-        text: 'Usage'
+        text: 'Usage',
       },
       {
         link: '/options/',
-        text: 'Options'
+        text: 'Options',
       },
       {
         text: 'Examples',
@@ -54,31 +54,31 @@ export default defineUserConfig({
         children: [
           {
             link: '/examples/basic/',
-            text: 'Basic'
+            text: 'Basic',
           },
           {
             link: '/examples/drawer/',
-            text: 'Sidebar / Drawer'
+            text: 'Sidebar / Drawer',
           },
           {
             link: '/examples/animations/',
-            text: 'Animations'
+            text: 'Animations',
           },
           {
             link: '/examples/prevent-body-scroll/',
-            text: 'Prevent body scroll'
+            text: 'Prevent body scroll',
           },
           {
             link: '/examples/prevent-close/',
-            text: 'Prevent modal from closing'
+            text: 'Prevent modal from closing',
           },
           {
             link: '/examples/customizing/',
-            text: 'Customizing'
-          }
-        ]
-      }
-    ]
+            text: 'Customizing',
+          },
+        ],
+      },
+    ],
   }),
   head: [
     ['link', { rel: 'shortcut icon', href: '/favicons/favicon.ico' }],
@@ -98,11 +98,11 @@ export default defineUserConfig({
     ['link', { rel: 'manifest', href: '/favicons/manifest.json' }],
     ['meta', { name: 'msapplication-TileColor', content: '#ffffff' }],
     ['meta', { name: 'msapplication-TileImage', content: '/favicons/ms-icon-144x144.png' }],
-    ['meta', { name: 'theme-color', content: '#ffffff' }]
+    ['meta', { name: 'theme-color', content: '#ffffff' }],
   ],
   alias: {
     '@': path.resolve(__dirname, '../../src'),
     '@playground': path.resolve(__dirname, '../../playground'),
-    '@root': path.resolve(__dirname, '../../')
-  }
+    '@root': path.resolve(__dirname, '../../'),
+  },
 })

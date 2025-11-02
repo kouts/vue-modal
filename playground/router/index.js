@@ -1,5 +1,5 @@
-import Example1 from '../views/Example1.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
+import Example1 from '../views/Example1.vue'
 
 const history = createWebHashHistory()
 const routes = [
@@ -8,8 +8,8 @@ const routes = [
     name: 'Example1',
     component: Example1,
     meta: {
-      layout: 'default'
-    }
+      layout: 'default',
+    },
   },
   {
     path: '/example2',
@@ -19,22 +19,22 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "example2" */ '../views/Example2.vue'),
     meta: {
-      layout: 'default'
-    }
+      layout: 'default',
+    },
   },
   {
     path: '/named-example',
     name: 'NamedExample',
     component: () => import(/* webpackChunkName: "named-example" */ '../views/NamedExample.vue'),
     meta: {
-      layout: 'default'
-    }
-  }
+      layout: 'default',
+    },
+  },
 ]
 const router = createRouter({
   linkActiveClass: 'active',
   history,
-  routes
+  routes,
 })
 
 export { router }

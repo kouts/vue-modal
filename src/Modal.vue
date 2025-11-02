@@ -1,6 +1,6 @@
 <template>
-  <teleport v-if="mount" :to="appendTo">
-    <transition name="vm-backdrop-transition" :enter-active-class="bgInClass" :leave-active-class="bgOutClass">
+  <Teleport v-if="mount" :to="appendTo">
+    <Transition name="vm-backdrop-transition" :enter-active-class="bgInClass" :leave-active-class="bgOutClass">
       <div
         v-show="show"
         :data-vm-backdrop-id="id"
@@ -8,8 +8,8 @@
         :class="bgClass"
         :style="{ 'z-index': zIndex - 1 }"
       ></div>
-    </transition>
-    <transition
+    </Transition>
+    <Transition
       name="vm-transition"
       :enter-active-class="inClass"
       :leave-active-class="outClass"
@@ -58,14 +58,14 @@
           </slot>
         </div>
       </div>
-    </transition>
-  </teleport>
+    </Transition>
+  </Teleport>
 </template>
 
 <script>
 const TYPE_CSS = {
   type: [String, Object, Array],
-  default: ''
+  default: '',
 }
 
 const FOCUSABLE_ELEMENTS =
@@ -77,15 +77,15 @@ export default {
   props: {
     name: {
       type: String,
-      default: ''
+      default: '',
     },
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     baseZindex: {
       type: Number,
-      default: 1051
+      default: 1051,
     },
     bgClass: TYPE_CSS,
     wrapperClass: TYPE_CSS,
@@ -97,24 +97,24 @@ export default {
     bgOutClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeOut' }),
     appendTo: {
       type: String,
-      default: 'body'
+      default: 'body',
     },
     live: {
       type: Boolean,
-      default: false
+      default: false,
     },
     enableClose: {
       type: Boolean,
-      default: true
+      default: true,
     },
     modelValue: {
       type: Boolean,
-      default: false
+      default: false,
     },
     closeLabel: {
       type: String,
-      default: 'Close'
-    }
+      default: 'Close',
+    },
   },
   emits: ['before-open', 'opening', 'opened', 'before-close', 'closing', 'closed', 'update:modelValue'],
   data() {
@@ -123,7 +123,7 @@ export default {
       id: null,
       show: false,
       mount: false,
-      elToFocus: null
+      elToFocus: null,
     }
   },
   created() {
@@ -148,8 +148,8 @@ export default {
         }
       },
       {
-        immediate: true
-      }
+        immediate: true,
+      },
     )
   },
   beforeUnmount() {
@@ -275,8 +275,8 @@ export default {
           this.$emit('closed')
         })
       })
-    }
-  }
+    },
+  },
 }
 </script>
 

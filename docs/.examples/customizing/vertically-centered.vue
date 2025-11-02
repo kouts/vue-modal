@@ -23,9 +23,9 @@
 export default {
   data: function () {
     return {
-      showModal: false
+      showModal: false,
     }
-  }
+  },
 }
 </script>
 

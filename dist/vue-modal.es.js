@@ -1,4 +1,4 @@
-import { openBlock as h, createBlock as x, Teleport as k, createVNode as b, Transition as v, withCtx as g, withDirectives as p, createElementVNode as n, normalizeClass as u, normalizeStyle as f, vShow as y, renderSlot as m, toDisplayString as S, createElementBlock as T, withModifiers as _, createCommentVNode as C, reactive as I } from "vue";
+import { createBlock as x, createCommentVNode as h, openBlock as b, Teleport as k, createVNode as v, Transition as g, withCtx as p, withDirectives as y, createElementVNode as n, normalizeStyle as u, normalizeClass as f, vShow as C, renderSlot as m, createElementBlock as S, toDisplayString as T, withModifiers as _, reactive as I } from "vue";
 const O = (e, t) => {
   const s = e.__vccOpts || e;
   for (const [i, l] of t)
@@ -153,27 +153,27 @@ const A = {
   }
 }, E = ["data-vm-backdrop-id"], z = ["data-vm-wrapper-id", "aria-label", "aria-describedby", "aria-labelledby"], F = ["data-vm-id"], B = { class: "vm-titlebar" }, V = ["id"], L = ["aria-label"], Z = ["id"];
 function j(e, t, s, i, l, a) {
-  return l.mount ? (h(), x(k, {
+  return l.mount ? (b(), x(k, {
     key: 0,
     to: s.appendTo
   }, [
-    b(v, {
+    v(g, {
       name: "vm-backdrop-transition",
       "enter-active-class": s.bgInClass,
       "leave-active-class": s.bgOutClass
     }, {
-      default: g(() => [
-        p(n("div", {
+      default: p(() => [
+        y(n("div", {
           "data-vm-backdrop-id": l.id,
-          class: u(["vm-backdrop", s.bgClass]),
-          style: f({ "z-index": l.zIndex - 1 })
+          class: f(["vm-backdrop", s.bgClass]),
+          style: u({ "z-index": l.zIndex - 1 })
         }, null, 14, E), [
-          [y, l.show]
+          [C, l.show]
         ])
       ]),
       _: 1
     }, 8, ["enter-active-class", "leave-active-class"]),
-    b(v, {
+    v(g, {
       name: "vm-transition",
       "enter-active-class": s.inClass,
       "leave-active-class": s.outClass,
@@ -184,13 +184,13 @@ function j(e, t, s, i, l, a) {
       onLeave: a.closing,
       onAfterLeave: a.closed
     }, {
-      default: g(() => [
-        p(n("div", {
+      default: p(() => [
+        y(n("div", {
           ref: "vm-wrapper",
           "data-vm-wrapper-id": l.id,
           tabindex: "-1",
-          class: u(["vm-wrapper", s.wrapperClass]),
-          style: f({ "z-index": l.zIndex, cursor: s.enableClose ? "pointer" : "default" }),
+          class: f(["vm-wrapper", s.wrapperClass]),
+          style: u({ "z-index": l.zIndex, cursor: s.enableClose ? "pointer" : "default" }),
           role: "dialog",
           "aria-label": s.title,
           "aria-modal": "true",
@@ -201,23 +201,23 @@ function j(e, t, s, i, l, a) {
         }, [
           n("div", {
             ref: "vm",
-            class: u(["vm", s.modalClass]),
+            class: f(["vm", s.modalClass]),
             "data-vm-id": l.id,
-            style: f(s.modalStyle)
+            style: u(s.modalStyle)
           }, [
             m(e.$slots, "titlebar", {}, () => [
               n("div", B, [
                 n("h3", {
                   id: `${l.id}-title`,
                   class: "vm-title"
-                }, S(s.title), 9, V),
-                s.enableClose ? (h(), T("button", {
+                }, T(s.title), 9, V),
+                s.enableClose ? (b(), S("button", {
                   key: 0,
                   type: "button",
                   class: "vm-btn-close",
                   "aria-label": s.closeLabel,
                   onClick: t[0] || (t[0] = _((...d) => a.close && a.close(...d), ["prevent"]))
-                }, null, 8, L)) : C("", !0)
+                }, null, 8, L)) : h("", !0)
               ])
             ]),
             m(e.$slots, "content", {}, () => [
@@ -230,12 +230,12 @@ function j(e, t, s, i, l, a) {
             ])
           ], 14, F)
         ], 46, z), [
-          [y, l.show]
+          [C, l.show]
         ])
       ]),
       _: 3
     }, 8, ["enter-active-class", "leave-active-class", "onBeforeEnter", "onEnter", "onAfterEnter", "onBeforeLeave", "onLeave", "onAfterLeave"])
-  ], 8, ["to"])) : C("", !0);
+  ], 8, ["to"])) : h("", !0);
 }
 const N = /* @__PURE__ */ O(A, [["render", j]]), c = I({
   modals: {}

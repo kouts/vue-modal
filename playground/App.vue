@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <component :is="layout">
-      <router-view />
+      <RouterView />
     </component>
   </div>
 </template>
@@ -13,7 +13,7 @@ export default {
   computed: {
     layout() {
       return `layout-${this.$route.meta.layout || 'default'}`
-    }
-  }
+    },
+  },
 }
 </script>
