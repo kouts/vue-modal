@@ -185,3 +185,26 @@ code {
 .theme-container .theme-default-content:not(.custom) h3 {
   margin-bottom: 1.3rem;
 }
+
+/* Fix and normalize header spacing */
+[vp-content] h2 {
+  margin-bottom: 1rem;
+}
+
+[vp-content] h2:first-child + p {
+  margin-top: 0;
+}
+
+/* Override VuePress link underlines for nav pills in examples */
+[vp-content] .nav-pills .nav-link {
+  text-decoration: none;
+}
+
+/* Add margin to GitHub link in navbar */
+.vp-navbar-items .auto-link.external-link[href*="github.com"] {
+  margin-right: 1rem;
+  
+  &:hover {
+    text-decoration: none;
+  }
+}

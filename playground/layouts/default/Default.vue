@@ -1,8 +1,8 @@
 <template>
   <div class="default-page-wrapper">
-    <default-nav />
+    <DefaultNav />
     <slot />
-    <default-footer />
+    <DefaultFooter />
   </div>
 </template>
 
@@ -13,8 +13,8 @@ import DefaultNav from './DefaultNav.vue'
 export default {
   components: {
     DefaultNav,
-    DefaultFooter
-  }
+    DefaultFooter,
+  },
 }
 </script>
 

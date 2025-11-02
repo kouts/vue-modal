@@ -1,7 +1,7 @@
 import vue from '@vitejs/plugin-vue'
-import { createHtmlPlugin } from 'vite-plugin-html'
-import { defineConfig } from 'vite'
 import { resolve } from 'path'
+import { defineConfig } from 'vite'
+import { createHtmlPlugin } from 'vite-plugin-html'
 
 export default defineConfig({
   publicDir: 'public-vite',
@@ -12,40 +12,43 @@ export default defineConfig({
       inject: {
         data: {
           title: 'vue-modal playground',
-          description: 'Playground for vue-modal Vue.js 3'
-        }
-      }
-    })
+          description: 'Playground for vue-modal Vue.js 3',
+        },
+      },
+    }),
   ],
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
       '@playground': resolve(__dirname, './playground'),
       '@root': resolve(__dirname, './'),
-      '~bootstrap': 'bootstrap'
-    }
+      '~bootstrap': 'bootstrap',
+    },
   },
   rollupInputOptions: {
-    input: resolve(__dirname, '/playground/main.js') // custom main
+    input: resolve(__dirname, '/playground/main.js'), // custom main
   },
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "./playground/scss/variables";`
-      }
-    }
+        // Make Bootstrap imports work with ~
+        includePaths: ['node_modules'],
+        // Import variables globally for all SCSS files
+        additionalData: `@import "@playground/scss/variables";`,
+      },
+    },
   },
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.js'),
       name: 'VueModal',
-      fileName: (format) => `vue-modal.${format}.js`
+      fileName: (format) => `vue-modal.${format}.js`,
     },
     rollupOptions: {
       external: ['vue'],
       output: {
         globals: {
-          vue: 'Vue'
+          vue: 'Vue',
         },
         assetFileNames: (assetInfo) => {
           if (assetInfo.name === 'style.css') {
@@ -53,8 +56,8 @@ export default defineConfig({
           }
 
           return assetInfo.name
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 })

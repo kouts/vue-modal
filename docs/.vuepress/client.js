@@ -1,9 +1,9 @@
+import './styles/styles.scss'
+import { defineClientConfig } from '@vuepress/client'
+import { Modal, modalPlugin } from '@/index'
 import Example1 from './components/Example1.vue'
 import Example2 from './components/Example2.vue'
 import Intro from './components/Intro.vue'
-import { Modal, modalPlugin } from '@/index'
-import { defineClientConfig } from '@vuepress/client'
-import './styles/styles.scss'
 
 export default defineClientConfig({
   enhance({ app, router, siteData }) {
@@ -16,5 +16,5 @@ export default defineClientConfig({
   setup() {
     // noop
   },
-  rootComponents: []
+  rootComponents: [],
 })
