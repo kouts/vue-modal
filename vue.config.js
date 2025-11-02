@@ -11,7 +11,10 @@ module.exports = {
       scss: {
         additionalData: `
           @import "@playground/scss/variables.scss";
-        `
+        `,
+        sassOptions: {
+          silenceDeprecations: ['legacy-js-api', 'import', 'global-builtin', 'color-functions', 'abs-percent']
+        }
       }
     }
   },

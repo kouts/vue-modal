@@ -9,7 +9,7 @@ If you're looking for a Vue.js 3 compatible version of vue-modal, [please check 
 ---
 
 > vue-modal is designed with web applications in mind and tries to stick as much as possible
-> to the accessibility best practices set in the [WAI-ARIA Dialog (Modal)](https://www.w3.org/TR/wai-aria-practices/#dialog_modal) section
+> to the accessibility best practices set in the [WAI-ARIA Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) section
 > of W3C.
 
 

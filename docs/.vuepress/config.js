@@ -6,6 +6,25 @@ module.exports = {
       componentsPath: '/docs/.examples/'
     })
   ],
+  configureWebpack: {
+    module: {
+      rules: [
+        {
+          test: /\.scss$/,
+          use: [
+            {
+              loader: 'sass-loader',
+              options: {
+                sassOptions: {
+                  silenceDeprecations: ['legacy-js-api', 'import', 'global-builtin', 'color-functions', 'abs-percent']
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
   dest: 'public',
   title: 'vue-modal',
   description: 'A modal plugin for Vue',
