@@ -23,8 +23,8 @@ export default {
   data: function () {
     return {
       showModal1: false,
-      showModal2: false
+      showModal2: false,
     }
-  }
+  },
 }
 </script>

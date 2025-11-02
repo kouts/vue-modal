@@ -1,12 +1,13 @@
-import Modal from '@/Modal.vue'
 import { mount } from '@vue/test-utils'
+import Modal from '@/Modal.vue'
 import { sleep, waitNT } from '../utils'
 
 const originalOffsetHeight = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetHeight')
 const originalOffsetWidth = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetWidth')
 
 const PortalStub = {
-  template: '<div class="portal"><slot></slot></div>'
+  template: '<div class="portal"><slot></slot></div>',
+  props: ['selector'],
 }
 
 const ModalParent = {
@@ -27,14 +28,14 @@ const ModalParent = {
   </div>
   `,
   components: {
-    Modal
+    Modal,
   },
   props: {
     showInput: {
       type: Boolean,
-      default: true
-    }
-  }
+      default: true,
+    },
+  },
 }
 
 const createModalsWrapper = (data) => {
@@ -42,7 +43,7 @@ const createModalsWrapper = (data) => {
     attachTo: document.body,
     stubs: {
       transition: false,
-      portal: PortalStub
+      Portal: PortalStub,
     },
     data() {
       return {
@@ -50,11 +51,11 @@ const createModalsWrapper = (data) => {
           live: false,
           title: 'Test title',
           showModal1: false,
-          showModal2: false
+          showModal2: false,
         },
-        ...data
+        ...data,
       }
-    }
+    },
   })
 }
 
@@ -178,7 +179,7 @@ describe('Modal features', () => {
 
     await wrapper.find('.modal-1').trigger('keydown', {
       keyCode: 9,
-      shiftKey: true
+      shiftKey: true,
     })
 
     const checkboxInput = wrapper.find('.modal-1 .checkbox-input')
@@ -219,7 +220,7 @@ describe('Modal features', () => {
 
   it('stays in DOM with live mode', async () => {
     const wrapper = createModalsWrapper({
-      live: true
+      live: true,
     })
 
     await waitNT(wrapper.vm)

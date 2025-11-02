@@ -78,9 +78,9 @@ export default {
       bgInClass: 'fadeInUp',
       bgInClasses: ['bounceIn', 'fadeInDown', 'fadeInUp'],
       bgOutClass: 'fadeOutDown',
-      bgOutClasses: ['bounceOut', 'fadeOutDown', 'fadeOutUp']
+      bgOutClasses: ['bounceOut', 'fadeOutDown', 'fadeOutUp'],
     }
-  }
+  },
 }
 </script>
 

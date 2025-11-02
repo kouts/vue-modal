@@ -1,8 +1,8 @@
 <template>
   <div class="default-page-wrapper">
-    <default-nav />
+    <DefaultNav />
     <slot />
-    <default-footer />
+    <DefaultFooter />
   </div>
 </template>
 
@@ -14,8 +14,8 @@ export default {
   name: 'LayoutsDefault',
   components: {
     DefaultNav,
-    DefaultFooter
-  }
+    DefaultFooter,
+  },
 }
 </script>
 

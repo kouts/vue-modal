@@ -7,7 +7,7 @@
 A customizable, stackable, and lightweight modal component for Vue.
 
 > vue-modal is designed with web applications in mind and tries to stick as much as possible
-> to the accessibility best practices set in the [WAI-ARIA Dialog (Modal)](https://www.w3.org/TR/wai-aria-practices/#dialog_modal) section
+> to the accessibility best practices set in the [WAI-ARIA Dialog (Modal)](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) section
 > of W3C.
 
 <Intro />

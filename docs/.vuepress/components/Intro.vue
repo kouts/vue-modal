@@ -7,7 +7,7 @@ import Basic from '../../.examples/basic.vue'
 
 export default {
   components: {
-    Basic
-  }
+    Basic,
+  },
 }
 </script>

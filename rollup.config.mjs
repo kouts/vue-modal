@@ -1,16 +1,16 @@
 import buble from '@rollup/plugin-buble'
 import commonjs from '@rollup/plugin-commonjs'
-import css from 'rollup-plugin-css-only'
-import terser from '@rollup/plugin-terser'
-import vue from 'rollup-plugin-vue'
-import { minify } from 'csso'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
+import terser from '@rollup/plugin-terser'
+import { minify } from 'csso'
 import { writeFileSync } from 'fs'
+import css from 'rollup-plugin-css-only'
+import vue from 'rollup-plugin-vue'
 
 const createPlugins = () => [
   nodeResolve(),
   vue({
-    css: false
+    css: false,
   }),
   commonjs(),
   css({
@@ -18,9 +18,9 @@ const createPlugins = () => [
       const minifiedCss = minify(styles).css
 
       writeFileSync('dist/vue-modal.css', minifiedCss)
-    }
+    },
   }),
-  buble()
+  buble(),
 ]
 
 const esBuild = () => {
@@ -33,11 +33,11 @@ const esBuild = () => {
         file: './dist/vue-modal.es.js',
         format: 'es',
         sourcemap: true,
-        sourcemapExcludeSources: false
+        sourcemapExcludeSources: false,
       },
       external: ['vue'],
-      plugins
-    }
+      plugins,
+    },
   ]
 }
 
@@ -56,12 +56,12 @@ const umdBuild = () => {
         sourcemap: true,
         sourcemapExcludeSources: false,
         globals: {
-          vue: 'Vue'
-        }
+          vue: 'Vue',
+        },
       },
       external: ['vue'],
-      plugins
-    }
+      plugins,
+    },
   ]
 }
 
@@ -70,5 +70,5 @@ export default [
   ...esBuild(),
 
   // UMD
-  ...umdBuild()
+  ...umdBuild(),
 ]

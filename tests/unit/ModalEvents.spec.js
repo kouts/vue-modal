@@ -1,21 +1,21 @@
-import Modal from '@/Modal.vue'
-import { mount } from '@vue/test-utils'
-import { sleep, waitNT, waitRAF } from '../utils'
 import '@testing-library/jest-dom'
+import { mount } from '@vue/test-utils'
+import Modal from '@/Modal.vue'
+import { sleep, waitNT, waitRAF } from '../utils'
 
 describe('Modal events', () => {
   const wrapper = mount(Modal, {
     stubs: {
-      transition: false
+      transition: false,
     },
     slots: {
-      default: '<p>Modal content goes here...</p>'
-    }
+      default: '<p>Modal content goes here...</p>',
+    },
   })
 
   afterEach(() => {
     wrapper.setProps({
-      basedOn: false
+      basedOn: false,
     })
   })
 

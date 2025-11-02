@@ -97,9 +97,9 @@ export default {
   data() {
     return {
       showfirstModal: false,
-      showSecondModal: false
+      showSecondModal: false,
     }
-  }
+  },
 }
 </script>
 

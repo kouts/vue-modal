@@ -275,7 +275,7 @@ if (typeof window !== 'undefined' && window.Vue && window.Vue === Vue) {
 
 var TYPE_CSS = {
   type: [String, Object, Array],
-  default: ''
+  default: '',
 };
 var FOCUSABLE_ELEMENTS =
   'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -284,20 +284,20 @@ var animatingZIndex = 0;
 var script = {
   name: 'VueModal',
   components: {
-    Portal: Portal
+    Portal: Portal,
   },
   model: {
     prop: 'basedOn',
-    event: 'close'
+    event: 'close',
   },
   props: {
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     baseZindex: {
       type: Number,
-      default: 1051
+      default: 1051,
     },
     bgClass: TYPE_CSS,
     wrapperClass: TYPE_CSS,
@@ -309,32 +309,33 @@ var script = {
     bgOutClass: Object.assign({}, TYPE_CSS, { default: 'vm-fadeOut' }),
     appendTo: {
       type: String,
-      default: 'body'
+      default: 'body',
     },
     live: {
       type: Boolean,
-      default: false
+      default: false,
     },
     enableClose: {
       type: Boolean,
-      default: true
+      default: true,
     },
     basedOn: {
       type: Boolean,
-      default: false
+      default: false,
     },
     closeLabel: {
       type: String,
-      default: 'Close'
-    }
+      default: 'Close',
+    },
   },
+  emits: ['close', 'before-open', 'opening', 'after-open', 'before-close', 'closing', 'after-close'],
   data: function data() {
     return {
       zIndex: 0,
       id: null,
       show: false,
       mount: false,
-      elToFocus: null
+      elToFocus: null,
     }
   },
   created: function created() {
@@ -359,11 +360,11 @@ var script = {
         }
       },
       {
-        immediate: true
+        immediate: true,
       }
     );
   },
-  beforeDestroy: function beforeDestroy() {
+  beforeUnmount: function beforeUnmount() {
     this.elToFocus = null;
   },
   methods: {
@@ -486,8 +487,8 @@ var script = {
           this$1$1.$emit('after-close');
         });
       });
-    }
-  }
+    },
+  },
 };
 
 function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
@@ -574,11 +575,11 @@ var __vue_render__ = function () {
   var _c = _vm._self._c || _h;
   return _vm.mount
     ? _c(
-        "portal",
+        "Portal",
         { attrs: { selector: _vm.appendTo } },
         [
           _c(
-            "transition",
+            "Transition",
             {
               attrs: {
                 name: "vm-backdrop-transition",
@@ -603,7 +604,7 @@ var __vue_render__ = function () {
           ),
           _vm._v(" "),
           _c(
-            "transition",
+            "Transition",
             {
               attrs: {
                 name: "vm-transition",
