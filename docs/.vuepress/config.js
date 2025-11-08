@@ -25,6 +25,13 @@ export default defineUserConfig({
   bundler: webpackBundler({
     postcss: {},
     vue: {},
+    scss: {
+      sassOptions: {
+        api: 'modern-compiler',
+        silenceDeprecations: ['legacy-js-api', 'import', 'global-builtin', 'color-functions', 'abs-percent'],
+        quietDeps: true,
+      },
+    },
   }),
   theme: defaultTheme({
     contributors: false,

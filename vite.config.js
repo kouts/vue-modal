@@ -31,10 +31,10 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        // Make Bootstrap imports work with ~
-        includePaths: ['node_modules'],
-        // Import variables globally for all SCSS files
-        additionalData: `@import "@playground/scss/variables";`,
+        api: 'modern',
+        quietDeps: true,
+        silenceDeprecations: ['legacy-js-api', 'import', 'global-builtin', 'color-functions', 'abs-percent'],
+        additionalData: `@use "@playground/scss/variables.scss" as *;`,
       },
     },
   },
