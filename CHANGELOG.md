@@ -1,3 +1,10 @@
+## [5.0.3](https://github.com/kouts/vue-modal/compare/v5.0.2...v5.0.3) (2025-11-08)
+
+
+### Bug Fixes
+
+* fixed playground, updated npm packages ([c8b048b](https://github.com/kouts/vue-modal/commit/c8b048b3ebe4f2186e4d4b826c036fb3cee6130f))
+
 ## [5.0.2](https://github.com/kouts/vue-modal/compare/v5.0.1...v5.0.2) (2025-11-02)
 
 
